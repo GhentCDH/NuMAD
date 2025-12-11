@@ -1,6 +1,7 @@
 from src.data import get_data
 from src.db import engine
 
+
 def main():
     print(engine)
 
@@ -10,7 +11,6 @@ def main():
 
         if i == 5:
             break
-
 
 
 if __name__ == "__main__":
