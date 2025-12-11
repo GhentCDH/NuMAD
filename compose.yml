@@ -1,4 +1,21 @@
 services:
+  db:
+    image: postgis/postgis:17-3.5
+    container_name: numad-db
+    environment:
+      POSTGRES_USER: numad
+      POSTGRES_PASSWORD: numad
+      POSTGRES_DB: numad
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U numad -d numad"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   import:
     container_name: numad-import
     build: 
@@ -7,6 +24,9 @@ services:
     volumes:
       - ./data:/app/data
       - import-venv:/app/.venv
+    depends_on:
+      db:
+        condition: service_healthy
 
   kottster:
     build:
@@ -27,6 +47,10 @@ services:
     tty: true
     stdin_open: true
     command: tail -f /dev/null
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   import-venv:
+  pgdata:
