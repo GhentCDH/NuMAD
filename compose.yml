@@ -1,0 +1,11 @@
+services:
+  import:
+    build: 
+      context: import/
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/app/data
+      - import-venv:/app/.venv
+
+volumes:
+  import-venv:
