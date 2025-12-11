@@ -1,0 +1,11 @@
+{
+  "version": "3.4",
+  "type": "table",
+  "title": "Test Page",
+  "hideInSidebar": false,
+  "config": {
+    "dataSource": "numad_db",
+    "fetchStrategy": "databaseTable",
+    "table": "spatial_ref_sys"
+  }
+}
