@@ -9,7 +9,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
       - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U numad -d numad"]
@@ -23,11 +23,14 @@ services:
       context: import/
       dockerfile: Dockerfile
     volumes:
-      - ./data:/app/data
+      - ./data:/data
       - import-venv:/app/.venv
+    env_file:
+      - .env
     depends_on:
       db:
         condition: service_healthy
+    command: tail -f /dev/null
 
   kottster:
     build:
@@ -54,3 +57,5 @@ services:
 
 volumes:
   import-venv:
+  pgdata:
+    name: numad_pgdata

@@ -12,5 +12,4 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 # copy application code
 COPY main.py .
- 
-CMD ["uv", "run", "main.py" ]
+COPY src/ ./src/
