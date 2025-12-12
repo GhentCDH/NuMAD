@@ -1,6 +1,8 @@
 import logging
 from typing import Type, TypeVar, Dict
 from sqlmodel import SQLModel, Session, select
+from geoalchemy2.elements import WKTElement
+
 from src.data import get_data
 from src.model import Coin, Identifier, Mint, Material, Ruler, Denomination, FindSpot
 from src.db import engine
@@ -93,13 +95,16 @@ def main():
                     session, Identifier, caches["identifier"], row.get("Identified by")
                 )
 
+                longitude = parse_float(row.get("Mint_latitude"))
+                latitude = parse_float(row.get("Mint_longitude"))
+
+                if longitude is not None and latitude is not None:
+                    location = WKTElement(f"POINT({longitude} {latitude})", srid=4326)
+                else:
+                    location = None
+
                 mint_obj = get_or_create_cached(
-                    session,
-                    Mint,
-                    caches["mint"],
-                    row.get("Mint"),
-                    latitude=parse_float(row.get("Mint_latitude")),
-                    longitude=parse_float(row.get("Mint_longitude")),
+                    session, Mint, caches["mint"], row.get("Mint"), location=location
                 )
 
                 mat_obj = get_or_create_cached(

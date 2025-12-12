@@ -1,5 +1,6 @@
-from typing import List
-from sqlmodel import Field, Relationship, SQLModel
+from typing import List, Any
+from geoalchemy2 import Geography
+from sqlmodel import Column, Field, Relationship, SQLModel
 
 
 class Identifier(SQLModel, table=True):
@@ -12,8 +13,9 @@ class Identifier(SQLModel, table=True):
 class Mint(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str = Field(index=True, unique=True)
-    latitude: float | None = None
-    longitude: float | None = None
+    location: Any | None = Field(
+        default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
+    )
 
     coins: List["Coin"] = Relationship(back_populates="mint")
 
