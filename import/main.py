@@ -3,6 +3,11 @@ from src.model import Coin, Identifier
 from src.data import get_data
 from src.db import engine
 
+import logging
+
+logging.basicConfig()
+logging.getLogger("sqlalchemy.engine").setLevel(logging.INFO)
+
 
 def main():
     SQLModel.metadata.create_all(engine)
@@ -10,18 +15,24 @@ def main():
     reader = get_data()
     identifier_cache: dict[str, Identifier] = {}
 
-    with Session(engine) as session:
-        for _, row in enumerate(reader):
-            coin = Coin(id=int(row["ID"]))
+    with Session(engine, autoflush=False) as session:
+        for i, row in enumerate(reader):
+            try:
+                coin = Coin()
+                if name := row.get("Identified by"):
+                    if name not in identifier_cache:
+                        identifier_cache[name] = Identifier(name=name)
+                        session.add(identifier_cache[name])
+                    coin.identifier = identifier_cache[name]
+                session.add(coin)
 
-            if name := row.get("Identified by"):
-                if name not in identifier_cache:
-                    identifier_cache[name] = Identifier(name=name)
-                    session.add(identifier_cache[name])
-                coin.identifier = identifier_cache[name]
+                print(f"Created coin object {i}")
+            except Exception as e:
+                print(f"Failed row with id {row['ID']}: {e}")
 
-            session.add(coin)
-            session.commit()
+        print("Commiting...")
+        session.commit()
+        print("Done!")
 
 
 if __name__ == "__main__":
