@@ -1,6 +1,7 @@
 from typing import List, Any
 from geoalchemy2 import Geography
 from sqlmodel import Column, Field, Relationship, SQLModel
+from datetime import date
 
 
 class Identifier(SQLModel, table=True):
@@ -54,18 +55,20 @@ class FindSpot(SQLModel, table=True):
     name: str = Field(index=True)  # local admin-unit
     toponym: str | None = None  # FindSpot_toponym
     site_classification: str | None = None
-    latitude: float | None = None
-    longitude: float | None = None
+    location: Any | None = Field(
+        default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
+    )
 
     coins: List["Coin"] = Relationship(back_populates="find_spot")
 
 
 class Coin(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
+    original_numers: str | None = None
+    data_history: str | None = None
 
     # Legacy IDs (kept on the Coin record as they are specific to the object)
     original_id: str | None = Field(default=None, description="The primary ID from CSV")
-    jvh_id: str | None = None
 
     # Foreign Keys
     identifier_id: int | None = Field(default=None, foreign_key="identifier.id")
@@ -75,6 +78,9 @@ class Coin(SQLModel, table=True):
     denomination_id: int | None = Field(default=None, foreign_key="denomination.id")
     find_spot_id: int | None = Field(default=None, foreign_key="findspot.id")
 
+    # Identification properties
+    identification_date: date | None = Field(default=None, index=True)
+
     # Physical Properties
     weight: float | None = None
     diameter: float | None = None
@@ -83,7 +89,7 @@ class Coin(SQLModel, table=True):
     # Dating
     year_start: int | None = None
     year_end: int | None = None
-    find_date: str | None = None  # Kept as string as CSV has "30-9-1987"
+    find_date: date | None = Field(default=None, index=True)
 
     # Descriptions
     obverse_legend: str | None = None

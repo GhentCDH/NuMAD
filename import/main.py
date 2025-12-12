@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=SQLModel)
 
+
 def get_or_create_cached(
     session: Session,
     model: Type[T],
@@ -64,6 +65,9 @@ def main():
     # which suggests legacy Windows encoding.
     with Session(engine) as session:
         for i, row in enumerate(reader):
+            # if i == 5000:
+            #     break
+
             try:
                 # 1. Resolve Relations via Cache/DB
 
@@ -71,13 +75,7 @@ def main():
                     session, Identifier, caches["identifier"], row.get("Identified by")
                 )
 
-                longitude = parse_float(row.get("Mint_latitude"))
-                latitude = parse_float(row.get("Mint_longitude"))
-
-                if longitude is not None and latitude is not None:
-                    location = WKTElement(f"POINT({longitude} {latitude})", srid=4326)
-                else:
-                    location = None
+                location = to_location(row["Mint_longitude"], row["Mint_latitude"])
 
                 mint_obj = get_or_create_cached(
                     session, Mint, caches["mint"], row.get("Mint"), location=location
@@ -109,14 +107,15 @@ def main():
                         find_spot_obj = caches["findspot"][location_name]
                     else:
                         # Check DB logic omitted for brevity, assuming simple create pattern here
+                        location = to_location(
+                            row["local_admin_unit_longitude"],
+                            row["local_admin_unit_latitude"],
+                        )
                         find_spot_obj = FindSpot(
                             name=location_name,
                             toponym=row.get("FindSpot_toponym"),
                             site_classification=row.get("site_classification"),
-                            latitude=parse_float(row.get("local_admin_unit_latitude")),
-                            longitude=parse_float(
-                                row.get("local_admin_unit_longitude")
-                            ),
+                            location=location,
                         )
                         session.add(find_spot_obj)
                         session.flush()
@@ -125,7 +124,6 @@ def main():
                 # 2. Create Coin Object
                 coin = Coin(
                     original_id=row.get("ID"),
-                    jvh_id=row.get("JVH_ID"),
                     # Foreign Keys
                     identifier_id=ident_obj.id if ident_obj else None,
                     mint_id=mint_obj.id if mint_obj else None,
@@ -133,6 +131,8 @@ def main():
                     ruler_id=ruler_obj.id if ruler_obj else None,
                     denomination_id=denom_obj.id if denom_obj else None,
                     find_spot_id=find_spot_obj.id if find_spot_obj else None,
+                    # Identification information
+                    identification_date=parse_date(row.get("Identification_year")),
                     # Metrics
                     weight=parse_float(row.get("Weight")),
                     diameter=parse_float(row.get("Diameter")),
@@ -140,7 +140,7 @@ def main():
                     # Dates
                     year_start=parse_int(row.get("Object_StardDate")),
                     year_end=parse_int(row.get("ObjectEndDate")),
-                    find_date=row.get("Identification_year"),  # Or Find_year
+                    find_date=parse_date(row.get("Find_year")),
                     # Descriptions
                     obverse_legend=row.get("Obverse_legend"),
                     obverse_design=row.get("Obverse_design"),

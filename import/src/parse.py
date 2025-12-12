@@ -9,7 +9,7 @@ def _parse_date_p(input: str) -> date | None:
     """
     Parse dates that are formatted as `<p YYYY>` or similar
     """
-    match = re.match(r'<p\s*(\d+)>', input)
+    match = re.match(r"<p\s*(\d+)>", input)
 
     if match:
         try:
@@ -24,7 +24,7 @@ def _parse_date_slash_range(input: str) -> date | None:
 
     Note: output is the first of the two years
     """
-    match = re.match(r'(\d+)/(\d+)', input)
+    match = re.match(r"(\d+)/(\d+)", input)
 
     if match:
         try:
@@ -39,7 +39,7 @@ def _parse_date_month_range(input: str) -> date | None:
 
     Note: output uses the first of the two months
     """
-    match = re.match(r'(\w+)\.?-(\w+)\s*(\d+)', input)
+    match = re.match(r"(\w+)\.?-(\w+)\s*(\d+)", input)
 
     if match:
         try:
@@ -52,7 +52,7 @@ def _parse_date_mrt_90(input: str) -> date | None:
     """
     Parse a very specific format that was found in the data, `mrt-90`
     """
-    if input == 'mrt-90':
+    if input == "mrt-90":
         try:
             return dateparser.parse("03-1990", dayfirst=True)
         except Exception:
@@ -69,14 +69,18 @@ def parse_date(v: str | date | None) -> date | None:
     try:
         return dateparser.parse(v, dayfirst=True).date()
     except Exception:
-        for parser in [_parse_date_p, _parse_date_slash_range, _parse_date_month_range, _parse_date_mrt_90]:
+        for parser in [
+            _parse_date_p,
+            _parse_date_slash_range,
+            _parse_date_month_range,
+            _parse_date_mrt_90,
+        ]:
             result = parser(v)
 
             if result is not None:
                 return result
 
         print(f"Failed parsing {v}, also with custom formats")
-
 
 
 def parse_float(value: str | None) -> float | None:
@@ -108,5 +112,3 @@ def to_location(longitude_field: str, latitude_field: str) -> WKTElement | None:
         return None
 
     return WKTElement(f"POINT({longitude} {latitude})", srid=4326)
-
-
