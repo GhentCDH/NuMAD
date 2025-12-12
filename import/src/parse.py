@@ -13,7 +13,7 @@ def _parse_date_p(input: str) -> date | None:
 
     if match:
         try:
-            return dateparser.parse(match.group(1), dayfirst=True)
+            return dateparser.parse(match.group(1))
         except Exception:
             return None
 
@@ -28,7 +28,7 @@ def _parse_date_slash_range(input: str) -> date | None:
 
     if match:
         try:
-            return dateparser.parse(match.group(1), dayfirst=True)
+            return dateparser.parse(match.group(1))
         except Exception:
             return None
 
@@ -43,7 +43,7 @@ def _parse_date_month_range(input: str) -> date | None:
 
     if match:
         try:
-            return dateparser.parse(f"{match.group(1)} {match.group(3)}", dayfirst=True)
+            return dateparser.parse(f"{match.group(1)} {match.group(3)}")
         except Exception:
             return None
 
@@ -54,7 +54,7 @@ def _parse_date_mrt_90(input: str) -> date | None:
     """
     if input == "mrt-90":
         try:
-            return dateparser.parse("03-1990", dayfirst=True)
+            return dateparser.parse("03-1990")
         except Exception:
             return None
 
