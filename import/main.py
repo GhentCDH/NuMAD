@@ -1,40 +1,16 @@
 import logging
 from typing import Type, TypeVar, Dict
 from sqlmodel import SQLModel, Session, select
-from geoalchemy2.elements import WKTElement
 
 from src.data import get_data
 from src.model import Coin, Identifier, Mint, Material, Ruler, Denomination, FindSpot
 from src.db import engine
-# Assuming you have a get_data function, otherwise use standard open()
-# from src.data import get_data
+from src.parse import to_location, parse_int, parse_float, parse_date
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=SQLModel)
-
-
-def parse_float(value: str | None) -> float | None:
-    if value is None:
-        return None
-    try:
-        # Replace comma with dot for European numeric formats
-        return float(value.replace(",", ".").replace(" g;", "").strip())
-    except ValueError:
-        return None
-
-
-def parse_int(value: str | None) -> int | None:
-    if value is None:
-        return None
-    try:
-        # Remove common non-numeric chars found in dirty data
-        clean = "".join(filter(str.isdigit, value))
-        return int(clean)
-    except ValueError:
-        return None
-
 
 def get_or_create_cached(
     session: Session,
