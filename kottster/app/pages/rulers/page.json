@@ -1,12 +1,11 @@
 {
   "version": "3.4",
   "type": "table",
-  "title": "Coins",
+  "title": "Rulers",
   "hideInSidebar": false,
   "config": {
     "dataSource": "numad_db",
     "fetchStrategy": "databaseTable",
-    "table": "coin"
-  },
-  "icon": "pieChart"
+    "table": "ruler"
+  }
 }

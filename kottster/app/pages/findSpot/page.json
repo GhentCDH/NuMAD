@@ -1,12 +1,11 @@
 {
   "version": "3.4",
   "type": "table",
-  "title": "Coins",
+  "title": "Find Spot",
   "hideInSidebar": false,
   "config": {
     "dataSource": "numad_db",
     "fetchStrategy": "databaseTable",
-    "table": "coin"
-  },
-  "icon": "pieChart"
+    "table": "findspot"
+  }
 }

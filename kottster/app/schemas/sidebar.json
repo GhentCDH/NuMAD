@@ -1,6 +1,9 @@
 {
   "menuPageOrder": [
-    "testPage",
-    "coins"
+    "coins",
+    "identifiers",
+    "rulers",
+    "findSpot",
+    "mint"
   ]
 }
