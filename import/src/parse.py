@@ -1,8 +1,11 @@
+import logging
 import re
-
 from datetime import date
+
 from dateutil import parser as dateparser
 from geoalchemy2 import WKTElement
+
+logger = logging.getLogger(__name__)
 
 
 def _parse_date_p(input: str) -> date | None:
@@ -80,7 +83,7 @@ def parse_date(v: str | date | None) -> date | None:
             if result is not None:
                 return result
 
-        print(f"Failed parsing {v}, also with custom formats")
+        logger.error(f"Failed parsing {v}, also with custom formats")
 
 
 def parse_float(value: str | None) -> float | None:
@@ -104,7 +107,9 @@ def parse_int(value: str | None) -> int | None:
         return None
 
 
-def to_location(longitude_field: str, latitude_field: str) -> WKTElement | None:
+def to_location(
+    longitude_field: str | None, latitude_field: str | None
+) -> WKTElement | None:
     longitude = parse_float(longitude_field)
     latitude = parse_float(latitude_field)
 
