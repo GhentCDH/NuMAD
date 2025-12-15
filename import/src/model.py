@@ -44,11 +44,18 @@ class Material(Table, table=True):
     coins: List["Coin"] = Relationship(back_populates="material")
 
 
+class CoinRuler(SQLModel, table=True):
+    coin_id: int = Field(foreign_key="coin.id", primary_key=True)
+    ruler_id: int = Field(foreign_key="ruler.id", primary_key=True)
+    certainty: int | None = None
+
+
 class Ruler(Table, table=True):
     """Represents Authority, Ruler, or Issuer."""
 
     name: str = Field(index=True, unique=True)
-    coins: List["Coin"] = Relationship(back_populates="ruler")
+    start_date: date | None = Field(default=None, index=True)
+    end_date: date | None = Field(default=None, index=True)
 
 
 class Denomination(Table, table=True):
@@ -79,18 +86,30 @@ class LocalAdminUnit(Table, table=True):
 
 
 class ObjectType(Table, table=True):
-    name: str = Field(index=True, unique=True)
+    name: str = Field(unique=True)
     coins: List["Coin"] = Relationship(back_populates="object_type")
 
 
 class ObjectClassification(Table, table=True):
-    name: str = Field(index=True, unique=True)
+    name: str = Field(unique=True)
     coins: List["Coin"] = Relationship(back_populates="object_classification")
 
 
 class ObjectSubclass(Table, table=True):
-    name: str = Field(index=True, unique=True)
+    name: str = Field(unique=True)
     coins: List["Coin"] = Relationship(back_populates="object_subclass")
+
+
+class State(Table, table=True):
+    # Overwrite table name as to not conflict with Postgis' table also called `state`
+    __tablename__ = "numadstate"  # type:ignore
+    name: str = Field()
+    coins: List["Coin"] = Relationship(back_populates="state")
+
+
+class StatedAuthority(Table, table=True):
+    name: str = Field()
+    coins: List["Coin"] = Relationship(back_populates="stated_authority")
 
 
 class Coin(Table, table=True):
@@ -102,7 +121,6 @@ class Coin(Table, table=True):
     identifier_id: int | None = Field(default=None, foreign_key="identifier.id")
     mint_id: int | None = Field(default=None, foreign_key="mint.id")
     material_id: int | None = Field(default=None, foreign_key="material.id")
-    ruler_id: int | None = Field(default=None, foreign_key="ruler.id")
     denomination_id: int | None = Field(default=None, foreign_key="denomination.id")
     find_spot_id: int | None = Field(default=None, foreign_key="findspot.id")
     local_admin_unit_id: int | None = Field(
@@ -114,6 +132,10 @@ class Coin(Table, table=True):
     )
     object_subclass_id: int | None = Field(
         default=None, foreign_key="objectsubclass.id"
+    )
+    state_id: int | None = Field(default=None, foreign_key="numadstate.id")
+    stated_authority_id: int | None = Field(
+        default=None, foreign_key="statedauthority.id"
     )
 
     # Exact location information
@@ -147,6 +169,7 @@ class Coin(Table, table=True):
     year_start: int | None = None
     year_end: int | None = None
     find_date: date | None = Field(default=None, index=True)
+    reece_periods: str | None = None
 
     # Descriptions
     obverse_legend: str | None = None
@@ -158,7 +181,6 @@ class Coin(Table, table=True):
     identifier: Identifier | None = Relationship(back_populates="coins")
     mint: Mint | None = Relationship(back_populates="coins")
     material: Material | None = Relationship(back_populates="coins")
-    ruler: Ruler | None = Relationship(back_populates="coins")
     denomination: Denomination | None = Relationship(back_populates="coins")
     find_spot: FindSpot | None = Relationship(back_populates="coins")
     local_admin_unit: LocalAdminUnit | None = Relationship(back_populates="coins")
@@ -167,3 +189,7 @@ class Coin(Table, table=True):
         back_populates="coins"
     )
     object_subclass: ObjectSubclass | None = Relationship(back_populates="coins")
+    state: State | None = Relationship(back_populates="coins")
+    stated_authority: StatedAuthority | None = Relationship(back_populates="coins")
+
+    # Persons or institutions responsible for the emission

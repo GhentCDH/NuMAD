@@ -83,7 +83,7 @@ def parse_date(v: str | date | None) -> date | None:
             if result is not None:
                 return result
 
-        logger.error(f"Failed parsing {v}, also with custom formats")
+        logger.error(f"Failed parsing '{v}', also with custom formats")
 
 
 def parse_float(value: str | None) -> float | None:

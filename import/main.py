@@ -8,6 +8,7 @@ from src.data import get_data
 from src.db import engine
 from src.model import (
     Coin,
+    CoinRuler,
     Denomination,
     FindSpot,
     Identifier,
@@ -18,6 +19,8 @@ from src.model import (
     ObjectSubclass,
     ObjectType,
     Ruler,
+    State,
+    StatedAuthority,
     Table,
 )
 from src.parse import parse_date, parse_float, parse_int, to_location
@@ -83,13 +86,13 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
         identifier_id=get_id(relations["identifier"]),
         mint_id=get_id(relations["mint"]),
         material_id=get_id(relations["material"]),
-        ruler_id=get_id(relations["ruler"]),
         denomination_id=get_id(relations["denomination"]),
         find_spot_id=get_id(relations["find_spot"]),
         local_admin_unit_id=get_id(relations["local_admin_unit"]),
         object_type_id=get_id(relations["object_type"]),
         object_classification_id=get_id(relations["object_classification"]),
         object_subclass_id=get_id(relations["object_subclass"]),
+        state_id=get_id(relations["state"]),
         # Location
         exact_location=row.get("exact_location"),
         # Find information
@@ -113,9 +116,10 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
         diameter=parse_float(row.get("Diameter")),
         die_axis=parse_int(row.get("Die axis")),
         # Dates
-        year_start=parse_int(row.get("Object_StardDate")),
+        year_start=parse_int(row.get("Object_StartDate")),
         year_end=parse_int(row.get("ObjectEndDate")),
         find_date=parse_date(row.get("Find_year")),
+        reece_periods=row.get("Periods (Reece adapted)"),
         # Descriptions
         obverse_legend=row.get("Obverse_legend"),
         obverse_design=row.get("Obverse_design"),
@@ -138,6 +142,8 @@ def main():
         "object_type": {},
         "object_classification": {},
         "object_subclass": {},
+        "state": {},
+        "stated_authority": {},
     }
 
     with Session(engine) as session:
@@ -163,7 +169,12 @@ def main():
                         session, Material, caches["material"], row.get("Material")
                     ),
                     "ruler": get_or_create(
-                        session, Ruler, caches["ruler"], row.get("Ruler")
+                        session,
+                        Ruler,
+                        caches["ruler"],
+                        row.get("Ruler"),
+                        start_date=parse_date(row.get("Ruler_startDate")),
+                        end_date=parse_date(row.get("Ruler_endDate")),
                     ),
                     "denomination": get_or_create(
                         session,
@@ -210,9 +221,31 @@ def main():
                             row.get("local_admin_unit_latitude"),
                         ),
                     ),
+                    "state": get_or_create(
+                        session,
+                        State,
+                        caches["state"],
+                        row.get("State"),
+                    ),
+                    "stated_authority": get_or_create(
+                        session,
+                        StatedAuthority,
+                        caches["stated_authority"],
+                        row.get("StatedAuthority"),
+                    ),
                 }
 
-                session.add(create_coin(row, relations))
+                session.add(coin := create_coin(row, relations))
+                session.flush()
+
+                if (ruler := relations["ruler"]) and coin.id is not None:
+                    session.add(
+                        CoinRuler(
+                            coin_id=coin.id,
+                            ruler_id=ruler.id,
+                            certainty=parse_int(row.get("Ruler_certainty_attribute")),
+                        )
+                    )
 
                 if i % 100 == 0:
                     logger.info(f"Processed {i} rows...")
