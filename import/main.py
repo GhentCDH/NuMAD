@@ -17,31 +17,34 @@ def get_or_create_cached(
     session: Session,
     model: Type[T],
     cache: Dict[str, T],
-    lookup_val: str | None,
+    name: str | None,
     **kwargs,
 ) -> T | None:
     """
     Checks cache, then DB, then creates new instance.
     """
 
-    if lookup_val is None:
+    if name is None:
         return None
 
-    clean_val = lookup_val.strip()
-    if clean_val in cache:
-        return cache[clean_val]
+    clean_name = name.strip()
+    if len(name) == 0:
+        return None
+
+    if clean_name in cache:
+        return cache[clean_name]
 
     # Check DB to prevent duplication on re-runs
-    statement = select(model).where(getattr(model, "name") == clean_val)
+    statement = select(model).where(getattr(model, "name") == clean_name)
     instance = session.exec(statement).first()
 
     if not instance:
-        instance = model(name=clean_val, **kwargs)
+        instance = model(name=clean_name, **kwargs)
         session.add(instance)
         session.flush()  # Flush to generate ID
         session.refresh(instance)
 
-    cache[clean_val] = instance
+    cache[clean_name] = instance
     return instance
 
 
