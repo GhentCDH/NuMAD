@@ -2,8 +2,8 @@ from datetime import date, datetime
 from typing import Any, List
 
 from geoalchemy2 import Geography
-from sqlalchemy import func
-from sqlmodel import Column, DateTime, Field, Relationship, SQLModel
+from sqlalchemy import DateTime, func
+from sqlmodel import Column, Field, Relationship, SQLModel
 
 
 class Table(SQLModel):
@@ -12,18 +12,17 @@ class Table(SQLModel):
     id: int | None = Field(default=None, primary_key=True)
     created_at: datetime = Field(
         default=None,
-        sa_column=Column(
-            DateTime(timezone=True), server_default=func.now(), nullable=False
-        ),
+        sa_type=DateTime(timezone=True),
+        sa_column_kwargs={"server_default": func.now(), "nullable": False},
     )
     updated_at: datetime = Field(
         default=None,
-        sa_column=Column(
-            DateTime(timezone=True),
-            server_default=func.now(),
-            onupdate=func.now(),
-            nullable=False,
-        ),
+        sa_type=DateTime(timezone=True),
+        sa_column_kwargs={
+            "server_default": func.now(),
+            "onupdate": func.now(),
+            "nullable": False,
+        },
     )
 
 
