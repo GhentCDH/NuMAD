@@ -1,3 +1,6 @@
+.env
+*.csv
+
 # import
 .python-version
 __pycache__
@@ -5,3 +8,4 @@ __pycache__
 # kottster
 kottster/dist
 kottster/app.db
+import/erd.mermaid
