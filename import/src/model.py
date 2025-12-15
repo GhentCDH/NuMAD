@@ -1,7 +1,8 @@
-from typing import List, Any
+from datetime import date
+from typing import Any, List
+
 from geoalchemy2 import Geography
 from sqlmodel import Column, Field, Relationship, SQLModel
-from datetime import date
 
 
 class Identifier(SQLModel, table=True):
@@ -52,14 +53,44 @@ class FindSpot(SQLModel, table=True):
     """
 
     id: int | None = Field(default=None, primary_key=True)
-    name: str = Field(index=True)  # local admin-unit
-    toponym: str | None = None  # FindSpot_toponym
+    name: str = Field(index=True)  # FindSpot_toponym
     site_classification: str | None = None
+    archeological_structure: str | None = None
     location: Any | None = Field(
         default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
     )
 
     coins: List["Coin"] = Relationship(back_populates="find_spot")
+
+
+class LocalAdminUnit(SQLModel, table=True):
+    """
+    Normalizes spatial data (City, Coordinates, Site Type).
+    In this dataset, 'local admin-unit' acts as the primary grouping for location.
+    """
+
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True)
+    location: Any | None = Field(
+        default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
+    )
+
+    coins: List["Coin"] = Relationship(back_populates="find_spot")
+
+
+class ObjectType(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+
+
+class ObjectClassification(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
+
+
+class ObjectSubclass(SQLModel, table=True):
+    id: int | None = Field(default=None, primary_key=True)
+    name: str = Field(index=True, unique=True)
 
 
 class Coin(SQLModel, table=True):
@@ -77,9 +108,38 @@ class Coin(SQLModel, table=True):
     ruler_id: int | None = Field(default=None, foreign_key="ruler.id")
     denomination_id: int | None = Field(default=None, foreign_key="denomination.id")
     find_spot_id: int | None = Field(default=None, foreign_key="findspot.id")
+    local_admin_unit_id: int | None = Field(
+        default=None, foreign_key="local_admin_unit.id"
+    )
+    object_type_id: int | None = Field(default=None, foreign_key="object_type.id")
+    object_classification_id: int | None = Field(
+        default=None, foreign_key="object_classification.id"
+    )
+    object_subclass_id: int | None = Field(
+        default=None, foreign_key="object_subclass.id"
+    )
+
+    # Exact location information (coin specific)
+    exact_location: str | None = None
+
+    # Find information
+    discovery_type: str | None = None
+    deposition_type: str | None = None
+    hoard_number: int | None = None
+    chrr_link: str | None = None
+    site_information: str | None = None
+    context_information: str | None = None
 
     # Identification properties
     identification_date: date | None = Field(default=None, index=True)
+    lot_code: str | None = None
+    identification_unique_identifier: str | None = None
+    identification_notes: str | None = None
+    find_bibliography: str | None = None
+
+    # Preservation data
+    last_known_location_object: str | None = None
+    cast_in_kbr: str | None = None
 
     # Physical Properties
     weight: float | None = None
@@ -104,3 +164,9 @@ class Coin(SQLModel, table=True):
     ruler: Ruler | None = Relationship(back_populates="coins")
     denomination: Denomination | None = Relationship(back_populates="coins")
     find_spot: FindSpot | None = Relationship(back_populates="coins")
+    local_admin_unit: LocalAdminUnit | None = Relationship(back_populates="coins")
+    object_type: ObjectType | None = Relationship(back_populates="coins")
+    object_classification: ObjectClassification | None = Relationship(
+        back_populates="coins"
+    )
+    object_subclass: ObjectSubclass | None = Relationship(back_populates="coins")
