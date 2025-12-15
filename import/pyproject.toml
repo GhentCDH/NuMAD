@@ -17,3 +17,8 @@ dependencies = [
 typeCheckingMode = "basic"
 venv = ".venv"
 venvPath = "."
+
+[dependency-groups]
+dev = [
+    "eralchemy[graphviz]>=1.6.0",
+]

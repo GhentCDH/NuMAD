@@ -12,6 +12,23 @@ wheels = [
 ]
 
 [[package]]
+name = "eralchemy"
+version = "1.6.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "sqlalchemy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0e/c0/9c28acf903566a02de43f8fc6c572b8195ab0fa854016825e5690c77b57a/eralchemy-1.6.0.tar.gz", hash = "sha256:8f82d329ec0cd9c04469adf36b8889b5ea2583e7e53c0fd2e784e176e1e27c7a", size = 27416, upload-time = "2025-09-17T22:34:26.286Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fc/7d/428dae27f8de9b9712acb0a36b475fe0f96e65ba4f89198ec3be6432715b/eralchemy-1.6.0-py3-none-any.whl", hash = "sha256:29f3c9c6211892306cdf0605c2df3239ac9d322c63c0385f3959b9a0228fd1f5", size = 21286, upload-time = "2025-09-17T22:34:25.082Z" },
+]
+
+[package.optional-dependencies]
+graphviz = [
+    { name = "graphviz" },
+]
+
+[[package]]
 name = "geoalchemy2"
 version = "0.18.1"
 source = { registry = "https://pypi.org/simple" }
@@ -22,6 +39,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/05/df/f6d689120a15a2287794e16696c3bdb4cf2e53038255d288b61a4d59e1fa/geoalchemy2-0.18.1.tar.gz", hash = "sha256:4bdc7daf659e36f6456e2f2c3bcce222b879584921a4f50a803ab05fa2bb3124", size = 239302, upload-time = "2025-11-18T15:12:05.296Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/48/25/b3d6fc757d8d909e0e666ec6fbf1b7914e9ad18d6e1b08994cd9d2e63330/geoalchemy2-0.18.1-py3-none-any.whl", hash = "sha256:a49d9559bf7acbb69129a01c6e1861657c15db420886ad0a09b1871fb0ff4bdb", size = 81261, upload-time = "2025-11-18T15:12:03.985Z" },
+]
+
+[[package]]
+name = "graphviz"
+version = "0.21"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/b3/3ac91e9be6b761a4b30d66ff165e54439dcd48b83f4e20d644867215f6ca/graphviz-0.21.tar.gz", hash = "sha256:20743e7183be82aaaa8ad6c93f8893c923bd6658a04c32ee115edb3c8a835f78", size = 200434, upload-time = "2025-06-15T09:35:05.824Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/91/4c/e0ce1ef95d4000ebc1c11801f9b944fa5910ecc15b5e351865763d8657f8/graphviz-0.21-py3-none-any.whl", hash = "sha256:54f33de9f4f911d7e84e4191749cac8cc5653f815b06738c54db9a15ab8b1e42", size = 47300, upload-time = "2025-06-15T09:35:04.433Z" },
 ]
 
 [[package]]
@@ -53,6 +79,11 @@ dependencies = [
     { name = "sqlmodel" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "eralchemy", extra = ["graphviz"] },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "geoalchemy2", specifier = ">=0.18.1" },
@@ -62,6 +93,9 @@ requires-dist = [
     { name = "rich", specifier = ">=14.2.0" },
     { name = "sqlmodel", specifier = ">=0.0.27" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "eralchemy", extras = ["graphviz"], specifier = ">=1.6.0" }]
 
 [[package]]
 name = "markdown-it-py"
