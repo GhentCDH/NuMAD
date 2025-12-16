@@ -5,13 +5,18 @@ from rich.logging import RichHandler
 from sqlmodel import Session, SQLModel, select
 
 from src.data import get_data
-from src.db import engine
+from src.db import create_updated_at_trigger, engine
 from src.model import (
+    Authenticity,
     Coin,
+    CoinCoinType,
     CoinRuler,
+    CoinType,
     Denomination,
     FindSpot,
     Identifier,
+    Imts,
+    Issuer,
     LocalAdminUnit,
     Material,
     Mint,
@@ -52,29 +57,40 @@ def get_or_create(
     session: Session,
     model: Type[T],
     cache: Dict[str, T],
-    name: str | None,
     **kwargs,
 ) -> T | None:
     """Checks cache, then DB, then creates new instance."""
-    if not name or not (clean_name := name.strip()):
+
+    if (key_col := next(iter(kwargs))) is None:
         return None
 
-    if clean_name in cache:
-        return cache[clean_name]
+    key_col_val = kwargs.get(key_col)
+    if not key_col_val:
+        return None
 
-    assert hasattr(model, "name"), (
-        f"the cached model {model.__class__} should have a column 'name'"
+    if not (
+        clean_val := key_col_val.strip() if type(key_col_val) == str else key_col_val
+    ):
+        return None
+
+    if clean_val in cache:
+        return cache[clean_val]
+
+    assert hasattr(model, key_col), (
+        f"the cached model {model.__class__} should have a column '{key_col}'"
     )
 
-    statement = select(model).where(model.name == clean_name)  # pyright:ignore
+    statement = select(model).where(getattr(model, key_col) == clean_val)  # pyright:ignore
     if instance := session.exec(statement).first():
-        cache[clean_name] = instance
+        cache[clean_val] = instance
         return instance
 
-    instance = model(name=clean_name, **kwargs)
+    kwargs.update({key_col: clean_val})
+
+    instance = model(**kwargs)
     session.add(instance)
     session.flush()
-    cache[clean_name] = instance
+    cache[clean_val] = instance
     return instance
 
 
@@ -82,17 +98,24 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
     """Create a Coin instance from a row and resolved relations."""
     return Coin(
         original_id=row.get("ID"),
+        original_numbers=row.get("Original numbers"),
+        data_history=row.get("Data history"),
         # Foreign keys
-        identifier_id=get_id(relations["identifier"]),
-        mint_id=get_id(relations["mint"]),
-        material_id=get_id(relations["material"]),
+        authenticity_id=get_id(relations["authenticity"]),
         denomination_id=get_id(relations["denomination"]),
         find_spot_id=get_id(relations["find_spot"]),
+        identifier_id=get_id(relations["identifier"]),
+        imts_obv_id=get_id(relations["imts_obv"]),
+        imts_rev_id=get_id(relations["imts_rev"]),
+        issuer_id=get_id(relations["issuer"]),
         local_admin_unit_id=get_id(relations["local_admin_unit"]),
-        object_type_id=get_id(relations["object_type"]),
+        material_id=get_id(relations["material"]),
+        mint_id=get_id(relations["mint"]),
         object_classification_id=get_id(relations["object_classification"]),
         object_subclass_id=get_id(relations["object_subclass"]),
+        object_type_id=get_id(relations["object_type"]),
         state_id=get_id(relations["state"]),
+        stated_authority_id=get_id(relations["stated_authority"]),
         # Location
         exact_location=row.get("exact_location"),
         # Find information
@@ -121,27 +144,42 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
         find_date=parse_date(row.get("Find_year")),
         reece_periods=row.get("Periods (Reece adapted)"),
         # Descriptions
+        reference_work=row.get("ReferenceWork"),
+        online_reference=row.get("Online reference"),
+        denomination_detail=row.get("Den_detail"),
+        countermark=row.get("Countermark"),
+        object_start=parse_date(row.get("Object_StardDate")),
+        object_end=parse_date(row.get("ObjectEndDate")),
         obverse_legend=row.get("Obverse_legend"),
         obverse_design=row.get("Obverse_design"),
         reverse_legend=row.get("Reverse_legend"),
         reverse_design=row.get("Reverse_design"),
+        object_notes=row.get("Object_notes"),
+        obverse_image=row.get("Foto obv."),
+        reverse_image=row.get("Foto rev."),
+        image_notes=row.get("Foto notes"),
     )
 
 
 def main():
     SQLModel.metadata.create_all(engine)
+    create_updated_at_trigger(engine)
 
     caches: dict[str, dict] = {
-        "identifier": {},
-        "mint": {},
-        "material": {},
-        "ruler": {},
+        "authenticity": {},
+        "coin_type": {},
         "denomination": {},
         "find_spot": {},
+        "identifier": {},
+        "imts": {},
+        "issuer": {},
         "local_admin_unit": {},
-        "object_type": {},
+        "material": {},
+        "mint": {},
         "object_classification": {},
         "object_subclass": {},
+        "object_type": {},
+        "ruler": {},
         "state": {},
         "stated_authority": {},
     }
@@ -150,93 +188,122 @@ def main():
         for i, row in enumerate(get_data()):
             try:
                 relations = {
-                    "identifier": get_or_create(
+                    "authenticity": get_or_create(
                         session,
-                        Identifier,
-                        caches["identifier"],
-                        row.get("Identified by"),
+                        Authenticity,
+                        caches["authenticity"],
+                        name=row.get("Authenticity"),
                     ),
-                    "mint": get_or_create(
-                        session,
-                        Mint,
-                        caches["mint"],
-                        row.get("Mint"),
-                        location=to_location(
-                            row.get("Mint_longitude"), row.get("Mint_latitude")
-                        ),
-                    ),
-                    "material": get_or_create(
-                        session, Material, caches["material"], row.get("Material")
-                    ),
-                    "ruler": get_or_create(
-                        session,
-                        Ruler,
-                        caches["ruler"],
-                        row.get("Ruler"),
-                        start_date=parse_date(row.get("Ruler_startDate")),
-                        end_date=parse_date(row.get("Ruler_endDate")),
+                    "coin_type": get_or_create(
+                        session, CoinType, caches["coin_type"], name=row.get("Type")
                     ),
                     "denomination": get_or_create(
                         session,
                         Denomination,
                         caches["denomination"],
-                        row.get("Denomination"),
-                    ),
-                    "object_type": get_or_create(
-                        session,
-                        ObjectType,
-                        caches["object_type"],
-                        row.get("Object_type"),
-                    ),
-                    "object_classification": get_or_create(
-                        session,
-                        ObjectClassification,
-                        caches["object_classification"],
-                        row.get("Object_classification"),
-                    ),
-                    "object_subclass": get_or_create(
-                        session,
-                        ObjectSubclass,
-                        caches["object_subclass"],
-                        row.get("Object_subclass"),
+                        name=row.get("Denomination"),
                     ),
                     "find_spot": get_or_create(
                         session,
                         FindSpot,
                         caches["find_spot"],
-                        row.get("FindSpot_toponym"),
+                        name=row.get("FindSpot_toponym"),
                         site_classification=row.get("site_classification"),
                         archeological_structure=row.get("archeological_structure"),
                         location=to_location(
                             row.get("FindSpot_longitude"), row.get("FindSpot_latitude")
                         ),
                     ),
+                    "identifier": get_or_create(
+                        session,
+                        Identifier,
+                        caches["identifier"],
+                        name=row.get("Identified by"),
+                    ),
+                    "imts_obv": get_or_create(
+                        session,
+                        Imts,
+                        caches["imts"],
+                        value=parse_int(row.get("IMTS-obv")),
+                    ),
+                    "imts_rev": get_or_create(
+                        session,
+                        Imts,
+                        caches["imts"],
+                        value=parse_int(row.get("IMTS-rev")),
+                    ),
+                    "issuer": get_or_create(
+                        session,
+                        Issuer,
+                        caches["issuer"],
+                        name=row.get("Issuer"),
+                    ),
                     "local_admin_unit": get_or_create(
                         session,
                         LocalAdminUnit,
                         caches["local_admin_unit"],
-                        row.get("local admin-unit"),
+                        name=row.get("local admin-unit"),
                         location=to_location(
                             row.get("local_admin_unit_longitude"),
                             row.get("local_admin_unit_latitude"),
                         ),
                     ),
+                    "material": get_or_create(
+                        session, Material, caches["material"], name=row.get("Material")
+                    ),
+                    "mint": get_or_create(
+                        session,
+                        Mint,
+                        caches["mint"],
+                        name=row.get("Mint"),
+                        location=to_location(
+                            row.get("Mint_longitude"), row.get("Mint_latitude")
+                        ),
+                    ),
+                    "object_classification": get_or_create(
+                        session,
+                        ObjectClassification,
+                        caches["object_classification"],
+                        name=row.get("Object_classification"),
+                    ),
+                    "object_subclass": get_or_create(
+                        session,
+                        ObjectSubclass,
+                        caches["object_subclass"],
+                        name=row.get("Object_subclass"),
+                    ),
+                    "object_type": get_or_create(
+                        session,
+                        ObjectType,
+                        caches["object_type"],
+                        name=row.get("Object_type"),
+                    ),
+                    "ruler": get_or_create(
+                        session,
+                        Ruler,
+                        caches["ruler"],
+                        name=row.get("Ruler"),
+                        start_date=parse_date(row.get("Ruler_startDate")),
+                        end_date=parse_date(row.get("Ruler_endDate")),
+                    ),
                     "state": get_or_create(
                         session,
                         State,
                         caches["state"],
-                        row.get("State"),
+                        name=row.get("State"),
                     ),
                     "stated_authority": get_or_create(
                         session,
                         StatedAuthority,
                         caches["stated_authority"],
-                        row.get("StatedAuthority"),
+                        name=row.get("StatedAuthority"),
                     ),
                 }
 
                 session.add(coin := create_coin(row, relations))
                 session.flush()
+
+                # Adding M-N relations later because they require knowing `coin.id`
 
                 if (ruler := relations["ruler"]) and coin.id is not None:
                     session.add(
@@ -244,6 +311,15 @@ def main():
                             coin_id=coin.id,
                             ruler_id=ruler.id,
                             certainty=parse_int(row.get("Ruler_certainty_attribute")),
+                        )
+                    )
+
+                if (coin_type := relations["coin_type"]) and coin.id is not None:
+                    session.add(
+                        CoinCoinType(
+                            coin_id=coin.id,
+                            coin_type_id=coin_type.id,
+                            certainty=parse_int(row.get("type_certainty_attribute")),
                         )
                     )
 

@@ -18,11 +18,7 @@ class Table(SQLModel):
     updated_at: datetime = Field(
         default=None,
         sa_type=DateTime(timezone=True),
-        sa_column_kwargs={
-            "server_default": func.now(),
-            "onupdate": func.now(),
-            "nullable": False,
-        },
+        sa_column_kwargs={"server_default": func.now(), "nullable": False},
     )
 
 
@@ -51,8 +47,6 @@ class CoinRuler(SQLModel, table=True):
 
 
 class Ruler(Table, table=True):
-    """Represents Authority, Ruler, or Issuer."""
-
     name: str = Field(index=True, unique=True)
     start_date: date | None = Field(default=None, index=True)
     end_date: date | None = Field(default=None, index=True)
@@ -64,8 +58,6 @@ class Denomination(Table, table=True):
 
 
 class FindSpot(Table, table=True):
-    """Normalizes spatial data (City, Coordinates, Site Type)."""
-
     name: str = Field(index=True)
     site_classification: str | None = None
     archeological_structure: str | None = None
@@ -76,8 +68,6 @@ class FindSpot(Table, table=True):
 
 
 class LocalAdminUnit(Table, table=True):
-    """Local administrative unit for grouping locations."""
-
     name: str = Field(index=True)
     location: Any | None = Field(
         default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
@@ -103,17 +93,49 @@ class ObjectSubclass(Table, table=True):
 class State(Table, table=True):
     # Overwrite table name as to not conflict with Postgis' table also called `state`
     __tablename__ = "numadstate"  # type:ignore
-    name: str = Field()
+    name: str = Field(unique=True)
     coins: List["Coin"] = Relationship(back_populates="state")
 
 
 class StatedAuthority(Table, table=True):
-    name: str = Field()
+    name: str = Field(unique=True)
     coins: List["Coin"] = Relationship(back_populates="stated_authority")
 
 
+class Issuer(Table, table=True):
+    name: str = Field(unique=True)
+    coins: List["Coin"] = Relationship(back_populates="issuer")
+
+
+class Authenticity(Table, table=True):
+    name: str = Field(unique=True)
+    coins: List["Coin"] = Relationship(back_populates="authenticity")
+
+
+class CoinType(Table, table=True):
+    name: str = Field(unique=True)
+
+
+class CoinCoinType(SQLModel, table=True):
+    coin_id: int = Field(foreign_key="coin.id", primary_key=True, unique=True)
+    coin_type_id: int = Field(foreign_key="cointype.id", primary_key=True)
+    certainty: int | None = None
+
+
+class Imts(Table, table=True):
+    value: int = Field(unique=True)
+    coins_obv: List["Coin"] = Relationship(
+        back_populates="imts_obv",
+        sa_relationship_kwargs={"foreign_keys": "[Coin.imts_obv_id]"},
+    )
+    coins_rev: List["Coin"] = Relationship(
+        back_populates="imts_rev",
+        sa_relationship_kwargs={"foreign_keys": "[Coin.imts_rev_id]"},
+    )
+
+
 class Coin(Table, table=True):
-    original_numers: str | None = None
+    original_numbers: str | None = None
     data_history: str | None = None
     original_id: str | None = Field(default=None, description="The primary ID from CSV")
 
@@ -137,6 +159,10 @@ class Coin(Table, table=True):
     stated_authority_id: int | None = Field(
         default=None, foreign_key="statedauthority.id"
     )
+    issuer_id: int | None = Field(default=None, foreign_key="issuer.id")
+    authenticity_id: int | None = Field(default=None, foreign_key="authenticity.id")
+    imts_obv_id: int | None = Field(default=None, foreign_key="imts.id")
+    imts_rev_id: int | None = Field(default=None, foreign_key="imts.id")
 
     # Exact location information
     exact_location: str | None = None
@@ -172,10 +198,22 @@ class Coin(Table, table=True):
     reece_periods: str | None = None
 
     # Descriptions
+    reference_work: str | None = None
+    online_reference: str | None = None
+    denomination_detail: str | None = None
+    countermark: str | None = None
+    object_start: date | None = None
+    object_end: date | None = None
     obverse_legend: str | None = None
     obverse_design: str | None = None
     reverse_legend: str | None = None
     reverse_design: str | None = None
+    object_notes: str | None = None
+
+    # Image
+    obverse_image: str | None = None
+    reverse_image: str | None = None
+    image_notes: str | None = None
 
     # Relationships
     identifier: Identifier | None = Relationship(back_populates="coins")
@@ -191,5 +229,16 @@ class Coin(Table, table=True):
     object_subclass: ObjectSubclass | None = Relationship(back_populates="coins")
     state: State | None = Relationship(back_populates="coins")
     stated_authority: StatedAuthority | None = Relationship(back_populates="coins")
+    issuer: Issuer | None = Relationship(back_populates="coins")
+    authenticity: Authenticity | None = Relationship(back_populates="coins")
+    imts_obv: Imts | None = Relationship(
+        back_populates="coins_obv",
+        sa_relationship_kwargs={"foreign_keys": "[Coin.imts_obv_id]"},
+    )
+    imts_rev: Imts | None = Relationship(
+        back_populates="coins_rev",
+        sa_relationship_kwargs={"foreign_keys": "[Coin.imts_rev_id]"},
+    )
 
-    # Persons or institutions responsible for the emission
+
+# Persons or institutions responsible for the emission
