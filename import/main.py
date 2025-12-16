@@ -12,6 +12,7 @@ from src.model import (
     CoinCoinType,
     CoinRuler,
     CoinType,
+    Date,
     Denomination,
     FindSpot,
     Identifier,
@@ -49,7 +50,7 @@ logger = logging.getLogger(__name__)
 T = TypeVar("T", bound=SQLModel)
 
 
-def get_id(obj: Table | None) -> int | None:
+def get_id(obj: Table | Date | None) -> int | None:
     return obj.id if obj else None
 
 
@@ -94,7 +95,38 @@ def get_or_create(
     return instance
 
 
-def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
+def get_or_create_date(
+    session: Session,
+    cache: Dict[tuple[int, int | None, int | None], Date],
+    date: Date | None,
+) -> Date | None:
+    """Get or create a Date instance, using (year, month, day) as composite key."""
+    if date is None:
+        return None
+
+    key = (date.year, date.month, date.day)
+
+    if key in cache:
+        return cache[key]
+
+    statement = select(Date).where(
+        Date.year == date.year,
+        Date.month == date.month if date.month is not None else Date.month.is_(None),
+        Date.day == date.day if date.day is not None else Date.day.is_(None),
+    )
+
+    if instance := session.exec(statement).first():
+        cache[key] = instance
+        return instance
+
+    instance = Date(year=date.year, month=date.month, day=date.day)
+    session.add(instance)
+    session.flush()
+    cache[key] = instance
+    return instance
+
+
+def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
     """Create a Coin instance from a row and resolved relations."""
     return Coin(
         original_id=row.get("ID"),
@@ -116,6 +148,10 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
         object_type_id=get_id(relations["object_type"]),
         state_id=get_id(relations["state"]),
         stated_authority_id=get_id(relations["stated_authority"]),
+        identification_date_id=get_id(relations["identification_date"]),
+        find_date_id=get_id(relations["find_date"]),
+        object_start_id=get_id(relations["object_start"]),
+        object_end_id=get_id(relations["object_end"]),
         # Location
         exact_location=row.get("exact_location"),
         # Find information
@@ -127,7 +163,6 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
         context_information=row.get("Context_information"),
         find_bibliography=row.get("Find_bibliography"),
         # Identification
-        identification_date=parse_date(row.get("Identification_year")),
         lot_code=row.get("Lot_Code"),
         identification_unique_identifier=row.get("unique_identifier"),
         identification_notes=row.get("identification_notes"),
@@ -141,15 +176,12 @@ def create_coin(row: dict, relations: dict[str, Table | None]) -> Coin:
         # Dates
         year_start=parse_int(row.get("Object_StartDate")),
         year_end=parse_int(row.get("ObjectEndDate")),
-        find_date=parse_date(row.get("Find_year")),
         reece_periods=row.get("Periods (Reece adapted)"),
         # Descriptions
         reference_work=row.get("ReferenceWork"),
         online_reference=row.get("Online reference"),
         denomination_detail=row.get("Den_detail"),
         countermark=row.get("Countermark"),
-        object_start=parse_date(row.get("Object_StardDate")),
-        object_end=parse_date(row.get("ObjectEndDate")),
         obverse_legend=row.get("Obverse_legend"),
         obverse_design=row.get("Obverse_design"),
         reverse_legend=row.get("Reverse_legend"),
@@ -168,6 +200,7 @@ def main():
     caches: dict[str, dict] = {
         "authenticity": {},
         "coin_type": {},
+        "date": {},  # This one uses tuple keys: (year, month, day)
         "denomination": {},
         "find_spot": {},
         "identifier": {},
@@ -219,6 +252,24 @@ def main():
                         Identifier,
                         caches["identifier"],
                         name=row.get("Identified by"),
+                    ),
+                    "identification_date": get_or_create_date(
+                        session,
+                        caches["date"],
+                        parse_date(row.get("Identification_year")),
+                    ),
+                    "find_date": get_or_create_date(
+                        session, caches["date"], parse_date(year=row.get("Find_year"))
+                    ),
+                    "object_start": get_or_create_date(
+                        session,
+                        caches["date"],
+                        parse_date(year=row.get("Object_StartDate")),
+                    ),
+                    "object_end": get_or_create_date(
+                        session,
+                        caches["date"],
+                        parse_date(year=row.get("ObjectEndDate")),
                     ),
                     "imts_obv": get_or_create(
                         session,

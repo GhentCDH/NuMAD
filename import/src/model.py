@@ -3,7 +3,7 @@ from typing import Any, List
 
 from geoalchemy2 import Geography
 from sqlalchemy import DateTime, func
-from sqlmodel import Column, Field, Relationship, SQLModel
+from sqlmodel import CheckConstraint, Column, Field, Relationship, SQLModel
 
 
 class Table(SQLModel):
@@ -134,6 +134,18 @@ class Imts(Table, table=True):
     )
 
 
+class Date(SQLModel, table=True):
+    __table_args__ = (
+        CheckConstraint("month >= 1 AND month <= 12", name="month range"),
+        CheckConstraint("day >= 1 AND day <= 31", name="day range"),
+    )
+
+    id: int | None = Field(default=None, primary_key=True)
+    year: int = Field()
+    month: int | None = None
+    day: int | None = None
+
+
 class Coin(Table, table=True):
     original_numbers: str | None = None
     data_history: str | None = None
@@ -163,6 +175,10 @@ class Coin(Table, table=True):
     authenticity_id: int | None = Field(default=None, foreign_key="authenticity.id")
     imts_obv_id: int | None = Field(default=None, foreign_key="imts.id")
     imts_rev_id: int | None = Field(default=None, foreign_key="imts.id")
+    identification_date_id: int | None = Field(default=None, foreign_key="date.id")
+    find_date_id: int | None = Field(default=None, foreign_key="date.id")
+    object_start_id: int | None = Field(default=None, foreign_key="date.id")
+    object_end_id: int | None = Field(default=None, foreign_key="date.id")
 
     # Exact location information
     exact_location: str | None = None
@@ -176,7 +192,6 @@ class Coin(Table, table=True):
     context_information: str | None = None
 
     # Identification properties
-    identification_date: date | None = Field(default=None, index=True)
     lot_code: str | None = None
     identification_unique_identifier: str | None = None
     identification_notes: str | None = None
@@ -194,7 +209,6 @@ class Coin(Table, table=True):
     # Dating
     year_start: int | None = None
     year_end: int | None = None
-    find_date: date | None = Field(default=None, index=True)
     reece_periods: str | None = None
 
     # Descriptions
@@ -202,8 +216,6 @@ class Coin(Table, table=True):
     online_reference: str | None = None
     denomination_detail: str | None = None
     countermark: str | None = None
-    object_start: date | None = None
-    object_end: date | None = None
     obverse_legend: str | None = None
     obverse_design: str | None = None
     reverse_legend: str | None = None
@@ -238,6 +250,18 @@ class Coin(Table, table=True):
     imts_rev: Imts | None = Relationship(
         back_populates="coins_rev",
         sa_relationship_kwargs={"foreign_keys": "[Coin.imts_rev_id]"},
+    )
+    identification_date: Date | None = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Coin.identification_date_id]"}
+    )
+    find_date: Date | None = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Coin.find_date_id]"}
+    )
+    object_start: Date | None = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Coin.object_start_id]"}
+    )
+    object_end: Date | None = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Coin.object_end_id]"}
     )
 
 

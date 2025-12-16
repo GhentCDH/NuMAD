@@ -5,6 +5,8 @@ from datetime import date
 from dateutil import parser as dateparser
 from geoalchemy2 import WKTElement
 
+from src.model import Date
+
 logger = logging.getLogger(__name__)
 
 
@@ -62,15 +64,20 @@ def _parse_date_mrt_90(input: str) -> date | None:
             return None
 
 
-def parse_date(v: str | date | None) -> date | None:
-    if v is None or isinstance(v, date):
-        return v
+def _parse_year(year: str) -> Date | None:
+    if not (year_int := parse_int(year)):
+        return None
 
-    if len(v) == 0:
+    return Date(year=year_int)
+
+
+def _parse_full_date(full: str) -> date | None:
+    if len(full) == 0:
         return None
 
     try:
-        return dateparser.parse(v, dayfirst=True).date()
+        return dateparser.parse(full, dayfirst=True).date()
+
     except Exception:
         for parser in [
             _parse_date_p,
@@ -78,12 +85,29 @@ def parse_date(v: str | date | None) -> date | None:
             _parse_date_month_range,
             _parse_date_mrt_90,
         ]:
-            result = parser(v)
+            result = parser(full)
 
             if result is not None:
                 return result
 
-        logger.error(f"Failed parsing '{v}', also with custom formats")
+        logger.error(f"Failed parsing '{full}', also with custom formats")
+
+
+def parse_date(full: str | None = None, year: str | None = None) -> Date | None:
+    if full is None and year is None:
+        return None
+
+    assert full is not None or year is not None, (
+        "parse date cannot get both a full date and a year"
+    )
+
+    if year is not None:
+        return _parse_year(year)
+    elif full is not None and (date := _parse_full_date(full)):
+        return Date(year=date.year, month=date.month, day=date.day)
+
+    else:
+        return None
 
 
 def parse_float(value: str | None) -> float | None:
@@ -101,7 +125,7 @@ def parse_int(value: str | None) -> int | None:
         return None
     try:
         # Remove common non-numeric chars found in dirty data
-        clean = "".join(filter(str.isdigit, value))
+        clean = "".join(filter(lambda v: str.isdigit(v) or v == "-", value))
         return int(clean)
     except ValueError:
         return None
