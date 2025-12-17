@@ -70,7 +70,7 @@ def get_or_create(
         return None
 
     if not (
-        clean_val := key_col_val.strip() if type(key_col_val) == str else key_col_val
+        clean_val := key_col_val.strip() if type(key_col_val) is str else key_col_val
     ):
         return None
 
@@ -81,7 +81,7 @@ def get_or_create(
         f"the cached model {model.__class__} should have a column '{key_col}'"
     )
 
-    statement = select(model).where(getattr(model, key_col) == clean_val)  # pyright:ignore
+    statement = select(model).where(getattr(model, key_col) == clean_val)  # type:ignore
     if instance := session.exec(statement).first():
         cache[clean_val] = instance
         return instance
@@ -111,8 +111,8 @@ def get_or_create_date(
 
     statement = select(Date).where(
         Date.year == date.year,
-        Date.month == date.month if date.month is not None else Date.month.is_(None),
-        Date.day == date.day if date.day is not None else Date.day.is_(None),
+        Date.month == date.month if date.month is not None else Date.month.is_(None),  # type:ignore
+        Date.day == date.day if date.day is not None else Date.day.is_(None),  # type:ignore
     )
 
     if instance := session.exec(statement).first():
