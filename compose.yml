@@ -1,7 +1,7 @@
 services:
   db:
-    image: postgis/postgis:17-3.5
     container_name: numad-db
+    image: postgis/postgis:17-3.5
     environment:
       POSTGRES_USER: numad
       POSTGRES_PASSWORD: numad
@@ -33,10 +33,10 @@ services:
     command: tail -f /dev/null
 
   kottster:
+    container_name: numad-kottster
     build:
       context: kottster
       dockerfile: Dockerfile
-    container_name: numad-kottster
     ports:
       - "5480:5480"
       - "5481:5481"
@@ -54,6 +54,22 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  ontop:
+    container_name: numad-ontop
+    image: ontop/ontop
+    env_file:
+      - .env
+    depends_on:
+      db: 
+        condition: service_healthy
+    volumes:
+      - ./ontop/input:/opt/ontop/input
+      - ./ontop/jdbc:/opt/ontop/jdbc
+    ports:
+      - "8080:8080"
+    command: ./ontop endpoint
+
 
 volumes:
   import-venv:

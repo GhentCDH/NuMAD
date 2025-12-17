@@ -16,3 +16,5 @@ kottster:
 
 reinit: rebuild import
     
+jdbc:
+    curl https://jdbc.postgresql.org/download/postgresql-42.7.8.jar -O --output-dir ./ontop/jdbc
