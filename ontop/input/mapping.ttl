@@ -1,5 +1,5 @@
  # NOTE: this file is currently a simple example at most
-@prefix : <http://numad.ugent.be/resource> .
+@prefix : <http://numad.ugent.be/resource/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix nmd: <http://numad.ugent.be/ontology#> .
@@ -16,4 +16,4 @@
 # Coins
 :COIN-TYPE a rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM coin""" ] ;
-    rr:subjectMap [] .
+    rr:subjectMap [ rr:template "http://numad.ugent.be/resource/coin/{id}" ; rr:class nmd:Coin ] .
