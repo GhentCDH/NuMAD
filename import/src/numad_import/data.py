@@ -1,7 +1,7 @@
 import csv
 from typing import Any
 
-from src.config import CSV
+from .config import CSV
 
 
 def get_data() -> list[dict[str, Any]]:

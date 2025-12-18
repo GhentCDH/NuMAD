@@ -1,5 +1,5 @@
 [project]
-name = "import"
+name = "numad-import"
 version = "0.1.0"
 description = "Numad data import"
 readme = "README.md"
@@ -14,10 +14,13 @@ dependencies = [
     "sqlmodel>=0.0.27",
 ]
 
-[tool.pyright]
-typeCheckingMode = "basic"
-venv = ".venv"
-venvPath = "."
-
 [dependency-groups]
 dev = ["eralchemy[graphviz]>=1.6.0"]
+
+[build-system]
+requires = ["uv_build>=0.9.18,<0.10.0"]
+build-backend = "uv_build"
+
+[project.scripts]
+import = "numad_import.cli:main"
+erd = "numad_import.cli:erd"

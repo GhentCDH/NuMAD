@@ -5,7 +5,7 @@ from datetime import date
 from dateutil import parser as dateparser
 from geoalchemy2 import WKTElement
 
-from src.model import Date
+from .model import Date
 
 logger = logging.getLogger(__name__)
 

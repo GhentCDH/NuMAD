@@ -4,9 +4,9 @@ from typing import Dict, Type, TypeVar
 from rich.logging import RichHandler
 from sqlmodel import Session, SQLModel, select
 
-from src.data import get_data
-from src.db import create_updated_at_trigger, engine
-from src.model import (
+from .data import get_data
+from .db import create_updated_at_trigger, engine
+from .model import (
     Authenticity,
     Coin,
     CoinCoinType,
@@ -29,7 +29,7 @@ from src.model import (
     StatedAuthority,
     Table,
 )
-from src.parse import parse_date, parse_float, parse_int, to_location
+from .parse import parse_date, parse_float, parse_int, to_location
 
 handler = RichHandler(
     rich_tracebacks=True,
@@ -386,5 +386,15 @@ def main():
         logger.info("Import complete.")
 
 
-if __name__ == "__main__":
-    main()
+def erd():
+    import subprocess
+
+    from .config import DB_STRING
+
+    subprocess.run(["eralchemy", "-i", DB_STRING, "-s", "public", "-o", "erd.md"])
+
+    subprocess.run(["sed", "-i", "s/public_//g", "erd.md"])
+    subprocess.run(
+        ["sed", "-i", "-e", "/^<!--$/d", "-e", "/^-->$/d", "-e", r"/!\[\]/d", "erd.md"]
+    )
+    subprocess.run(["mv", "erd.md", "erd.mermaid"])

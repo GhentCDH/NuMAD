@@ -1,6 +1,6 @@
 import sqlmodel
 
-from src.config import DB_STRING
+from .config import DB_STRING
 
 engine = sqlmodel.create_engine(DB_STRING)
 

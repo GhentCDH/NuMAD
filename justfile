@@ -9,7 +9,7 @@ rebuild:
     docker compose up -d --build
 
 import:
-    docker compose exec import uv run main.py
+    docker compose exec import uv run import
 
 kottster:
     docker compose exec kottster /dev.sh

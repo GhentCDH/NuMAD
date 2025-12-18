@@ -5,11 +5,11 @@ WORKDIR /app
 # avoids hardlink issues in containers
 ENV UV_LINK_MODE=copy  
 
-# copy dependency files for caching
+# copy dependency files
 COPY pyproject.toml uv.lock ./
+COPY README.md ./
+COPY src/ ./src/
+
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --frozen --no-dev
 
-# copy application code
-COPY main.py .
-COPY src/ ./src/
