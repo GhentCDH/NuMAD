@@ -16,4 +16,5 @@
 # Coins
 :COIN-TYPE a rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM coin""" ] ;
-    rr:subjectMap [ rr:template "http://numad.ugent.be/resource/coin/{id}" ; rr:class nmd:Coin ] .
+    rr:subjectMap [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
+                    rr:class nmd:Coin ] .
