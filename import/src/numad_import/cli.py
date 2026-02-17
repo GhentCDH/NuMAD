@@ -6,7 +6,7 @@ from sqlmodel import Session, SQLModel, select
 
 from .data import get_data
 from .db import create_updated_at_trigger, engine
-from .util import get_nomisma_ruler
+from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material
 from .model import (
     Authenticity,
     Coin,
@@ -396,6 +396,38 @@ def main():
                 )
             if i % 10 == 0:
                 logger.info(f"Processed {i} rulers...")
+        session.commit()
+
+        logger.info(f"\nProcessing mints URIs")
+        mints = session.exec(select(Mint)).all()
+        for i, mint in enumerate(mints):
+            if mint.nomisma_uri is None:
+                mint.nomisma_uri = get_nomisma_mint(
+                    mint.name
+                )
+            if i % 10 == 0:
+                logger.info(f"Processed {i} mints...")
+        session.commit()
+
+        logger.info(f"\nProcessing denominations URIs")
+        denoms = session.exec(select(Denomination)).all()
+        for i, denom in enumerate(denoms):
+            if denom.nomisma_uri is None:
+                denom.nomisma_uri = get_nomisma_denomination(
+                    denom.name
+                )
+            if i % 10 == 0:
+                logger.info(f"Processed {i} denominations...")
+        session.commit()
+
+        logger.info(f"\nProcessing material URIs")
+        materials = session.exec(select(Material)).all()
+        for i, material in enumerate(materials):
+            if material.nomisma_uri is None:
+                nomisma_material = get_nomisma_material(material.name)
+                if nomisma_material is not None:
+                    material.nomisma_uri = nomisma_material["nmo"]
+                    material.label = nomisma_material["label"]
 
         session.commit()
 

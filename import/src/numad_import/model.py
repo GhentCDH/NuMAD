@@ -32,11 +32,14 @@ class Mint(Table, table=True):
     location: Any | None = Field(
         default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
     )
+    nomisma_uri: str | None = Field(default=None, index=True)
     coins: List["Coin"] = Relationship(back_populates="mint")
 
 
 class Material(Table, table=True):
     name: str = Field(index=True, unique=True)
+    label: str | None = Field(default=None, index=True)
+    nomisma_uri: str | None = Field(default=None, index=True)
     coins: List["Coin"] = Relationship(back_populates="material")
 
 
@@ -55,6 +58,7 @@ class Ruler(Table, table=True):
 
 class Denomination(Table, table=True):
     name: str = Field(index=True, unique=True)
+    nomisma_uri: str | None = Field(default=None, index=True)
     coins: List["Coin"] = Relationship(back_populates="denomination")
 
 
