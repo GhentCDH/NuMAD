@@ -6,6 +6,7 @@ from sqlmodel import Session, SQLModel, select
 
 from .data import get_data
 from .db import create_updated_at_trigger, engine
+from .util import get_nomisma_ruler
 from .model import (
     Authenticity,
     Coin,
@@ -334,8 +335,8 @@ def main():
                         Ruler,
                         caches["ruler"],
                         name=row.get("Ruler"),
-                        start_date=parse_date(row.get("Ruler_startDate")),
-                        end_date=parse_date(row.get("Ruler_endDate")),
+                        start_date=parse_int(row.get("Ruler_StartDate")),
+                        end_date=parse_int(row.get("Ruler_EndDate")),
                     ),
                     "state": get_or_create(
                         session,
@@ -383,6 +384,21 @@ def main():
                 continue
 
         session.commit()
+
+        logger.info(f"\nProcessing rulers URIs")
+        rulers = session.exec(select(Ruler)).all()
+        for i, ruler in enumerate(rulers):
+            if ruler.nomisma_uri is None:
+                ruler.nomisma_uri = get_nomisma_ruler(
+                    ruler.name,
+                    ruler.start_date,
+                    ruler.end_date,
+                )
+            if i % 10 == 0:
+                logger.info(f"Processed {i} rulers...")
+
+        session.commit()
+
         logger.info("Import complete.")
 
 

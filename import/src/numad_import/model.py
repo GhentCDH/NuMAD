@@ -48,8 +48,9 @@ class CoinRuler(SQLModel, table=True):
 
 class Ruler(Table, table=True):
     name: str = Field(index=True, unique=True)
-    start_date: date | None = Field(default=None, index=True)
-    end_date: date | None = Field(default=None, index=True)
+    start_date: int | None = Field(default=None, index=True)
+    end_date: int | None = Field(default=None, index=True)
+    nomisma_uri: str | None = Field(default=None, index=True)
 
 
 class Denomination(Table, table=True):

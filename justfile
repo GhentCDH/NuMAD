@@ -12,7 +12,7 @@ import:
     docker compose exec import uv run import
 
 kottster:
-    docker compose exec kottster /dev.sh
+    docker compose exec -d kottster /dev.sh
 
 reinit: rebuild import
     
