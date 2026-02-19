@@ -6,7 +6,8 @@ from sqlmodel import Session, SQLModel, select
 
 from .data import get_data
 from .db import create_updated_at_trigger, engine
-from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material
+from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material, \
+    fix_online_reference
 from .model import (
     Authenticity,
     Coin,
@@ -171,16 +172,16 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         last_known_location_object=row.get("last_known_location_object"),
         cast_in_kbr=row.get("Cast in KBR"),
         # Metrics
-        weight=parse_float(row.get("Weight")),
+        weight=parse_float(row.get("Weight ")),
         diameter=parse_float(row.get("Diameter")),
         die_axis=parse_int(row.get("Die axis")),
         # Dates
-        year_start=parse_int(row.get("Object_StartDate")),
+        year_start=parse_int(row.get("Object_StardDate")),
         year_end=parse_int(row.get("ObjectEndDate")),
         reece_periods=row.get("Periods (Reece adapted)"),
         # Descriptions
         reference_work=row.get("ReferenceWork"),
-        online_reference=row.get("Online reference"),
+        online_reference=fix_online_reference(row.get("Online reference")),
         denomination_detail=row.get("Den_detail"),
         countermark=row.get("Countermark"),
         obverse_legend=row.get("Obverse_legend"),
@@ -265,7 +266,7 @@ def main():
                     "object_start": get_or_create_date(
                         session,
                         caches["date"],
-                        parse_date(year=row.get("Object_StartDate")),
+                        parse_date(year=row.get("Object_StardDate")),
                     ),
                     "object_end": get_or_create_date(
                         session,

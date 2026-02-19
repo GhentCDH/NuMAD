@@ -1,20 +1,305 @@
- # NOTE: this file is currently a simple example at most
-@prefix : <http://numad.ugent.be/resource/> .
-@prefix dct: <http://purl.org/dc/terms/> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix nmd: <http://numad.ugent.be/ontology#> .
-@prefix org: <http://www.w3.org/ns/org#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix rov: <http://www.w3.org/ns/regorg#> .
-@prefix rr: <http://www.w3.org/ns/r2rml#> .
+# NOTE: this file is currently a simple example at most
+@prefix :       <http://numad.ugent.be/resource/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix foaf:   <http://xmlns.com/foaf/0.1/> .
+@prefix nmd:    <http://numad.ugent.be/ontology#> .
+@prefix org:    <http://www.w3.org/ns/org#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rov:    <http://www.w3.org/ns/regorg#> .
+@prefix rr:     <http://www.w3.org/ns/r2rml#> .
 @prefix schema: <http://schema.org/> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix vcard:  <http://www.w3.org/2006/vcard/ns#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix nmo:    <http://nomisma.org/ontology#> .
 
-# Coins
-:COIN-TYPE a rr:TriplesMap ;
+##############
+# COINS
+##############
+:COIN
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, year_start, year_end, weight, diameter, die_axis FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
+                            rr:class    nmo:Coin ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
+                            rr:objectMap [ rr:column   "year_start" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasEndDate ;
+                            rr:objectMap [ rr:column   "year_end" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasWeight ;
+                            rr:objectMap [ rr:column   "weight" ;
+                                           rr:datatype xsd:decimal ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasDiameter ;
+                            rr:objectMap [ rr:column   "diameter" ;
+                                           rr:datatype xsd:decimal ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasAxis ;
+                            rr:objectMap [ rr:column   "die_axis" ;
+                                           rr:datatype xsd:int ] ] .
+
+
+:COIN-IDENTIFIER
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, identifier_id FROM coin
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasIdentifier ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/identifier/{identifier_id}" ] ] .
+
+:COIN-FIND
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasFindContext ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/find/{id}" ] ] .
+
+:COIN-SAME-AS
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, online_reference FROM coin
+        WHERE online_reference IS NOT NULL AND online_reference <> ''
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate owl:sameAs ;
+                            rr:objectMap [ rr:column   "online_reference" ;
+                                           rr:termType rr:IRI ] ] .
+
+:COIN-DENOMINATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, denomination_id FROM coin
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasDenomination ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/denomination/{denomination_id}" ] ] .
+
+:COIN-RULER
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT coin_id, ruler_id FROM coinruler""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{coin_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasAuthority ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/ruler/{ruler_id}" ] ] .
+
+:COIN-MINT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, mint_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasMint ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/mint/{mint_id}" ] ] .
+
+:COIN-MATERIAL
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, material_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasMaterial ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/material/{material_id}" ] ] .
+
+:COIN-LOCAL-ADMIN-UNIT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, local_admin_unit_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasLocalAdminUnit ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/localadminunit/{local_admin_unit_id}" ] ] .
+
+#########
+# FINDS
+#########
+:FIND
+    a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM coin""" ] ;
-    rr:subjectMap [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
-                    rr:class nmd:Coin ] .
+    rr:subjectMap   [ rr:template "http://numad.ugent.be/resource/find/{id}" ;
+                      rr:class    nmo:Find ] .
+
+:FIND-DATE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+            SELECT
+                c.id AS id,
+                make_date(d.year, d.month, d.day) AS coin_date
+            FROM coin c
+            JOIN date d
+              ON c.identification_date_id = d.id
+        """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/find/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasDate ;
+                            rr:objectMap [ rr:column   "coin_date" ;
+                                           rr:datatype xsd:date ] ] .
+
+################
+# IDENTIFIERS
+################
+:IDENTIFIER
+    a               rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery """
+        SELECT id FROM identifier
+    """ ] ;
+    rr:subjectMap   [ rr:template "http://numad.ugent.be/resource/identifier/{id}" ;
+                      rr:class    nmd:Identifier ] .
+
+:IDENTIFIER-PROPERTIES
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, name FROM identifier
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/identifier/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate foaf:name ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+#################
+# Denominations
+#################
+:DENOMINATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, name, nomisma_uri FROM denomination
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/denomination/{id}" ;
+                            rr:class    nmo:Denomination ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate owl:sameAs ;
+                            rr:objectMap [ rr:column   "nomisma_uri" ;
+                                           rr:termType rr:IRI ] ] .
+
+###########
+# RULERS
+###########
+:RULER
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name, nomisma_uri FROM ruler""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/ruler/{id}" ;
+                            rr:class    foaf:Person ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate owl:sameAs ;
+                            rr:objectMap [ rr:column   "nomisma_uri" ;
+                                           rr:termType rr:IRI ] ] .
+
+#########
+# MINTS
+#########
+:MINT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id, name, nomisma_uri
+        FROM mint
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/mint/{id}" ;
+                            rr:class    nmo:Mint ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate owl:sameAs ;
+                            rr:objectMap [ rr:column   "nomisma_uri" ;
+                                           rr:termType rr:IRI ] ] .
+
+:MINT-MINT-LOCATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id
+        FROM mint m
+        WHERE m.location IS NOT NULL
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/mint/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate schema:geo ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/mint/{id}/geo" ] ] .
+
+:MINT-LOCATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id,
+            ST_Y(m.location::geometry) as lat,
+            ST_X(m.location::geometry) as long
+        FROM mint m
+        WHERE m.location IS NOT NULL
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/mint/{id}/geo" ;
+                            rr:class    schema:GeoCoordinates ] ;
+    rr:predicateObjectMap [ rr:predicate schema:latitude ;
+                            rr:objectMap [ rr:column   "lat" ;
+                                           rr:datatype xsd:decimal ] ] ;
+    rr:predicateObjectMap [ rr:predicate schema:longitude ;
+                            rr:objectMap [ rr:column   "long" ;
+                                           rr:datatype xsd:decimal ] ] .
+
+##############
+# MATERIALS
+##############
+:MATERIAL
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id, name, label, nomisma_uri
+        FROM material
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/material/{id}" ;
+                            rr:class    nmo:Material ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate skos:prefLabel ;
+                            rr:objectMap [ rr:column   "label" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate owl:sameAs ;
+                            rr:objectMap [ rr:column   "nomisma_uri" ;
+                                           rr:termType rr:IRI ] ] .
+
+####################
+# LOCAL ADMIN UNITS
+####################
+:LOCAL-ADMIN-UNIT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, name FROM localadminunit
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}" ;
+                            rr:class    nmd:LocalAdminUnit ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:LOCAL-ADMIN-UNIT-LOCATION-LINK
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id
+        FROM localadminunit a
+        WHERE a.location IS NOT NULL
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate schema:geo ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}/geo" ] ] .
+
+
+:LOCAL-ADMIN-UNIT-LOCATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id,
+            ST_Y(a.location::geometry) as lat,
+            ST_X(a.location::geometry) as long
+        FROM localadminunit a
+        WHERE a.location IS NOT NULL
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}/geo" ;
+                            rr:class    schema:GeoCoordinates ] ;
+    rr:predicateObjectMap [ rr:predicate schema:latitude ;
+                            rr:objectMap [ rr:column   "lat" ;
+                                           rr:datatype xsd:decimal ] ] ;
+    rr:predicateObjectMap [ rr:predicate schema:longitude ;
+                            rr:objectMap [ rr:column   "long" ;
+                                           rr:datatype xsd:decimal ] ] .

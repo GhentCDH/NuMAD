@@ -107,7 +107,7 @@ def get_nomisma_ruler(name: str, start_date: int, end_date: int) -> str | None:
     if res.status_code == 200:
         data = res.json()
         if len(data["results"]["bindings"]) == 1:
-            return f"<{data["results"]["bindings"][0]["ruler"]["value"]}>"
+            return f"{data["results"]["bindings"][0]["ruler"]["value"]}"
     else:
         print(res.status_code)
         print(res.text)
@@ -131,7 +131,7 @@ def get_nomisma_denomination(name: str) -> str | None:
     if res.status_code == 200:
         data = res.json()
         if len(data["results"]["bindings"]) == 1:
-            return f"<{data["results"]["bindings"][0]["denomination"]["value"]}>"
+            return f"{data["results"]["bindings"][0]["denomination"]["value"]}"
     else:
         print(res.status_code)
         print(res.text)
@@ -155,7 +155,7 @@ def get_nomisma_mint(name: str) -> str | None:
     if res.status_code == 200:
         data = res.json()
         if len(data["results"]["bindings"]) == 1:
-            return f"<{data["results"]["bindings"][0]["mint"]["value"]}>"
+            return f"{data["results"]["bindings"][0]["mint"]["value"]}"
     else:
         print(res.status_code)
         print(res.text)
@@ -167,6 +167,5 @@ def get_nomisma_mint(name: str) -> str | None:
 def get_nomisma_material(material: str):
     return MATERIALS.get(material.lower())
 
-
-if __name__ == '__main__':
-    print(get_nomisma_denomination("potin"))
+def fix_online_reference(url: str) -> str :
+    return url.strip("#")
