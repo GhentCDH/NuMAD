@@ -6,7 +6,8 @@ from sqlmodel import Session, SQLModel, select
 
 from .data import get_data
 from .db import create_updated_at_trigger, engine
-from .util import get_nomisma_ruler
+from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material, \
+    fix_online_reference
 from .model import (
     Authenticity,
     Coin,
@@ -171,16 +172,16 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         last_known_location_object=row.get("last_known_location_object"),
         cast_in_kbr=row.get("Cast in KBR"),
         # Metrics
-        weight=parse_float(row.get("Weight")),
+        weight=parse_float(row.get("Weight ")),
         diameter=parse_float(row.get("Diameter")),
         die_axis=parse_int(row.get("Die axis")),
         # Dates
-        year_start=parse_int(row.get("Object_StartDate")),
+        year_start=parse_int(row.get("Object_StardDate")),
         year_end=parse_int(row.get("ObjectEndDate")),
         reece_periods=row.get("Periods (Reece adapted)"),
         # Descriptions
         reference_work=row.get("ReferenceWork"),
-        online_reference=row.get("Online reference"),
+        online_reference=fix_online_reference(row.get("Online reference")),
         denomination_detail=row.get("Den_detail"),
         countermark=row.get("Countermark"),
         obverse_legend=row.get("Obverse_legend"),
@@ -265,7 +266,7 @@ def main():
                     "object_start": get_or_create_date(
                         session,
                         caches["date"],
-                        parse_date(year=row.get("Object_StartDate")),
+                        parse_date(year=row.get("Object_StardDate")),
                     ),
                     "object_end": get_or_create_date(
                         session,
@@ -396,6 +397,38 @@ def main():
                 )
             if i % 10 == 0:
                 logger.info(f"Processed {i} rulers...")
+        session.commit()
+
+        logger.info(f"\nProcessing mints URIs")
+        mints = session.exec(select(Mint)).all()
+        for i, mint in enumerate(mints):
+            if mint.nomisma_uri is None:
+                mint.nomisma_uri = get_nomisma_mint(
+                    mint.name
+                )
+            if i % 10 == 0:
+                logger.info(f"Processed {i} mints...")
+        session.commit()
+
+        logger.info(f"\nProcessing denominations URIs")
+        denoms = session.exec(select(Denomination)).all()
+        for i, denom in enumerate(denoms):
+            if denom.nomisma_uri is None:
+                denom.nomisma_uri = get_nomisma_denomination(
+                    denom.name
+                )
+            if i % 10 == 0:
+                logger.info(f"Processed {i} denominations...")
+        session.commit()
+
+        logger.info(f"\nProcessing material URIs")
+        materials = session.exec(select(Material)).all()
+        for i, material in enumerate(materials):
+            if material.nomisma_uri is None:
+                nomisma_material = get_nomisma_material(material.name)
+                if nomisma_material is not None:
+                    material.nomisma_uri = nomisma_material["nmo"]
+                    material.label = nomisma_material["label"]
 
         session.commit()
 
