@@ -76,7 +76,7 @@ union
 }
 `
 
-export const facetResultSetQueryBelhisfirm = `
+export const facetResultSetQueryOntop = `
   SELECT *
   WHERE {
     {

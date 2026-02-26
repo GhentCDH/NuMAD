@@ -429,6 +429,8 @@ def main():
                 if nomisma_material is not None:
                     material.nomisma_uri = nomisma_material["nmo"]
                     material.label = nomisma_material["label"]
+                else :
+                    material.label = material.name
 
         session.commit()
 

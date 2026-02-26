@@ -4,7 +4,8 @@
     "staticsUrl": "",
     "perspectives": {
         "searchPerspectives": [
-            "coins"
+            "coins",
+            "authorities"
         ],
         "onlyInstancePages": [
 

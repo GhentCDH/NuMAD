@@ -179,15 +179,21 @@
 ###########
 :RULER
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id, name, nomisma_uri FROM ruler""" ] ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name, nomisma_uri, start_date, end_date FROM ruler""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/ruler/{id}" ;
-                            rr:class    foaf:Person ] ;
+                            rr:class    nmd:Authority ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
                             rr:objectMap [ rr:column   "name" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate owl:sameAs ;
                             rr:objectMap [ rr:column   "nomisma_uri" ;
-                                           rr:termType rr:IRI ] ] .
+                                           rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
+                            rr:objectMap [ rr:column   "start_date" ;
+                                           rr:dataType xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasEndDate ;
+                            rr:objectMap [ rr:column   "end_date" ;
+                                           rr:dataType xsd:string ] ] .
 
 #########
 # MINTS
