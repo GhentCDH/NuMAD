@@ -20,9 +20,12 @@
 ##############
 :COIN
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id, year_start, year_end, weight, diameter, die_axis FROM coin""" ] ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, year_start, year_end, weight, diameter, die_axis, original_id FROM coin""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
                             rr:class    nmo:Coin ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "original_id" ;
+                                           rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
                             rr:objectMap [ rr:column   "year_start" ;
                                            rr:datatype xsd:int ] ] ;

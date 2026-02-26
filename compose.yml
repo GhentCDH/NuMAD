@@ -81,6 +81,23 @@ services:
       - "8080:8080"
     command: ./ontop endpoint
 
+  # Sampo UI - Client
+  client:
+    image: ghcr.io/ghentcdh/sampo-ui-client:latest
+    container_name: sampo-ui-client-prod
+    network_mode: host
+    environment:
+      API_URL: ${API_URL}
+
+  # Sampo UI - Server
+  server:
+    image: ghcr.io/ghentcdh/sampo-ui-server:latest
+    container_name: sampo-ui-server-prod
+    network_mode: host
+    environment:
+      SPARQL_ENDPOINT: ${SPARQL_ENDPOINT}
+    volumes:
+      - ./sampoConfigs:/app/configs
 
 volumes:
   import-venv:
