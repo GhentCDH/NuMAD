@@ -261,6 +261,20 @@
             "sortByPredicate": "nmd:hasIdentifier/foaf:name",
             "sortDirection": "desc",
             "literal": true
+        },
+        "yearStart": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "nmo:hasStartDate",
+            "sortByPredicate": "nmo:hasStartDate"
+        },
+        "yearEnd": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "nmo:hasEndDate",
+            "sortByPredicate": "nmo:hasEndDate"
         }
     }
 }

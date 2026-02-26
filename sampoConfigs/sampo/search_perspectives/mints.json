@@ -28,7 +28,7 @@
                 "tabIcon": "CalendarViewDay",
                 "propertiesQueryBlock": "mintProperties",
                 "pagesize": 100,
-                "sortBy": null,
+                "sortBy": "nomismaUri",
                 "sortDirection": "asc"
             },
             "instanceConfig": {
@@ -61,8 +61,8 @@
     "maps": {
         "mintsPlaces": {
             "center": [
-                65.184809,
-                27.314050
+                41.881488,
+                12.527705
             ],
             "zoom": 5
         }
@@ -135,6 +135,15 @@
         }
     ],
     "facets": {
-
+        "name": {
+            "sortByPredicate": "rdfs:label",
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "textQueryProperty": "rdfs:label"
+        },
+        "nomismaUri": {
+            "sortByPredicate": "owl:sameAs"
+        }
     }
 }

@@ -28,8 +28,8 @@
                 "tabIcon": "CalendarViewDay",
                 "propertiesQueryBlock": "authorityProperties",
                 "pagesize": 100,
-                "sortBy": null,
-                "sortDirection": null
+                "sortBy": "nomismaUri",
+                "sortDirection": "asc"
             },
             "instanceConfig": {
                 "propertiesQueryBlock": "authorityPropertiesDetail",
@@ -126,6 +126,23 @@
             "filterType": "textFilter",
             "sortByPredicate": "rdfs:label",
             "textQueryProperty": "rdfs:label"
+        },
+        "nomismaUri": {
+            "sortByPredicate": "owl:sameAs"
+        },
+        "yearStart": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "nmo:hasStartDate",
+            "sortByPredicate": "nmo:hasStartDate"
+        },
+        "yearEnd": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilterRange",
+            "predicate": "nmo:hasEndDate",
+            "sortByPredicate": "nmo:hasEndDate"
         }
     }
 }

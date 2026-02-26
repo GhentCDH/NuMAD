@@ -170,11 +170,11 @@
                 },
                 "weight": {
                     "label": "weight",
-                    "description": "Weight"
+                    "description": "Weight in grams"
                 },
                 "diameter": {
                     "label": "diameter",
-                    "description": "Diameter"
+                    "description": "Diameter in millimeters"
                 },
                 "axis": {
                     "label": "axis",
@@ -262,6 +262,106 @@
                 },
                 "coin": {
                     "label": "coin finds",
+                    "description": ""
+                }
+            }
+        },
+        "denominations": {
+            "label": "denominations",
+            "instancePage": {
+                "label": "Denomination",
+                "description": "NuMAD denomination"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
+                "name": {
+                    "label": "name",
+                    "description": ""
+                },
+                "authority": {
+                    "label": "authorities",
+                    "description": ""
+                },
+                "material": {
+                    "label": "materials",
+                    "description": ""
+                }
+            }
+        },
+        "identifiers": {
+            "label": "identifiers",
+            "instancePage": {
+                "label": "Identifier",
+                "description": "NuMAD identifier"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
+                "name": {
+                    "label": "name",
+                    "description": ""
+                },
+                "coin": {
+                    "label": "coin finds",
+                    "description": ""
+                }
+            }
+        },
+        "materials": {
+            "label": "materials",
+            "instancePage": {
+                "label": "Material",
+                "description": "NuMAD material"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
+                "name": {
+                    "label": "name",
+                    "description": ""
+                },
+                "label": {
+                    "label": "label",
+                    "description": ""
+                },
+                "authority": {
+                    "label": "authorities",
+                    "description": ""
+                },
+                "mint": {
+                    "label": "mints",
+                    "description": ""
+                }
+            }
+        },
+        "localAdminUnits": {
+            "label": "local admin units",
+            "instancePage": {
+                "label": "Local Admin Unit",
+                "description": "NuMAD Local Admin Unit"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
+                "name": {
+                    "label": "name",
+                    "description": ""
+                },
+                "authority": {
+                    "label": "authorities",
+                    "description": ""
+                },
+                "material": {
+                    "label": "materials",
                     "description": ""
                 }
             }

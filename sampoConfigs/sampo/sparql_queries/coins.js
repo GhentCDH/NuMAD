@@ -47,7 +47,7 @@ union
 {
     ?id nmd:hasLocalAdminUnit ?localAdminUnit__id .
     ?localAdminUnit__id rdfs:label ?localAdminUnit__prefLabel .
-    bind(concat("/localadminunit/page/", STRAFTER(str(?localAdminUnit__id), "localadminunit/")) as ?localAdminUnit__dataProviderUrl)
+    bind(concat("/localadminunits/page/", STRAFTER(str(?localAdminUnit__id), "localadminunit/")) as ?localAdminUnit__dataProviderUrl)
 }
 union
 {
