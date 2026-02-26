@@ -1,5 +1,5 @@
 {
-    "id": "authorities",
+    "id": "mints",
     "endpoint": {
         "url": "",
         "useAuth": false,
@@ -9,30 +9,30 @@
     "generalQueries": {
         "facetResultSetQuery": "facetResultSetQueryOntop"
     },
-    "sparqlQueriesFile": "authorities.js",
+    "sparqlQueriesFile": "mints.js",
     "baseURI": "http://numad.ugent.be/resource",
-    "URITemplate": "<BASE_URI>/ruler/<LOCAL_ID>",
-    "facetClass": "nmd:Authority",
+    "URITemplate": "<BASE_URI>/mint/<LOCAL_ID>",
+    "facetClass": "nmo:Mint",
     "frontPageImage": "main_page/mmm-banner.jpg",
     "searchMode": "faceted-search",
-    "enableDynamicLanguageChange": false,
+    "enableDynamicLanguageChange": true,
     "defaultActiveFacets": [],
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {
-        "authorities": {
+        "mints": {
             "paginatedResultsConfig": {
                 "tabID": 0,
                 "component": "ResultTable",
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
-                "propertiesQueryBlock": "authorityProperties",
+                "propertiesQueryBlock": "mintProperties",
                 "pagesize": 100,
                 "sortBy": null,
-                "sortDirection": null
+                "sortDirection": "asc"
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "authorityPropertiesDetail",
+                "propertiesQueryBlock": "mintPropertiesDetail",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -42,6 +42,29 @@
                     }
                 }
             }
+        },
+        "mintsPlaces": {
+            "tabID": 1,
+            "tabPath": "map",
+            "tabIcon": "AddLocation",
+            "component": "LeafletMap",
+            "showInstanceCountInClusters": false,
+            "showExternalLayers": true,
+            "customMapControl": true,
+            "sparqlQuery": "mintPlaces",
+            "filterTarget": "id",
+            "facetClass": "mints",
+            "mapMode": "marker",
+            "resultMapper": "mapPlaces"
+        }
+    },
+    "maps": {
+        "mintsPlaces": {
+            "center": [
+                65.184809,
+                27.314050
+            ],
+            "zoom": 5
         }
     },
     "properties": [
@@ -59,7 +82,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         },
         {
             "id": "nomismaUri",
@@ -71,31 +94,23 @@
             "minWidth": 200
         },
         {
-            "id": "yearStart",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": false,
-            "numberedList": false,
-            "minWidth": 100
-        },
-        {
-            "id": "yearEnd",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": false,
-            "numberedList": false,
-            "minWidth": 100
-        },
-        {
             "id": "denomination",
             "valueType": "object",
             "makeLink": true,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200,
+            "minWidth": 130,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "authority",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 130,
             "onlyOnInstancePage": true
         },
         {
@@ -105,7 +120,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "mindWidth": 200,
+            "minWidth": 130,
             "onlyOnInstancePage": true
         },
         {
@@ -115,17 +130,11 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "mindWidth": 200,
+            "minWidth": 130,
             "onlyOnInstancePage": true
         }
     ],
     "facets": {
-        "name": {
-            "containerClass": "one",
-            "facetType": "text",
-            "filterType": "textFilter",
-            "sortByPredicate": "rdfs:label",
-            "textQueryProperty": "rdfs:label"
-        }
+
     }
 }

@@ -192,6 +192,10 @@
                 "description": "NuMAD authority"
             },
             "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
                 "name": {
                     "label": "name",
                     "description": ""
@@ -217,7 +221,47 @@
                     "description": ""
                 },
                 "coin": {
-                    "label": "coins",
+                    "label": "coin finds",
+                    "description": ""
+                }
+            }
+        },
+        "mints": {
+            "label": "mints",
+            "facetResultsType": "mints",
+            "shortDescription": "NuMAD mints",
+            "longDescription": "",
+            "instancePage": {
+                "label": "Mint",
+                "description": "NuMAD mint"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
+                "name": {
+                    "label": "name",
+                    "description": ""
+                },
+                "nomismaUri": {
+                    "label": "nomisma uri",
+                    "description": "Link to the nomisma entity of this same ruler"
+                },
+                "denomination": {
+                    "label": "denominations",
+                    "description": ""
+                },
+                "material": {
+                    "label": "materials",
+                    "description": ""
+                },
+                "authority": {
+                    "label": "authorities",
+                    "description": ""
+                },
+                "coin": {
+                    "label": "coin finds",
                     "description": ""
                 }
             }

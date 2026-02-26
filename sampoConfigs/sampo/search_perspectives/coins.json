@@ -27,7 +27,7 @@
                 "tabPath": "table",
                 "tabIcon": "CalendarViewDay",
                 "propertiesQueryBlock": "coinProperties",
-                "pagesize": 10,
+                "pagesize": 100,
                 "sortBy": null,
                 "sortDirection": null
             },
