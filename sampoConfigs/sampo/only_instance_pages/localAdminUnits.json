@@ -1,0 +1,59 @@
+{
+    "id": "localAdminUnits",
+    "endpoint": {
+        "url": "",
+        "useAuth": false,
+        "prefixesFile": "prefixes.js",
+        "defaultSparql": true
+    },
+    "sparqlQueriesFile": "instancePagesQueries.js",
+    "baseURI": "http://numad.ugent.be/resource",
+    "URITemplate": "<BASE_URI>/localadminunit/<LOCAL_ID>",
+    "resultClasses": {
+        "localAdminUnits": {
+            "instanceConfig": {
+                "propertiesQueryBlock": "localAdminUnitsInstanceProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "minWidth": 250,
+            "makeLink": true,
+            "externalLink": false
+        },
+        {
+            "id": "name",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "authority",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        },
+        {
+            "id": "material",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        }
+    ]
+}

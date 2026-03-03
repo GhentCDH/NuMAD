@@ -1,0 +1,69 @@
+{
+    "id": "denominations",
+    "endpoint": {
+        "url": "",
+        "useAuth": false,
+        "prefixesFile": "prefixes.js",
+        "defaultSparql": true
+    },
+    "sparqlQueriesFile": "instancePagesQueries.js",
+    "baseURI": "http://numad.ugent.be/resource",
+    "URITemplate": "<BASE_URI>/denomination/<LOCAL_ID>",
+    "resultClasses": {
+        "denominations": {
+            "instanceConfig": {
+                "propertiesQueryBlock": "denominationsInstanceProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "minWidth": 250,
+            "makeLink": true,
+            "externalLink": false
+        },
+        {
+            "id": "nomismaUri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "name",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "authority",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        },
+        {
+            "id": "material",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        }
+    ]
+}

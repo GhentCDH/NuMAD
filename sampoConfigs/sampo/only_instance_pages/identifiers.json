@@ -1,0 +1,50 @@
+{
+    "id": "identifiers",
+    "endpoint": {
+        "url": "",
+        "useAuth": false,
+        "prefixesFile": "prefixes.js",
+        "defaultSparql": true
+    },
+    "sparqlQueriesFile": "instancePagesQueries.js",
+    "baseURI": "http://numad.ugent.be/resource",
+    "URITemplate": "<BASE_URI>/identifier/<LOCAL_ID>",
+    "resultClasses": {
+        "identifiers": {
+            "instanceConfig": {
+                "propertiesQueryBlock": "identifiersInstanceProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "minWidth": 250,
+            "makeLink": true,
+            "externalLink": false
+        },
+        {
+            "id": "name",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "coin",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        }
+    ]
+}

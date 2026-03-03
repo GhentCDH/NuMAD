@@ -1,0 +1,74 @@
+{
+    "id": "materials",
+    "endpoint": {
+        "url": "",
+        "useAuth": false,
+        "prefixesFile": "prefixes.js",
+        "defaultSparql": true
+    },
+    "sparqlQueriesFile": "instancePagesQueries.js",
+    "baseURI": "http://numad.ugent.be/resource",
+    "URITemplate": "<BASE_URI>/material/<LOCAL_ID>",
+    "resultClasses": {
+        "materials": {
+            "instanceConfig": {
+                "propertiesQueryBlock": "materialsInstanceProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "minWidth": 250,
+            "makeLink": true,
+            "externalLink": false
+        },
+        {
+            "id": "nomismaUri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "label",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "name",
+            "valueType": "object",
+            "minWidth": 250
+        },
+        {
+            "id": "authority",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        },
+        {
+            "id": "mint",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 250
+        }
+    ]
+}

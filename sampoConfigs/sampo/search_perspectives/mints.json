@@ -1,0 +1,154 @@
+{
+    "id": "mints",
+    "endpoint": {
+        "url": "",
+        "useAuth": false,
+        "prefixesFile": "prefixes.js",
+        "defaultSparql": true
+    },
+    "generalQueries": {
+        "facetResultSetQuery": "facetResultSetQueryOntop"
+    },
+    "sparqlQueriesFile": "mints.js",
+    "baseURI": "http://numad.ugent.be/resource",
+    "URITemplate": "<BASE_URI>/mint/<LOCAL_ID>",
+    "facetClass": "nmo:Mint",
+    "frontPageImage": "main_page/mmm-banner.jpg",
+    "searchMode": "faceted-search",
+    "enableDynamicLanguageChange": true,
+    "defaultActiveFacets": [],
+    "defaultTab": "table",
+    "defaultInstancePageTab": "table",
+    "resultClasses": {
+        "mints": {
+            "paginatedResultsConfig": {
+                "tabID": 0,
+                "component": "ResultTable",
+                "tabPath": "table",
+                "tabIcon": "CalendarViewDay",
+                "propertiesQueryBlock": "mintProperties",
+                "pagesize": 100,
+                "sortBy": "nomismaUri",
+                "sortDirection": "asc"
+            },
+            "instanceConfig": {
+                "propertiesQueryBlock": "mintPropertiesDetail",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        },
+        "mintsPlaces": {
+            "tabID": 1,
+            "tabPath": "map",
+            "tabIcon": "AddLocation",
+            "component": "LeafletMap",
+            "showInstanceCountInClusters": false,
+            "showExternalLayers": true,
+            "customMapControl": true,
+            "sparqlQuery": "mintPlaces",
+            "filterTarget": "id",
+            "facetClass": "mints",
+            "mapMode": "marker",
+            "resultMapper": "mapPlaces",
+            "instanceConfig": {
+                "propertiesQueryBlock": "mintPropertiesDetail",
+                "createPopUpContent": "createPopUpContentDefault"
+            }
+
+        }
+    },
+    "maps": {
+        "mintsPlaces": {
+            "center": [
+                41.881488,
+                12.527705
+            ],
+            "zoom": 5
+        }
+    },
+    "properties": [
+        {
+            "id": "uri",
+            "valueType": "object",
+            "makeLink": false,
+            "sortValues": true,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "prefLabel",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "nomismaUri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "denomination",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 130,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "authority",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 130,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "material",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 130,
+            "onlyOnInstancePage": true
+        },
+        {
+            "id": "coin",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 130,
+            "onlyOnInstancePage": true
+        }
+    ],
+    "facets": {
+        "name": {
+            "sortByPredicate": "rdfs:label",
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "textQueryProperty": "rdfs:label"
+        },
+        "nomismaUri": {
+            "sortByPredicate": "owl:sameAs"
+        }
+    }
+}
