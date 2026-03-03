@@ -1,12 +1,12 @@
 export const mintProperties = `
 {
     ?id a nmo:Mint ;
-        rdfs:label ?name__prefLabel .
-    bind(?id as ?name__id)
+        rdfs:label ?prefLabel__prefLabel .
+    bind(?id as ?prefLabel__id)
     bind(?id as ?uri__id)
     bind(?id as ?uri__prefLabel)
     
-    bind(concat("/mints/page/", STRAFTER(str(?id), "mint/")) as ?name__dataProviderUrl)
+    bind(concat("/mints/page/", STRAFTER(str(?id), "mint/")) as ?prefLabel__dataProviderUrl)
     bind(?mint_dataProviderUrl as ?uri__dataProviderUrl)
 }
 union
@@ -25,8 +25,13 @@ export const mintPropertiesDetail = `
     bind(?id as ?uri__id)
     bind(?id as ?uri__prefLabel)
     
+    bind(?name__prefLabel as ?prefLabel__prefLabel)
+    bind(?name__prefLabel as ?prefLabel__id)
+    
     bind(concat("/mints/page/", STRAFTER(str(?id), "mint/")) as ?name__dataProviderUrl)
-    bind(?mint_dataProviderUrl as ?uri__dataProviderUrl)
+    bind(?name__dataProviderUrl as ?uri__dataProviderUrl)
+    
+    bind(?name__dataProviderUrl as ?prefLabel__dataProviderUrl)
 }
 union
 {

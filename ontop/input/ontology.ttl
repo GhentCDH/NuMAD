@@ -40,13 +40,13 @@ nmd:Authority
 #############
 nmd:hasIdentifier
     a            owl:ObjectProperty ;
-    rdfs:domain  nmo:Coin ;
+    rdfs:domain  nmo:Find ;
     rdfs:range   nmd:Identifier ;
     rdfs:label   "has identifier"@en ;
     rdfs:comment "The person who identified the numismatic object"@en .
 
 nmd:hasLocalAdminUnit
     a           owl:ObjectProperty ;
-    rdfs:domain nmo:Coin ;
+    rdfs:domain nmo:Find ;
     rdfs:range  nmd:LocalAdminUnit ;
     rdfs:label  "has local admin unit"@en .

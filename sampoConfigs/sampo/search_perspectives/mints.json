@@ -55,7 +55,12 @@
             "filterTarget": "id",
             "facetClass": "mints",
             "mapMode": "marker",
-            "resultMapper": "mapPlaces"
+            "resultMapper": "mapPlaces",
+            "instanceConfig": {
+                "propertiesQueryBlock": "mintPropertiesDetail",
+                "createPopUpContent": "createPopUpContentDefault"
+            }
+
         }
     },
     "maps": {
@@ -76,7 +81,7 @@
             "onlyOnInstancePage": true
         },
         {
-            "id": "name",
+            "id": "prefLabel",
             "valueType": "object",
             "makeLink": true,
             "externalLink": false,

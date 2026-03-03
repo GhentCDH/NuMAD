@@ -63,9 +63,11 @@
         }
     },
     "tabs": {
-        "table": "table",
-        "openCloseChart": "open&close prices chart",
-        "minMaxChart": "min&max prices chart"
+        "table": "Table",
+        "map": "Map",
+        "heatmap": "Heatmap",
+        "mintsheatmap": "Mints",
+        "migrations": "Migrations"
     },
     "table": {
         "rowsPerPage": "Rows per page",
@@ -107,12 +109,19 @@
         "repetition": "<h6 class=\"MuiTypography-root MuiTypography-h6\"> Repetition of data </h6> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> The same or similar data may appear within a single data field multiple times. This repetition occurs due to the merging of multiple records from different datasets to create the MMM record. </p>"
     },
     "deckGlMap": {
-        "arcColouring": "Arc colouring:",
-        "showMoreInformation": "Click to show more information.",
-        "placesMsMigrations": {
-            "legendTitle": "Arc colouring"
-        }
-    },
+    "arcColouring": "Arc colouring:",
+    "showMoreInformation": "Click to show more information.",
+    "coinsMigrations": {
+      "legendTitle": "Arc colouring",
+      "legendFrom": "Mint",
+      "legendTo": "Find municipality",
+      "from": "Mint",
+      "to": "Find municipality:",
+      "count": "Coin count",
+      "listHeadingSingleInstance": "Find:",
+      "listHeadingMultipleInstances": "Finds:"
+    }
+  },
     "perspectives": {
         "coins": {
             "label": "coins",
@@ -169,7 +178,7 @@
                     "description": "Find date"
                 },
                 "localAdminUnit": {
-                    "label": "local admin unit",
+                    "label": "municipality",
                     "description": "Local administrative unit where the coin was found"
                 },
                 "weight": {
@@ -354,10 +363,10 @@
             }
         },
         "localAdminUnits": {
-            "label": "local admin units",
+            "label": "Municipalities",
             "instancePage": {
-                "label": "Local Admin Unit",
-                "description": "NuMAD Local Admin Unit"
+                "label": "Municipality",
+                "description": "Municipality"
             },
             "properties": {
                 "uri": {

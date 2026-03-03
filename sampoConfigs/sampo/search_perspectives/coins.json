@@ -12,7 +12,7 @@
     "sparqlQueriesFile": "coins.js",
     "baseURI": "http://numad.ugent.be/resource",
     "URITemplate": "<BASE_URI>/coin/<LOCAL_ID>",
-    "facetClass": "nmo:Coin",
+    "facetClass": "nmo:Find",
     "frontPageImage": "main_page/mmm-banner.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
@@ -42,6 +42,97 @@
                     }
                 }
             }
+        },
+        "findsPlaces": {
+            "tabID": 1,
+            "tabPath": "map",
+            "tabIcon": "AddLocation",
+            "component": "LeafletMap",
+            "showInstanceCountInClusters": false,
+            "showExternalLayers": true,
+            "customMapControl": true,
+            "sparqlQuery": "coinPlaces",
+            "filterTarget": "id",
+            "facetClass": "coins",
+            "resultMapper": "mapPlaces",
+            "instanceConfig": {
+                "propertiesQueryBlock": "coinProperties",
+                "createPopUpContent": "createPopUpContentDefault"
+            }
+        },
+        "findsPlacesHeatmap": {
+            "tabID": 2,
+            "tabPath": "heatmap",
+            "tabIcon": "BubbleChart",
+            "component": "Deck",
+            "layerType": "heatmapLayer",
+            "sparqlQuery": "coinPlaces",
+            "facetClass": "coins",
+            "filterTarget": "id",
+            "resultMapper": "mapPlaces"
+        },
+        "mintsPlacesHeatmap": {
+            "tabID": 3,
+            "tabPath": "mintsheatmap",
+            "tabIcon": "BubbleChart",
+            "component": "Deck",
+            "layerType": "heatmapLayer",
+            "sparqlQuery": "mintPlaces",
+            "facetClass": "coins",
+            "filterTarget": "id",
+            "resultMapper": "mapPlaces"
+        },
+        "coinsMigrations": {
+            "tabID": 4,
+            "component": "Deck",
+            "tabPath": "migrations",
+            "tabIcon": "Redo",
+            "sparqlQuery": "migrations",
+            "facetClass": "coins",
+            "filterTarget": "coin",
+            "resultMapper": "makeObjectList",
+            "layerType": "arcLayer",
+            "arcWidthVariable": "instanceCountScaled",
+            "instanceVariable": "coin",
+            "showTooltips": false,
+            "postprocess": {
+                "func": "linearScale",
+                "config": {
+                    "variable": "instanceCount",
+                    "minAllowed": 2,
+                    "maxAllowed": 20
+                }
+            }
+        }
+    },
+    "maps": {
+        "findsPlaces": {
+            "center": [
+                50.851301,
+                4.357218
+            ],
+            "zoom": 8
+        },
+        "findsPlacesHeatmap": {
+            "center": [
+                50.851301,
+                4.357218
+            ],
+            "zoom": 8
+        },
+        "mintsPlacesHeatmap": {
+            "center": [
+                41.881488,
+                12.527705
+            ],
+            "zoom": 5
+        },
+        "coinsMigrations": {
+            "center": [
+                41.881488,
+                12.527705
+            ],
+            "zoom": 4
         }
     },
     "properties": [
@@ -69,7 +160,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 50
+            "minWidth": 75
         },
         {
             "id": "yearStart",
@@ -78,7 +169,7 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 75
         },
         {
             "id": "yearEnd",
@@ -87,7 +178,7 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 75
         },
         {
             "id": "denomination",
@@ -96,7 +187,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         },
         {
             "id": "authority",
@@ -105,7 +196,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         },
         {
             "id": "identifier",
@@ -114,7 +205,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         },
         {
             "id": "mint",
@@ -123,7 +214,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 150
         },
         {
             "id": "material",
@@ -132,7 +223,7 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 100
         },
         {
             "id": "findDate",
@@ -285,6 +376,21 @@
             "filterType": "integerFilter",
             "predicate": "nmo:hasEndDate",
             "sortByPredicate": "nmo:hasEndDate"
+        },
+        "weight": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilter",
+            "predicate": "nmo:hasWeight",
+            "sortByPredicate": "nmo:hasWeight"
+        },
+        "diameter": {
+            "containerClass": "five",
+            "facetType": "integer",
+            "filterType": "integerFilter",
+            "predicate": "nmo:hasDiameter",
+            "sortByPredicate": "nmo:hasDiameter"
         }
+
     }
 }
