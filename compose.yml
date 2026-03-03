@@ -91,7 +91,7 @@ services:
 
   # Sampo UI - Server
   server:
-    image: sampo-ui-server:prod
+    image: ghcr.io/ghentcdh/sampo-ui-server:latest
     container_name: sampo-ui-server-prod
     network_mode: host
     environment:
