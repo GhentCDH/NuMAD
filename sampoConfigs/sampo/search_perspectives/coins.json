@@ -53,6 +53,16 @@
             "onlyOnInstancePage": true
         },
         {
+            "id": "nomismaUri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "onlyOnInstancePage": true
+        },
+        {
             "id": "coinId",
             "valueType": "object",
             "makeLink": true,
@@ -265,14 +275,14 @@
         "yearStart": {
             "containerClass": "five",
             "facetType": "integer",
-            "filterType": "integerFilterRange",
+            "filterType": "integerFilter",
             "predicate": "nmo:hasStartDate",
             "sortByPredicate": "nmo:hasStartDate"
         },
         "yearEnd": {
             "containerClass": "five",
             "facetType": "integer",
-            "filterType": "integerFilterRange",
+            "filterType": "integerFilter",
             "predicate": "nmo:hasEndDate",
             "sortByPredicate": "nmo:hasEndDate"
         }

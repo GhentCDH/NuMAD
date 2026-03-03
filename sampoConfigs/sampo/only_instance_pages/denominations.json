@@ -33,6 +33,16 @@
             "externalLink": false
         },
         {
+            "id": "nomismaUri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "onlyOnInstancePage": true
+        },
+        {
             "id": "name",
             "valueType": "object",
             "minWidth": 250

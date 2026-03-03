@@ -133,14 +133,14 @@
         "yearStart": {
             "containerClass": "five",
             "facetType": "integer",
-            "filterType": "integerFilterRange",
+            "filterType": "integerFilter",
             "predicate": "nmo:hasStartDate",
             "sortByPredicate": "nmo:hasStartDate"
         },
         "yearEnd": {
             "containerClass": "five",
             "facetType": "integer",
-            "filterType": "integerFilterRange",
+            "filterType": "integerFilter",
             "predicate": "nmo:hasEndDate",
             "sortByPredicate": "nmo:hasEndDate"
         }

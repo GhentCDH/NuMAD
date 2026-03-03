@@ -128,6 +128,10 @@
                     "label": "uri",
                     "description": "identifier of the resource"
                 },
+                "nomismaUri": {
+                    "label": "Online reference",
+                    "description": "Other uri of this same entity."
+                },
                 "coinId": {
                     "label": "id",
                     "description": "id of the coin"
@@ -246,7 +250,7 @@
                 },
                 "nomismaUri": {
                     "label": "nomisma uri",
-                    "description": "Link to the nomisma entity of this same ruler"
+                    "description": "Link to the nomisma entity of this same mint"
                 },
                 "denomination": {
                     "label": "denominations",
@@ -276,6 +280,10 @@
                 "uri": {
                     "label": "uri",
                     "description": "identifier of the resource"
+                },
+                "nomismaUri": {
+                    "label": "nomisma uri",
+                    "description": "Link to the nomisma entity of this same denomination"
                 },
                 "name": {
                     "label": "name",
@@ -322,6 +330,10 @@
                 "uri": {
                     "label": "uri",
                     "description": "identifier of the resource"
+                },
+                "nomismaUri": {
+                    "label": "nomisma uri",
+                    "description": "Link to the nomisma entity of this same material"
                 },
                 "name": {
                     "label": "name",

@@ -25,6 +25,12 @@ union
         bind(concat("/materials/page/", STRAFTER(str(?material__id), "material/")) as ?material__dataProviderUrl)
     }
 }
+union
+{
+    ?id owl:sameAs ?nomismaUri__id .
+    bind(?nomismaUri__id as ?nomismaUri__prefLabel)
+    bind(?nomismaUri__id as ?nomismaUri__dataProviderUrl)
+}
 `
 
 export const identifiersInstanceProperties = `
@@ -72,6 +78,12 @@ union
         ?mint__id rdfs:label ?mint__prefLabel .
         bind(concat("/mints/page/", STRAFTER(str(?mint__id), "mint/")) as ?mint__dataProviderUrl)
     }
+}
+union
+{
+    ?id owl:sameAs ?nomismaUri__id .
+    bind(?nomismaUri__id as ?nomismaUri__prefLabel)
+    bind(?nomismaUri__id as ?nomismaUri__dataProviderUrl)
 }
 `
 

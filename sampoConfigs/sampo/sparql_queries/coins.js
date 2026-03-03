@@ -74,6 +74,12 @@ union
     ?id nmo:hasAxis ?axis__id .
     bind(?axis__id as ?axis__prefLabel)
 }
+union
+{
+    ?id owl:sameAs ?nomismaUri__id .
+    bind(?nomismaUri__id as ?nomismaUri__prefLabel)
+    bind(?nomismaUri__id as ?nomismaUri__dataProviderUrl)
+}
 `
 
 export const facetResultSetQueryOntop = `
