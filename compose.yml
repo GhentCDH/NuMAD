@@ -57,7 +57,7 @@ services:
 
   ontop:
     container_name: numad-ontop
-    image: ontop/ontop
+    image: ontop/ontop:latest
     env_file:
       - .env
     depends_on:
