@@ -12,7 +12,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/sampo-ui-client
+  IMAGE_NAME_KOTTSTER: ghcr.io/${{ github.repository_owner }}/numad-kottster
+  IMAGE_NAME_IMPORT: ghcr.io/${{ github.repository_owner }}/numad-import
 
 jobs:
   build-import:
@@ -52,7 +53,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME_IMPORT }}
           tags: |
             type=raw,value=${{ steps.version.outputs.tag }}
             type=raw,value=latest
@@ -112,7 +113,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME_KOTTSTER }}
           tags: |
             type=raw,value=${{ steps.version.outputs.tag }}
             type=raw,value=latest
