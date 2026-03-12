@@ -308,7 +308,7 @@ def main():
                         session,
                         Mint,
                         caches["mint"],
-                        name=row.get("Mint"),
+                        name=clean_name(row.get("Mint")),
                         location=to_location(
                             row.get("Mint_longitude"), row.get("Mint_latitude")
                         ),

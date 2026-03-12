@@ -115,7 +115,7 @@
       "legendTitle": "Arc colouring",
       "legendFrom": "Mint",
       "legendTo": "Find municipality",
-      "from": "Mint",
+      "from": "Mint:",
       "to": "Find municipality:",
       "count": "Coin count",
       "listHeadingSingleInstance": "Find:",
@@ -253,7 +253,7 @@
                     "label": "uri",
                     "description": "identifier of the resource"
                 },
-                "name": {
+                "prefLabel": {
                     "label": "name",
                     "description": ""
                 },

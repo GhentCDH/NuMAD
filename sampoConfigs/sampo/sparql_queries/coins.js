@@ -144,6 +144,17 @@ GROUP BY ?id ?from__id ?from__prefLabel ?from__lat ?from__long ?from__dataProvid
 ORDER BY desc(?instanceCount)
 `
 
+export const migrationsDialog = `
+SELECT *
+WHERE {
+    <FILTER>
+    ?id nmo:hasMint <FROM_ID> ;
+        nmd:hasLocalAdminUnit <TO_ID> ;
+        rdfs:label ?prefLabel .
+    bind(concat("/coins/page/", str(?prefLabel)) as ?dataProviderUrl)
+}
+`
+
 export const facetResultSetQueryOntop = `
 SELECT *
 WHERE {

@@ -59,8 +59,14 @@
             "instanceConfig": {
                 "propertiesQueryBlock": "mintPropertiesDetail",
                 "createPopUpContent": "createPopUpContentDefault"
+            },
+            "customTilesLayer": {
+                "type": "pmtiles",
+                "inConfig": true,
+                "url": "maps/europe.pmtiles",
+                "maxZoom": 11,
+                "minZoom": 5
             }
-
         }
     },
     "maps": {

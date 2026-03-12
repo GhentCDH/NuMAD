@@ -58,6 +58,13 @@
             "instanceConfig": {
                 "propertiesQueryBlock": "coinProperties",
                 "createPopUpContent": "createPopUpContentDefault"
+            },
+            "customTilesLayer": {
+                "type": "pmtiles",
+                "inConfig": true,
+                "url": "maps/belgium.pmtiles",
+                "maxZoom": 14,
+                "minZoom": 8
             }
         },
         "findsPlacesHeatmap": {
@@ -69,7 +76,12 @@
             "sparqlQuery": "coinPlaces",
             "facetClass": "coins",
             "filterTarget": "id",
-            "resultMapper": "mapPlaces"
+            "resultMapper": "mapPlaces",
+            "customTilesLayer": {
+                "type": "pmtiles",
+                "inConfig": true,
+                "url": "maps/belgium.pmtiles"
+            }
         },
         "mintsPlacesHeatmap": {
             "tabID": 3,
@@ -80,7 +92,12 @@
             "sparqlQuery": "mintPlaces",
             "facetClass": "coins",
             "filterTarget": "id",
-            "resultMapper": "mapPlaces"
+            "resultMapper": "mapPlaces",
+            "customTilesLayer": {
+                "type": "pmtiles",
+                "inConfig": true,
+                "url": "maps/europe.pmtiles"
+            }
         },
         "coinsMigrations": {
             "tabID": 4,
@@ -102,7 +119,17 @@
                     "minAllowed": 2,
                     "maxAllowed": 20
                 }
+            },
+            "customTilesLayer": {
+                "type": "pmtiles",
+                "inConfig": true,
+                "url": "maps/europe.pmtiles"
             }
+        },
+        "coinsMigrationsDialog": {
+            "sparqlQuery": "migrationsDialog",
+            "filterTarget": "id",
+            "resultMapper": "makeObjectList"
         }
     },
     "maps": {
