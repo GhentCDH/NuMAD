@@ -43,10 +43,15 @@ export const identifiersInstanceProperties = `
 union
 {
     ?coin__id nmd:hasIdentifier ?id ;
-              nmo:hasDenomination ?denomination__id ;
               rdfs:label ?coin__label .
-    ?denomination__id rdfs:label ?denomination__prefLabel .
-    bind(concat(?coin__label, ", ", ?denomination__prefLabel) as ?coin__prefLabel)
+  
+    optional {
+      ?coin__id nmo:hasDenomination ?denomination__id .
+        ?denomination__id rdfs:label ?denomination__prefLabel .
+        bind(concat("/denominations/page/", STRAFTER(str(?denomination__id), "denomination/")) as ?denomination__dataProviderUrl)
+    }
+    
+    bind(concat(?coin__label, ", ", COALESCE(?denomination__prefLabel, " - ")) as ?coin__prefLabel)
     bind(concat("/coins/page/", STRAFTER(str(?coin__id), "coin/")) as ?coin__dataProviderUrl)
 }
 `
