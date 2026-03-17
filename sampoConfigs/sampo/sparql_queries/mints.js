@@ -42,23 +42,23 @@ union
 union
 {
     ?coin__id nmo:hasMint ?id ;
-              nmo:hasDenomination ?denomination__id ;
-              rdfs:label ?coin__label .
+            nmo:hasDenomination ?denomination__id ;
+            rdfs:label ?coin__label .
     ?denomination__id rdfs:label ?denomination__prefLabel .
     bind(concat(?coin__label, ", ", ?denomination__prefLabel) as ?coin__prefLabel)
     bind(concat("/coins/page/", STRAFTER(str(?coin__id), "coin/")) as ?coin__dataProviderUrl)
     bind(concat("/denominations/page/", STRAFTER(str(?denomination__id), "denomination/")) as ?denomination__dataProviderUrl)
-    {
-        ?coin__id nmo:hasAuthority ?authority__id .
-        ?authority__id rdfs:label ?authority__prefLabel .
-        bind(concat("/authorities/page/", STRAFTER(str(?authority__id), "ruler/")) as ?authority__dataProviderUrl)
+    optional {
+      ?coin__id nmo:hasAuthority ?authority__id .
+      ?authority__id rdfs:label ?authority__prefLabel .
+      bind(concat("/authorities/page/", STRAFTER(str(?authority__id), "ruler/")) as ?authority__dataProviderUrl)
     }
-    union
-    {
-        ?coin__id nmo:hasMaterial ?material__id .
-        ?material__id skos:prefLabel ?material__prefLabel .
-        bind(concat("/materials/page/", STRAFTER(str(?material__id), "material/")) as ?material__dataProviderUrl)
-    }       
+    
+    optional {
+      ?coin__id nmo:hasMaterial ?material__id .
+      ?material__id skos:prefLabel ?material__prefLabel .
+      bind(concat("/materials/page/", STRAFTER(str(?material__id), "material/")) as ?material__dataProviderUrl)
+    }      
 }
 `
 
