@@ -8,5 +8,4 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix nmd:  <http://numad.ugent.be/ontology#>
 prefix nmo: <http://nomisma.org/ontology#>
-
 `

@@ -22,7 +22,7 @@ union
 union
 {
     ?id nmd:hasIdentifier ?identifier__id .
-    ?identifier__id foaf:name ?identifier__prefLabel .
+    ?identifier__id schema:name ?identifier__prefLabel .
     bind(concat("/identifiers/page/", STRAFTER(str(?identifier__id), "identifier/")) as ?identifier__dataProviderUrl)
 }
 union
