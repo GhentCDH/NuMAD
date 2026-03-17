@@ -115,7 +115,7 @@
     a               rr:TriplesMap ;
     rr:logicalTable [ rr:sqlQuery """SELECT id FROM coin""" ] ;
     rr:subjectMap   [ rr:template "http://numad.ugent.be/resource/find/{id}" ;
-                      rr:class    nmo:Find ] .
+                      rr:class    nmo:Context ] .
 
 :FIND-DATE
     a                     rr:TriplesMap ;

@@ -15,6 +15,9 @@ Source of truth for the data
 Maps the data in real time from the database to a sparql endpoint using
 the nomisma ontology for the most part.
 
+#### Diagram of classes used:
+![diagram.png](docs/diagram.png)
+
 ### Sampo UI
 
 #### Sampo client
