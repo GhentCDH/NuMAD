@@ -32,6 +32,6 @@ export const app = createApp({
 
     /* The root admin user credentials */
     rootUsername: KOTTSTER_ROOT_USERNAME,
-    rootPassword: KOTTSTER_ROOT_USER_PASSWORD,
+    rootPassword: KOTTSTER_ROOT_USER_PASSWORD
   }),
 });

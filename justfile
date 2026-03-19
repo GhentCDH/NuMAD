@@ -19,9 +19,9 @@ import:
 
 kottster:
     docker compose up -d db kottster
-
-kottster-dev:
     docker compose exec -d kottster /dev.sh
+    open http://localhost:5480
+
 
 reinit: rebuild import
     
