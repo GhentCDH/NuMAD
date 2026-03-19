@@ -9,3 +9,5 @@ __pycache__
 kottster/dist
 kottster/app.db
 import/erd.mermaid
+
+.DS_Store
