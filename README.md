@@ -18,6 +18,14 @@ the nomisma ontology for the most part.
 #### Diagram of classes used:
 ![diagram.png](docs/diagram.png)
 
+
+The nomisma ontology is extremely loosely defined without any domains or ranges for any class.
+Because of that I had to take some liberty in how to assign literal properties, while still trying to
+follow what nomisma does as close as possible.
+
+If they ever release a new ontology version that is better defined it would be a good idea to migrate to
+that.
+
 ### Sampo UI
 
 #### Sampo client
