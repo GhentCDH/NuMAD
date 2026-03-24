@@ -1,6 +1,6 @@
 #
 # Bouwt en pusht de Kottster-container naar GHCR bij elke push op main.
-# Image: ghcr.io/ghentcdh/bantulex:main
+# Image: ghcr.io/ghentcdh/numad-kottster:main
 #
 # Benodigde repository secrets: geen (GITHUB_TOKEN volstaat voor GHCR).
 # Benodigde repository/org-instelling: "Read and write permissions" voor
@@ -22,7 +22,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE:    ghcr.io/ghentcdh/bantulex
+  IMAGE:    ghcr.io/ghentcdh/numad-kottster
 
 jobs:
   build-and-push:
