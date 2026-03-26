@@ -62,7 +62,7 @@
             "customTilesLayer": {
                 "type": "pmtiles",
                 "inConfig": true,
-                "url": "maps/map.pmtiles",
+                "url": "maps/world.pmtiles",
                 "maxZoom": 14,
                 "minZoom": 8
             }
@@ -80,7 +80,7 @@
             "customTilesLayer": {
                 "type": "pmtiles",
                 "inConfig": true,
-                "url": "maps/map.pmtiles"
+                "url": "maps/world.pmtiles"
             }
         },
         "mintsPlacesHeatmap": {
@@ -96,7 +96,7 @@
             "customTilesLayer": {
                 "type": "pmtiles",
                 "inConfig": true,
-                "url": "maps/map.pmtiles"
+                "url": "maps/world.pmtiles"
             }
         },
         "coinsMigrations": {
@@ -123,7 +123,7 @@
             "customTilesLayer": {
                 "type": "pmtiles",
                 "inConfig": true,
-                "url": "maps/map.pmtiles"
+                "url": "maps/world.pmtiles"
             }
         },
         "coinsMigrationsDialog": {
