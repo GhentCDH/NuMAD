@@ -77,11 +77,22 @@
         },
         "mainPage": {
             "bannerImage": "main_page/mmm-banner.jpg",
-            "bannerBackround": "linear-gradient( rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45) ), url(<BANNER_IMAGE_URL>)",
+            "bannerBackground": "linear-gradient( rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45) ), url(<BANNER_IMAGE_URL>)",
             "bannerMobileHeight": 150,
             "bannerReducedHeight": 220,
             "bannerDefaultHeight": 300,
-            "wrapSubheading": true
+            "wrapSubheading": true,
+            "perspectives": [
+                {
+                    "id": "part1",
+                    "cardsPerRow": 3,
+                    "perspectives": [
+                        "coins",
+                        "mints",
+                        "authorities"
+                    ]
+                }
+            ]
         },
         "infoHeader": {
             "default": {
@@ -99,7 +110,41 @@
         },
         "footer": {
             "reducedHeight": 44,
-            "defaultHeight": 64
+            "defaultHeight": 64,
+            "images": [
+                {
+                    "id": "ghentcdh",
+                    "href": "https://www.ghentcdh.ugent.be/",
+                    "image": "logos/ghentcdh.png",
+                    "alt": "ghentcdh logo",
+                    "width": 150,
+                    "height": 40
+                },
+                {
+                    "id": "heldig",
+                    "href": "https://www.helsinki.fi/en/helsinki-centre-for-digital-humanities",
+                    "image": "logos/heldig-logo-transparent-black.png",
+                    "alt": "heldig logo",
+                    "width": 118,
+                    "height": 33
+                },
+                {
+                    "id": "helsinki",
+                    "href": "https://www.helsinki.fi/en",
+                    "image": "logos/university-of-helsinki-logo-transparent-black.png",
+                    "alt": "University of Helsinki logo",
+                    "width": 155,
+                    "height": 40
+                },
+                {
+                    "id": "aalto",
+                    "href":"https://www.aalto.fi/en/school-of-science",
+                    "image":"logos/Aalto_SCI_EN_13_BLACK_2_cropped.png",
+                    "alt": "Aalto University logo",
+                    "width": 143,
+                    "height": 29
+                }
+            ]
         }
     },
     "mapboxConfig": {

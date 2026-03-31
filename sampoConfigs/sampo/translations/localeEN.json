@@ -10,7 +10,7 @@
         "long": "&nbsp; &nbsp; NuMAD &nbsp; &nbsp;",
         "subheading": ""
     },
-    "selectPerspective": "Select a perspective to search and browse the knowledge graph:",
+    "selectPerspective": "",
     "mainPageImageLicence": "Images used under license from Shutterstock.com",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
     "infoHeader": {
@@ -41,7 +41,7 @@
         "sortAlphabetically": "Sort alphabetically",
         "sortByNumberOfSearchResults": "Sort by number of search results",
         "useDisjunction": "Use logical OR between selections",
-        "useConjuction": "Use logical AND between selections",
+        "useConjunction": "Use logical AND between selections",
         "minYear": "Min year",
         "maxYear": "Max year",
         "min": "Min",
@@ -120,6 +120,12 @@
             "count": "Coin count",
             "listHeadingSingleInstance": "Find:",
             "listHeadingMultipleInstances": "Finds:"
+        }
+    },
+    "mainPageLayout": {
+        "part1": {
+            "heading": "test heading",
+            "description": "some description text"
         }
     },
     "perspectives": {

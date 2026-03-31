@@ -63,7 +63,7 @@
             "customTilesLayer": {
                 "type": "pmtiles",
                 "inConfig": true,
-                "url": "maps/europe.pmtiles",
+                "url": "maps/world.pmtiles",
                 "maxZoom": 11,
                 "minZoom": 5
             }
