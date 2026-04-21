@@ -13,10 +13,12 @@
     "baseURI": "http://numad.ugent.be/resource",
     "URITemplate": "<BASE_URI>/ruler/<LOCAL_ID>",
     "facetClass": "nmd:Authority",
-    "frontPageImage": "main_page/mmm-banner.jpg",
+    "frontPageImage": "main_page/gallienus.jpg",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
-    "defaultActiveFacets": [],
+    "defaultActiveFacets": [
+        "name"
+    ],
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {

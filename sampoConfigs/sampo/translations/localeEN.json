@@ -11,7 +11,7 @@
         "subheading": ""
     },
     "selectPerspective": "",
-    "mainPageImageLicence": "Images used under license from Shutterstock.com",
+    "mainPageImageLicence": "",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
     "infoHeader": {
         "toggleInstructions": "Click to show or hide instructions"
@@ -124,8 +124,8 @@
     },
     "mainPageLayout": {
         "part1": {
-            "heading": "test heading",
-            "description": "some description text"
+            "heading": "Perspectives",
+            "description": "Select a perspective to start browsing"
         }
     },
     "perspectives": {

@@ -13,10 +13,12 @@
     "baseURI": "http://numad.ugent.be/resource",
     "URITemplate": "<BASE_URI>/mint/<LOCAL_ID>",
     "facetClass": "nmo:Mint",
-    "frontPageImage": "main_page/mmm-banner.jpg",
+    "frontPageImage": "main_page/minting.png",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": true,
-    "defaultActiveFacets": [],
+    "defaultActiveFacets": [
+        "prefLabel"
+    ],
     "defaultTab": "table",
     "defaultInstancePageTab": "table",
     "resultClasses": {

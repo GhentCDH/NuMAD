@@ -60,23 +60,10 @@
             "externalAboutPage": false,
             "reducedHeight": 48,
             "defaultHeight": 64,
-            "mobileMenuBreakpoint": 1360,
-            "infoDropdown": [
-                {
-                    "id": "about",
-                    "translatedText": "aboutThePortal",
-                    "internalLink": "/about"
-                },
-                {
-                    "id": "blog",
-                    "externalLink": true,
-                    "translatedUrl": "blogUrl",
-                    "translatedText": "blog"
-                }
-            ]
+            "mobileMenuBreakpoint": 1360
         },
         "mainPage": {
-            "bannerImage": "main_page/mmm-banner.jpg",
+            "bannerImage": "main_page/coins.webp",
             "bannerBackground": "linear-gradient( rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45) ), url(<BANNER_IMAGE_URL>)",
             "bannerMobileHeight": 150,
             "bannerReducedHeight": 220,

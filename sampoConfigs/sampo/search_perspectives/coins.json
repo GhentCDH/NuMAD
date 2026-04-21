@@ -13,7 +13,7 @@
     "baseURI": "http://numad.ugent.be/resource",
     "URITemplate": "<BASE_URI>/coin/<LOCAL_ID>",
     "facetClass": "nmo:Find",
-    "frontPageImage": "main_page/mmm-banner.jpg",
+    "frontPageImage": "main_page/tetricus_coin.png",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
     "defaultActiveFacets": [],
