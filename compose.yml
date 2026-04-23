@@ -79,7 +79,11 @@ services:
     image: ghcr.io/ghentcdh/sampo-ui-client:latest
     platform: linux/amd64
     container_name: sampo-ui-client-prod
-    network_mode: host
+#    network_mode: host
+    ports:
+      - "80:80"
+    volumes:
+      - ./custom_components/dist:/app/custom-components
     depends_on:
       server:
         condition: service_healthy
@@ -91,7 +95,9 @@ services:
     image: ghcr.io/ghentcdh/sampo-ui-server:latest
     platform: linux/amd64
     container_name: sampo-ui-server-prod
-    network_mode: host
+#    network_mode: host
+    ports:
+      - "3001:3001"
     environment:
       SPARQL_ENDPOINT: ${SPARQL_ENDPOINT}
     depends_on:

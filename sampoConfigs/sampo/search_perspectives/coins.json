@@ -101,7 +101,8 @@
         },
         "coinsMigrations": {
             "tabID": 4,
-            "component": "Deck",
+            "component": "CustomComponent",
+            "componentName": "MigrationsMapWithRoads",
             "tabPath": "migrations",
             "tabIcon": "Redo",
             "sparqlQuery": "migrations",
@@ -124,6 +125,10 @@
                 "type": "pmtiles",
                 "inConfig": true,
                 "url": "maps/world.pmtiles"
+            },
+            "roadsGeoJson": {
+                "inConfig": true,
+                "url": "maps/itinere_roads_4326.geojson"
             }
         },
         "coinsMigrationsDialog": {

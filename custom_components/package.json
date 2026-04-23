@@ -1,0 +1,29 @@
+{
+  "name": "custom-components",
+  "scripts": {
+    "build": "sh build.sh",
+    "build:MyCustomComponent": "webpack --config components/MyCustomComponent/webpack.config.js --mode production"
+  },
+  "devDependencies": {
+    "@babel/core": "^7",
+    "@babel/preset-react": "^7",
+    "babel-loader": "^9",
+    "webpack": "^5",
+    "webpack-cli": "^5",
+    "style-loader": "^2.0.0",
+    "css-loader": "^5.0.1",
+    "sass": "^1.43.4",
+    "sass-loader": "^16.0.5"
+  },
+  "peerDependencies": {
+    "react": "^18"
+  },
+  "dependencies": {
+    "@protomaps/basemaps": "^5.7.2",
+    "deck.gl": "^8.6.0",
+    "@deck.gl/react": "^8.6.0",
+    "maplibre-gl": "^4.7.1",
+    "pmtiles": "^4.4.0",
+    "react-map-gl": "^7.1.9"
+  }
+}
