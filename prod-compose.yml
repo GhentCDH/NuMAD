@@ -1,0 +1,95 @@
+services:
+  db:
+    container_name: numad-db
+    image: postgis/postgis:17-3.5
+    platform: linux/amd64
+    environment:
+      POSTGRES_USER: numad
+      POSTGRES_PASSWORD: numad
+      POSTGRES_DB: numad
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./data/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U numad -d numad" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  import:
+    container_name: numad-import
+    build:
+      context: import/
+      dockerfile: Dockerfile
+    volumes:
+      - ./data:/data
+      - import-venv:/app/.venv
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    command: tail -f /dev/null
+
+  kottster:
+    container_name: numad-kottster
+    platform: linux/amd64
+    build:
+      context: kottster
+      dockerfile: Dockerfile
+    ports:
+      - "5480:5480"
+      - "5481:5481"
+    volumes:
+      - ./kottster:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null
+    depends_on:
+      db:
+        condition: service_healthy
+
+  ontop:
+    container_name: numad-ontop
+    image: ontop/ontop:latest
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./ontop/input:/opt/ontop/input
+      - ./ontop/jdbc:/opt/ontop/jdbc
+    environment:
+      DB_URL: ${ONTOP_DB_URL}
+      DB_USER: ${ONTOP_DB_USER}
+      DB_PASSWORD: ${ONTOP_DB_PASSWORD}
+      DB_DRIVER: ${ONTOP_JDBC_DRIVER}
+    ports:
+      - "8080:8080"
+    command: ./ontop endpoint
+
+  numad:
+    build:
+      context: .
+      dockerfile: ./sampoConfigs/Dockerfile
+      target: prod
+    image: numad:prod
+    container_name: numad-prod
+    environment:
+      SPARQL_ENDPOINT: ${SPARQL_ENDPOINT}
+    ports:
+      - "3002:80"
+    volumes:
+      - ./sampoConfigs:/app/configs
+      - ./custom_components/dist:/app/custom-components
+
+volumes:
+  import-venv:
+  pgdata:
+    name: numad_pgdata
