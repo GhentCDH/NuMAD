@@ -3,7 +3,7 @@
 ## Requirements
 
 You are expected to have a copy of the UTF-8 encoded `csv` exported by Excel.
-This file should be located at `../data/numad-data-20251208.csv`.
+This file should be located at `../data/numad-data.csv`.
 
 ## Usage
 

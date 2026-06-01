@@ -9,7 +9,7 @@ ROOT = Path(__file__).parent.parent.parent.parent
 # in production (docker), env variables are loaded by Docker (.env)
 load_dotenv(ROOT / "dev.env")
 
-CSV = ROOT / "data" / "numad-data-20251208.csv"
+CSV = ROOT / "data" / "numad-data.csv"
 
 _db_host = os.getenv("DB_HOST")
 _db_name = os.getenv("DB_NAME")

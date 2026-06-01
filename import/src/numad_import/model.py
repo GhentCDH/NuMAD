@@ -69,7 +69,7 @@ class FindSpot(Table, table=True):
     location: Any | None = Field(
         default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
     )
-    coins: List["Coin"] = Relationship(back_populates="find_spot")
+    finds: List["Find"] = Relationship(back_populates="find_spot")
 
 
 class LocalAdminUnit(Table, table=True):
@@ -77,7 +77,7 @@ class LocalAdminUnit(Table, table=True):
     location: Any | None = Field(
         default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
     )
-    coins: List["Coin"] = Relationship(back_populates="local_admin_unit")
+    finds: List["Find"] = Relationship(back_populates="local_admin_unit")
 
 
 class ObjectType(Table, table=True):
@@ -151,6 +151,33 @@ class Date(SQLModel, table=True):
     day: int | None = None
 
 
+class Find(Table, table=True):
+    discovery_type: str | None = None
+    deposition_type: str | None = None
+    hoard_number: int | None = None
+    chrr_link: str | None = None
+    site_information: str | None = None
+
+    # Foreign keys
+    local_admin_unit_id: int | None = Field(
+        default=None, foreign_key="localadminunit.id"
+    )
+    find_spot_id: int | None = Field(default=None, foreign_key="findspot.id")
+    find_year_start_id: int | None = Field(default=None, foreign_key="date.id")
+    find_year_end_id: int | None = Field(default=None, foreign_key="date.id")
+
+    # relationships
+    local_admin_unit: LocalAdminUnit | None = Relationship(back_populates="finds")
+    find_spot: FindSpot | None = Relationship(back_populates="finds")
+    find_year_start: Date | None = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Find.find_year_start_id]"}
+    )
+    find_year_end: Date | None = Relationship(
+        sa_relationship_kwargs={"foreign_keys": "[Find.find_year_end_id]"}
+    )
+    coins: List["Coin"] = Relationship(back_populates="find")
+
+
 class Coin(Table, table=True):
     original_numbers: str | None = None
     data_history: str | None = None
@@ -161,10 +188,7 @@ class Coin(Table, table=True):
     mint_id: int | None = Field(default=None, foreign_key="mint.id")
     material_id: int | None = Field(default=None, foreign_key="material.id")
     denomination_id: int | None = Field(default=None, foreign_key="denomination.id")
-    find_spot_id: int | None = Field(default=None, foreign_key="findspot.id")
-    local_admin_unit_id: int | None = Field(
-        default=None, foreign_key="localadminunit.id"
-    )
+    find_id: int | None = Field(default=None, foreign_key="find.id")
     object_type_id: int | None = Field(default=None, foreign_key="objecttype.id")
     object_classification_id: int | None = Field(
         default=None, foreign_key="objectclassification.id"
@@ -188,13 +212,6 @@ class Coin(Table, table=True):
     # Exact location information
     exact_location: str | None = None
 
-    # Find information
-    discovery_type: str | None = None
-    deposition_type: str | None = None
-    hoard_number: int | None = None
-    chrr_link: str | None = None
-    site_information: str | None = None
-    context_information: str | None = None
 
     # Identification properties
     lot_code: str | None = None
@@ -237,8 +254,7 @@ class Coin(Table, table=True):
     mint: Mint | None = Relationship(back_populates="coins")
     material: Material | None = Relationship(back_populates="coins")
     denomination: Denomination | None = Relationship(back_populates="coins")
-    find_spot: FindSpot | None = Relationship(back_populates="coins")
-    local_admin_unit: LocalAdminUnit | None = Relationship(back_populates="coins")
+    find: Find | None = Relationship(back_populates="coins")
     object_type: ObjectType | None = Relationship(back_populates="coins")
     object_classification: ObjectClassification | None = Relationship(
         back_populates="coins"

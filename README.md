@@ -45,7 +45,7 @@ Download postgres jdbc driver for ontop:
 curl -o ontop/jdbc/postgresql-42.7.8.jar https://jdbc.postgresql.org/download/postgresql-42.7.8.jar
 ```
 
-You also need the original csv file named `numad-data-20251208.csv` in the `data` directory.
+You also need the original csv file named `numad-data.csv` in the `data` directory.
 
 ### Maps
 This config uses local pmtiles files for the base layers of maps. For this to work you either need

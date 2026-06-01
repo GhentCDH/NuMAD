@@ -29,7 +29,7 @@ from .model import (
     Ruler,
     State,
     StatedAuthority,
-    Table,
+    Table, Find,
 )
 from .parse import parse_date, parse_float, parse_int, to_location
 
@@ -57,10 +57,10 @@ def get_id(obj: Table | Date | None) -> int | None:
 
 
 def get_or_create(
-    session: Session,
-    model: Type[T],
-    cache: Dict[str, T],
-    **kwargs,
+        session: Session,
+        model: Type[T],
+        cache: Dict[str, T],
+        **kwargs,
 ) -> T | None:
     """Checks cache, then DB, then creates new instance."""
 
@@ -72,7 +72,7 @@ def get_or_create(
         return None
 
     if not (
-        clean_val := key_col_val.strip() if type(key_col_val) is str else key_col_val
+            clean_val := key_col_val.strip() if type(key_col_val) is str else key_col_val
     ):
         return None
 
@@ -98,9 +98,9 @@ def get_or_create(
 
 
 def get_or_create_date(
-    session: Session,
-    cache: Dict[tuple[int, int | None, int | None], Date],
-    date: Date | None,
+        session: Session,
+        cache: Dict[tuple[int, int | None, int | None], Date],
+        date: Date | None,
 ) -> Date | None:
     """Get or create a Date instance, using (year, month, day) as composite key."""
     if date is None:
@@ -128,6 +128,72 @@ def get_or_create_date(
     return instance
 
 
+def get_or_create_find(
+        session: Session,
+        row: dict,
+        caches,
+        discovery_type, deposition_type, hoard_number, chrr_link, site_information
+):
+    key = (row.get("local admin-unit"), row.get("Find_year_StartDate"), row.get("Find_year_EndDate"),
+           row.get("FindSpot_toponym"))
+
+    if key in caches["find"]:
+        return caches["find"][key]
+
+    relations = {
+        "local_admin_unit": get_or_create(
+            session,
+            LocalAdminUnit,
+            caches["local_admin_unit"],
+            name=row.get("local admin-unit"),
+            location=to_location(
+                row.get("local_admin_unit_longitude"),
+                row.get("local_admin_unit_latitude"),
+            ),
+        ),
+        "find_spot": get_or_create(
+            session,
+            FindSpot,
+            caches["find_spot"],
+            name=row.get("FindSpot_toponym"),
+            site_classification=row.get("site_classification"),
+            archeological_structure=row.get("archeological_structure"),
+            location=to_location(
+                row.get("FindSpot_longitude"), row.get("FindSpot_latitude")
+            ),
+        ),
+        "find_year_start": get_or_create_date(
+            session,
+            caches["date"],
+            parse_date(year=row.get("Find_year_StartDate")),
+        ),
+        "find_year_end": get_or_create_date(
+            session,
+            caches["date"],
+            parse_date(year=row.get("Find_year_EndDate")),
+        )
+    }
+
+    find = Find(
+        local_admin_unit_id=get_id(relations["local_admin_unit"]),
+        find_spot_id=get_id(relations["find_spot"]),
+        find_year_start_id=get_id(relations["find_year_start"]),
+        find_year_end_id=get_id(relations["find_year_end"]),
+
+        discovery_type = discovery_type,
+        deposition_type = deposition_type,
+        hoard_number = hoard_number,
+        chrr_link = chrr_link,
+        site_information = site_information
+    )
+
+    session.add(find)
+    session.flush()
+    caches["find"][key] = find
+
+    return find
+
+
 def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
     """Create a Coin instance from a row and resolved relations."""
     return Coin(
@@ -137,12 +203,10 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         # Foreign keys
         authenticity_id=get_id(relations["authenticity"]),
         denomination_id=get_id(relations["denomination"]),
-        find_spot_id=get_id(relations["find_spot"]),
         identifier_id=get_id(relations["identifier"]),
         imts_obv_id=get_id(relations["imts_obv"]),
         imts_rev_id=get_id(relations["imts_rev"]),
         issuer_id=get_id(relations["issuer"]),
-        local_admin_unit_id=get_id(relations["local_admin_unit"]),
         material_id=get_id(relations["material"]),
         mint_id=get_id(relations["mint"]),
         object_classification_id=get_id(relations["object_classification"]),
@@ -157,12 +221,6 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         # Location
         exact_location=row.get("exact_location"),
         # Find information
-        discovery_type=row.get("DiscoveryType"),
-        deposition_type=row.get("DepositionType"),
-        hoard_number=parse_int(row.get("Hoard_number")),
-        chrr_link=row.get("CHRR_link"),
-        site_information=row.get("Site_information"),
-        context_information=row.get("Context_information"),
         find_bibliography=row.get("Find_bibliography"),
         # Identification
         lot_code=row.get("Lot_Code"),
@@ -204,6 +262,7 @@ def main():
         "coin_type": {},
         "date": {},  # This one uses tuple keys: (year, month, day)
         "denomination": {},
+        "find": {},
         "find_spot": {},
         "identifier": {},
         "imts": {},
@@ -237,17 +296,6 @@ def main():
                         Denomination,
                         caches["denomination"],
                         name=row.get("Denomination"),
-                    ),
-                    "find_spot": get_or_create(
-                        session,
-                        FindSpot,
-                        caches["find_spot"],
-                        name=row.get("FindSpot_toponym"),
-                        site_classification=row.get("site_classification"),
-                        archeological_structure=row.get("archeological_structure"),
-                        location=to_location(
-                            row.get("FindSpot_longitude"), row.get("FindSpot_latitude")
-                        ),
                     ),
                     "identifier": get_or_create(
                         session,
@@ -290,16 +338,6 @@ def main():
                         Issuer,
                         caches["issuer"],
                         name=row.get("Issuer"),
-                    ),
-                    "local_admin_unit": get_or_create(
-                        session,
-                        LocalAdminUnit,
-                        caches["local_admin_unit"],
-                        name=row.get("local admin-unit"),
-                        location=to_location(
-                            row.get("local_admin_unit_longitude"),
-                            row.get("local_admin_unit_latitude"),
-                        ),
                     ),
                     "material": get_or_create(
                         session, Material, caches["material"], name=row.get("Material")
@@ -350,6 +388,16 @@ def main():
                         StatedAuthority,
                         caches["stated_authority"],
                         name=clean_name(row.get("StatedAuthority")),
+                    ),
+                    "find": get_or_create_find(
+                        session,
+                        row=row,
+                        caches=caches,
+                        discovery_type=row.get("DiscoveryType"),
+                        deposition_type=row.get("DepositionType"),
+                        hoard_number=parse_int(row.get("Hoard_number")),
+                        chrr_link=row.get("CHRR_link"),
+                        site_information=row.get("Site_information")
                     ),
                 }
 
@@ -429,7 +477,7 @@ def main():
                 if nomisma_material is not None:
                     material.nomisma_uri = nomisma_material["nmo"]
                     material.label = nomisma_material["label"]
-                else :
+                else:
                     material.label = material.name
 
         session.commit()

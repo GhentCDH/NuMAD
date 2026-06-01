@@ -70,6 +70,6 @@ The Nomisma ontology (`nmo:`) is extremely loosely defined with no domains or ra
 
 - Docker & Docker Compose
 - `just` command runner
-- CSV data file `numad-data-20251208.csv` in `data/`
+- CSV data file `numad-data.csv` in `data/`
 - PostgreSQL JDBC driver (run `just jdbc`)
 - Optional: `belgium.pmtiles` and `europe.pmtiles` in `sampoConfigs/sampo/assets/maps/` for map base layers
