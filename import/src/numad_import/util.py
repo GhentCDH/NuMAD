@@ -89,14 +89,14 @@ MATERIALS = {
 
 
 def clean_name(name:str) -> str :
-    return re.sub(r"[<>!;?]", "", name.lower().replace("-", " ").replace(",", " "))
+    return re.sub(r"[<>!;?]", "", name.replace("-", " ").replace(",", " "))
 
 
 def get_nomisma_ruler(name: str, start_date: int, end_date: int) -> str | None:
     if name is None or start_date is None or end_date is None:
         return None
 
-    sparql_query = PREFIXES + RULER_QUERY.replace("<RULER_NAME>", clean_name(name)).replace("<START_DATE>", str(start_date)).replace("<END_DATE>", str(end_date))
+    sparql_query = PREFIXES + RULER_QUERY.replace("<RULER_NAME>", clean_name(name).lower()).replace("<START_DATE>", str(start_date)).replace("<END_DATE>", str(end_date))
     params = {
         "query": sparql_query,
         "output": "json"
@@ -120,7 +120,7 @@ def get_nomisma_denomination(name: str) -> str | None:
     if name is None:
         return None
 
-    sparql_query = PREFIXES + DENOMINATION_QUERY.replace("<DENOMINATION_NAME>", clean_name(name))
+    sparql_query = PREFIXES + DENOMINATION_QUERY.replace("<DENOMINATION_NAME>", clean_name(name).lower())
     params = {
         "query": sparql_query,
         "output": "json"
@@ -144,7 +144,7 @@ def get_nomisma_mint(name: str) -> str | None:
     if name is None:
         return None
 
-    sparql_query = PREFIXES + MINT_QUERY.replace("<MINT_NAME>", clean_name(name))
+    sparql_query = PREFIXES + MINT_QUERY.replace("<MINT_NAME>", clean_name(name).lower())
     params = {
         "query": sparql_query,
         "output": "json"
