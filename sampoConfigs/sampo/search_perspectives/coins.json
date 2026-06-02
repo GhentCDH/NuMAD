@@ -268,6 +268,15 @@
             "minWidth": 200
         },
         {
+            "id": "findSpot",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
             "id": "weight",
             "valueType": "object",
             "makeLink": false,
@@ -370,6 +379,20 @@
             "sortButton": true,
             "sortBy": "instanceCount",
             "sortByPredicate": "nmo:hasFindContext/nmd:hasLocalAdminUnit/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "findSpot": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasFindContext/nmo:hasFindSpot/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasFindContext/nmo:hasFindSpot/rdfs:label",
             "sortDirection": "desc",
             "literal": true
         },

@@ -354,7 +354,7 @@ def main():
                         session,
                         ObjectType,
                         caches["object_type"],
-                        name=row.get("Object_type"),
+                        name=row.get("ObjectType"),
                     ),
                     "ruler": get_or_create(
                         session,

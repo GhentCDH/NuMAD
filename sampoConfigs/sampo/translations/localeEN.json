@@ -187,6 +187,10 @@
                     "label": "municipality",
                     "description": "Local administrative unit where the coin was found"
                 },
+                "findSpot": {
+                    "label": "find spot toponym",
+                    "description": "find spot name"
+                },
                 "weight": {
                     "label": "weight",
                     "description": "Weight in grams"

@@ -144,10 +144,13 @@
     rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
                             rr:objectMap [ rr:column   "name" ;
                                            rr:datatype xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasSiteClassification ;
                             rr:objectMap [ rr:column   "site_classification" ;
                                            rr:datatype xsd:string ] ] ;
-    rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasArchaeologicalStructure ;
                             rr:objectMap [ rr:column   "archeological_structure" ;
                                            rr:datatype xsd:string ] ] .
 
