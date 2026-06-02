@@ -31,7 +31,7 @@ from .model import (
     StatedAuthority,
     Table, Find,
 )
-from .parse import parse_date, parse_float, parse_int, to_location
+from .parse import parse_date, parse_float, parse_int, to_location, parse_string
 
 handler = RichHandler(
     rich_tracebacks=True,
@@ -156,35 +156,25 @@ def get_or_create_find(
             FindSpot,
             caches["find_spot"],
             name=row.get("FindSpot_toponym"),
-            site_classification=row.get("site_classification"),
-            archeological_structure=row.get("archeological_structure"),
+            site_classification=parse_string(row.get("site_classification")),
+            archeological_structure=parse_string(row.get("archeological_structure")),
             location=to_location(
                 row.get("FindSpot_longitude"), row.get("FindSpot_latitude")
             ),
-        ),
-        "find_year_start": get_or_create_date(
-            session,
-            caches["date"],
-            parse_date(year=row.get("Find_year_StartDate")),
-        ),
-        "find_year_end": get_or_create_date(
-            session,
-            caches["date"],
-            parse_date(year=row.get("Find_year_EndDate")),
         )
     }
 
     find = Find(
         local_admin_unit_id=get_id(relations["local_admin_unit"]),
         find_spot_id=get_id(relations["find_spot"]),
-        find_year_start_id=get_id(relations["find_year_start"]),
-        find_year_end_id=get_id(relations["find_year_end"]),
 
-        discovery_type = discovery_type,
-        deposition_type = deposition_type,
+        discovery_type = parse_string(discovery_type),
+        deposition_type = parse_string(deposition_type),
         hoard_number = hoard_number,
         chrr_link = chrr_link,
-        site_information = site_information
+        site_information = parse_string(site_information),
+        find_year_start = parse_int(row.get("Find_year_StartDate")),
+        find_year_end = parse_int(row.get("Find_year_EndDate"))
     )
 
     session.add(find)
@@ -215,7 +205,7 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         state_id=get_id(relations["state"]),
         stated_authority_id=get_id(relations["stated_authority"]),
         identification_date_id=get_id(relations["identification_date"]),
-        find_date_id=get_id(relations["find_date"]),
+        find_id=get_id(relations["find"]),
         object_start_id=get_id(relations["object_start"]),
         object_end_id=get_id(relations["object_end"]),
         # Location
@@ -307,9 +297,6 @@ def main():
                         session,
                         caches["date"],
                         parse_date(row.get("Identification_year")),
-                    ),
-                    "find_date": get_or_create_date(
-                        session, caches["date"], parse_date(year=row.get("Find_year"))
                     ),
                     "object_start": get_or_create_date(
                         session,

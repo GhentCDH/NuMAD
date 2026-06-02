@@ -7,12 +7,13 @@
         "defaultSparql": true
     },
     "generalQueries": {
-        "facetResultSetQuery": "facetResultSetQueryOntop"
+        "facetResultSetQuery": "facetResultSetQueryOntop",
+        "facetValuesQuery": "facetValuesQueryOntop"
     },
     "sparqlQueriesFile": "coins.js",
     "baseURI": "http://numad.ugent.be/resource",
     "URITemplate": "<BASE_URI>/coin/<LOCAL_ID>",
-    "facetClass": "nmo:Find",
+    "facetClass": "nmo:Coin",
     "frontPageImage": "main_page/tetricus_coin.png",
     "searchMode": "faceted-search",
     "enableDynamicLanguageChange": false,
@@ -258,15 +259,6 @@
             "minWidth": 100
         },
         {
-            "id": "findDate",
-            "valueType": "object",
-            "makeLink": false,
-            "externalLink": false,
-            "sortValues": false,
-            "numberedList": false,
-            "minWidth": 100
-        },
-        {
             "id": "localAdminUnit",
             "valueType": "object",
             "makeLink": true,
@@ -371,13 +363,13 @@
             "containerClass": "ten",
             "facetType": "list",
             "filterType": "uriFilter",
-            "predicate": "nmd:hasLocalAdminUnit/rdfs:label",
+            "predicate": "nmo:hasFindContext/nmd:hasLocalAdminUnit/rdfs:label",
             "pieChartButton": true,
             "barChartButton": true,
             "searchField": true,
             "sortButton": true,
             "sortBy": "instanceCount",
-            "sortByPredicate": "nmd:hasLocalAdminUnit/rdfs:label",
+            "sortByPredicate": "nmo:hasFindContext/nmd:hasLocalAdminUnit/rdfs:label",
             "sortDirection": "desc",
             "literal": true
         },

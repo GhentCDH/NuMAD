@@ -6,6 +6,7 @@
 @prefix dct:  <http://purl.org/dc/terms/> .
 @prefix nmo:  <http://nomisma.org/ontology#> .
 @prefix schema: <http://schema.org/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 
 nmd:
     a               owl:Ontology ;
@@ -34,19 +35,55 @@ nmd:Authority
     rdfs:label      "Authority"@en ;
     rdfs:comment    "We use this class to define rulers in NuMAD since nomisma has no specific class for rulers or authorities"@en .
 
+nmd:FindSpot
+    a owl:Class ;
+    rdfs:label "Describes a spot where there have been finds"@en ;
+    rdfs:comment "Again nomisma has no specific class to formally describe find spots."@en .
+
 
 #############
 # PROPERTIES
 #############
 nmd:hasIdentifier
     a            owl:ObjectProperty ;
-    rdfs:domain  nmo:Find ;
+    rdfs:domain  nmo:Coin ;
     rdfs:range   nmd:Identifier ;
-    rdfs:label   "has identifier"@en ;
+    rdfs:label   "Has identifier"@en ;
     rdfs:comment "The person who identified the numismatic object"@en .
 
 nmd:hasLocalAdminUnit
     a           owl:ObjectProperty ;
     rdfs:domain nmo:Find ;
     rdfs:range  nmd:LocalAdminUnit ;
-    rdfs:label  "has local admin unit"@en .
+    rdfs:label  "Has local admin unit"@en .
+
+nmd:hasDiscoveryType
+    a owl:DatatypeProperty  ;
+    rdfs:domain nmo:Find ;
+    rdfs:range xsd:string ;
+    rdfs:label "Has discovery type"@en .
+
+nmd:hasDepositionType
+    a owl:DatatypeProperty  ;
+    rdfs:domain nmo:Find ;
+    rdfs:range xsd:string ;
+    rdfs:label "Has deposition type"@en .
+
+nmd:hasFindSpotToponym
+    a owl:DatatypeProperty ;
+    rdfs:subPropertyOf schema:name, rdfs:label ;
+    rdfs:domain nmd:FindSpot ;
+    rdfs:range xsd:string ;
+    rdfs:label "Has findspot toponym"@en .
+
+nmd:hasSiteClassification
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:FindSpot ;
+    rdfs:range xsd:string ;
+    rdfs:label "Has site classification"@en .
+
+nmd:hasArchaeologicalStructure
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:FindSpot ;
+    rdfs:range xsd:string ;
+    rdfs:label "Has archeological structure"@en .

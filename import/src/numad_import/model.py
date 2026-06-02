@@ -157,24 +157,18 @@ class Find(Table, table=True):
     hoard_number: int | None = None
     chrr_link: str | None = None
     site_information: str | None = None
+    find_year_start: int | None = None
+    find_year_end: int | None = None
 
     # Foreign keys
     local_admin_unit_id: int | None = Field(
         default=None, foreign_key="localadminunit.id"
     )
     find_spot_id: int | None = Field(default=None, foreign_key="findspot.id")
-    find_year_start_id: int | None = Field(default=None, foreign_key="date.id")
-    find_year_end_id: int | None = Field(default=None, foreign_key="date.id")
 
     # relationships
     local_admin_unit: LocalAdminUnit | None = Relationship(back_populates="finds")
     find_spot: FindSpot | None = Relationship(back_populates="finds")
-    find_year_start: Date | None = Relationship(
-        sa_relationship_kwargs={"foreign_keys": "[Find.find_year_start_id]"}
-    )
-    find_year_end: Date | None = Relationship(
-        sa_relationship_kwargs={"foreign_keys": "[Find.find_year_end_id]"}
-    )
     coins: List["Coin"] = Relationship(back_populates="find")
 
 
@@ -274,9 +268,6 @@ class Coin(Table, table=True):
     )
     identification_date: Date | None = Relationship(
         sa_relationship_kwargs={"foreign_keys": "[Coin.identification_date_id]"}
-    )
-    find_date: Date | None = Relationship(
-        sa_relationship_kwargs={"foreign_keys": "[Coin.find_date_id]"}
     )
     object_start: Date | None = Relationship(
         sa_relationship_kwargs={"foreign_keys": "[Coin.object_start_id]"}

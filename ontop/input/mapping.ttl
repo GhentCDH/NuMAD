@@ -19,9 +19,10 @@
 ##############
 :COIN
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id, year_start, year_end, weight, diameter, die_axis, original_id FROM coin""" ] ;
+    rr:logicalTable       [ rr:sqlQuery
+                                    """SELECT id, year_start, year_end, weight, diameter, die_axis, original_id FROM coin""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
-                            rr:class    nmo:Find ] ;
+                            rr:class    nmo:Coin ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
                             rr:objectMap [ rr:column   "original_id" ;
                                            rr:datatype xsd:string ] ] ;
@@ -53,10 +54,10 @@
 
 :COIN-FIND
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id FROM coin""" ] ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, find_id FROM coin""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate nmo:hasFindContext ;
-                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/find/{id}" ] ] .
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/find/{find_id}" ] ] .
 
 :COIN-SAME-AS
     a                     rr:TriplesMap ;
@@ -100,37 +101,55 @@
     rr:predicateObjectMap [ rr:predicate nmo:hasMaterial ;
                             rr:objectMap [ rr:template "http://numad.ugent.be/resource/material/{material_id}" ] ] .
 
-:COIN-LOCAL-ADMIN-UNIT
-    a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id, local_admin_unit_id FROM coin""" ] ;
-    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate nmd:hasLocalAdminUnit ;
-                            rr:objectMap [ rr:template
-                                                   "http://numad.ugent.be/resource/localadminunit/{local_admin_unit_id}" ] ] .
 
 #########
 # FINDS
 #########
 :FIND
-    a               rr:TriplesMap ;
-    rr:logicalTable [ rr:sqlQuery """SELECT id FROM coin""" ] ;
-    rr:subjectMap   [ rr:template "http://numad.ugent.be/resource/find/{id}" ;
-                      rr:class    nmo:Context ] .
-
-:FIND-DATE
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """
-            SELECT
-                c.id AS id,
-                make_date(d.year, d.month, d.day) AS coin_date
-            FROM coin c
-            JOIN date d
-              ON c.identification_date_id = d.id
-        """ ] ;
+    rr:logicalTable       [ rr:sqlQuery
+                                    """SELECT id, find_spot_id, local_admin_unit_id, discovery_type, deposition_type, find_year_start, find_year_end FROM find""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/find/{id}" ;
+                            rr:class    nmo:Find ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
+                            rr:objectMap [ rr:column   "find_year_start" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasEndDate ;
+                            rr:objectMap [ rr:column   "find_year_end" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasFindSpot ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/findspot/{find_spot_id}" ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasDiscoveryType ;
+                            rr:objectMap [ rr:column   "discovery_type" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasDepositionType ;
+                            rr:objectMap [ rr:column   "deposition_type" ;
+                                           rr:datatype xsd:string ] ] .
+
+:FIND-LOCAL-ADMIN-UNIT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, local_admin_unit_id FROM find""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/find/{id}" ] ;
-    rr:predicateObjectMap [ rr:predicate nmo:hasDate ;
-                            rr:objectMap [ rr:column   "coin_date" ;
-                                           rr:datatype xsd:date ] ] .
+    rr:predicateObjectMap [ rr:predicate nmd:hasLocalAdminUnit ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/localadminunit/{local_admin_unit_id}" ] ] .
+
+
+:FINDSPOT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery
+                                    """SELECT id, name, site_classification, archeological_structure FROM findspot""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/findspot/{id}" ;
+                            rr:class    nmd:FindSpot ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
+                            rr:objectMap [ rr:column   "site_classification" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
+                            rr:objectMap [ rr:column   "archeological_structure" ;
+                                           rr:datatype xsd:string ] ] .
 
 ################
 # IDENTIFIERS

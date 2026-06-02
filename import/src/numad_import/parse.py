@@ -130,6 +130,11 @@ def parse_int(value: str | None) -> int | None:
     except ValueError:
         return None
 
+def parse_string(value: str | None) -> str | None:
+    if value is None or len(value.strip()) == 0 or value == "[unknown]":
+        return None
+    return value.strip()
+
 
 def to_location(
     longitude_field: str | None, latitude_field: str | None

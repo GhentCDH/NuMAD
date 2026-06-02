@@ -1,6 +1,6 @@
 export const coinProperties = `
 {
-    ?id rdf:type nmo:Find ;
+    ?id rdf:type nmo:Coin ;
         rdfs:label ?coinId__prefLabel .
     bind(?id as ?uri__id)
     bind(?id as ?uri__prefLabel)
@@ -45,17 +45,6 @@ union
 }
 union
 {
-    ?id nmo:hasFindContext/nmo:hasDate ?findDate__id .
-    bind(str(?findDate__id) as ?findDate__prefLabel)
-}
-union
-{
-    ?id nmd:hasLocalAdminUnit ?localAdminUnit__id .
-    ?localAdminUnit__id rdfs:label ?localAdminUnit__prefLabel .
-    bind(concat("/localadminunits/page/", STRAFTER(str(?localAdminUnit__id), "localadminunit/")) as ?localAdminUnit__dataProviderUrl)
-}
-union
-{
     ?id nmo:hasStartDate ?yearStart__id .
     bind(?yearStart__id as ?yearStart__prefLabel)
 }
@@ -85,6 +74,14 @@ union
     bind(?nomismaUri__id as ?nomismaUri__prefLabel)
     bind(?nomismaUri__id as ?nomismaUri__dataProviderUrl)
 }
+union
+{
+    ?id nmo:hasFindContext ?find__id .
+    ?find__id nmd:hasLocalAdminUnit ?localAdminUnit__id .
+    ?localAdminUnit__id rdfs:label ?localAdminUnit__prefLabel .
+    bind(concat("/localadminunits/page/", STRAFTER(str(?localAdminUnit__id), "localadminunit/")) as ?localAdminUnit__dataProviderUrl)
+}
+
 `
 
 export const coinPlaces = `
@@ -92,8 +89,8 @@ SELECT DISTINCT ?id ?lat ?long ?markerColor
 (1 as ?instanceCount) # for heatmap
 WHERE {
     <FILTER>
-    ?id a nmo:Find ;
-        nmd:hasLocalAdminUnit ?lau .
+    ?id a nmo:Coin ;
+        nmo:hasFindContext/nmd:hasLocalAdminUnit ?lau .
     ?lau schema:geo ?geo .
     ?geo schema:latitude ?lat ;
          schema:longitude ?long .
@@ -106,7 +103,7 @@ SELECT DISTINCT ?id ?lat ?long ?markerColor
 (1 as ?instanceCount) # for heatmap
 WHERE {
     <FILTER>
-    ?id a nmo:Find ;
+    ?id a nmo:Coin ;
         nmo:hasMint ?mint .
     ?mint schema:geo ?geo .
     ?geo schema:latitude ?lat ;
@@ -122,9 +119,9 @@ SELECT ?id
 (COUNT(DISTINCT ?coin) as ?instanceCount)
 WHERE {
     <FILTER>
-    ?coin a nmo:Find ;
+    ?coin a nmo:Coin ;
         nmo:hasMint ?from__id ;
-        nmd:hasLocalAdminUnit ?to__id .
+        nmo:hasFindContext/nmd:hasLocalAdminUnit ?to__id .
           
     ?from__id rdfs:label ?from__prefLabel ;
               schema:geo/schema:latitude ?from__lat ;
@@ -149,7 +146,7 @@ SELECT *
 WHERE {
     <FILTER>
     ?id nmo:hasMint <FROM_ID> ;
-        nmd:hasLocalAdminUnit <TO_ID> ;
+        nmo:hasFindContext/nmd:hasLocalAdminUnit <TO_ID> ;
         rdfs:label ?prefLabel .
     bind(concat("/coins/page/", str(?prefLabel)) as ?dataProviderUrl)
 }
@@ -172,4 +169,52 @@ FILTER(BOUND(?id))
 <RESULT_SET_PROPERTIES>
 }
 <ORDER_BY>
+`
+
+
+export const facetValuesQueryOntop = `
+  SELECT DISTINCT ?id ?prefLabel ?selected ?parent ?instanceCount {
+    {
+      {
+        SELECT DISTINCT (count(DISTINCT ?instance) as ?instanceCount) ?id ?parent ?selected {
+          # facet values that return results
+          {
+            <FILTER>
+            ?instance <PREDICATE> ?id .
+            <PARENTS>
+            VALUES ?facetClass { <FACET_CLASS> }
+            ?instance <FACET_CLASS_PREDICATE> ?facetClass .
+            <SELECTED_VALUES>
+          }
+          <SELECTED_VALUES_NO_HITS>     
+          BIND(COALESCE(?selected_, false) as ?selected)
+        }
+        GROUP BY ?id ?parent ?selected
+      }
+      FILTER(BOUND(?id))
+      <FACET_VALUE_FILTER>
+      <LABELS>
+    }
+    UNION
+    {
+      # 'Unknown' facet value for results with no predicate path
+      {
+        SELECT DISTINCT (count(DISTINCT ?instance) as ?instanceCount) {
+          <FILTER>
+          VALUES ?facetClass { <FACET_CLASS> }
+          ?instance <FACET_CLASS_PREDICATE> ?facetClass .
+          OPTIONAL {
+            ?instance <MISSING_PREDICATE> ?not_exists .
+          }
+          FILTER(!BOUND(?not_exists))
+        }
+      }
+      FILTER(?instanceCount > 0)
+      BIND(IRI("http://ldf.fi/MISSING_VALUE") AS ?id)
+      # prefLabel for <http://ldf.fi/MISSING_VALUE> is given in client/translations
+      BIND('0' as ?parent)
+      BIND(<UNKNOWN_SELECTED> as ?selected)
+    }
+  }
+  <ORDER_BY>
 `
