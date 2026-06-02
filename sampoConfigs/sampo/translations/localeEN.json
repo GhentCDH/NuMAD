@@ -202,6 +202,70 @@
                 "axis": {
                     "label": "axis",
                     "description": "Axis"
+                },
+                "objectType": {
+                    "label": "Object type",
+                    "description": "Type of numismatic object"
+                },
+                "objectClassification": {
+                    "label": "Object classification",
+                    "description": "Classification of the object"
+                },
+                "objectSubclass": {
+                    "label": "Object subclass",
+                    "description": "Subclass of the object"
+                },
+                "state": {
+                    "label": "State",
+                    "description": "Preservation state of the coin"
+                },
+                "authenticity": {
+                    "label": "Authenticity",
+                    "description": "Authenticity status of the coin"
+                },
+                "coinType": {
+                    "label": "Type",
+                    "description": "Coin type"
+                },
+                "statedAuthority": {
+                    "label": "Stated authority",
+                    "description": "Authority as stated on the coin"
+                },
+                "issuer": {
+                    "label": "Issuer",
+                    "description": "Person or institution who issued the coin"
+                },
+                "reecePeriods": {
+                    "label": "Reece period",
+                    "description": "Period according to Reece's adapted classification"
+                },
+                "referenceWork": {
+                    "label": "Reference work",
+                    "description": "Bibliographic reference for this coin type"
+                },
+                "denominationDetail": {
+                    "label": "Denomination detail",
+                    "description": "Detailed denomination information"
+                },
+                "countermark": {
+                    "label": "Countermark",
+                    "description": "Countermark present on the coin"
+                },
+                "obverseDesign": {
+                    "label": "Obverse design",
+                    "description": "Description of the obverse design"
+                },
+                "obverseLegend": {
+                    "label": "Obverse legend",
+                    "description": "Legend text on the obverse"
+                },
+                "reverseDesign": {
+                    "label": "Reverse design",
+                    "description": "Description of the reverse design"
+                },
+                "reverseLegend": {
+                    "label": "Reverse legend",
+                    "description": "Legend text on the reverse"
                 }
             }
         },

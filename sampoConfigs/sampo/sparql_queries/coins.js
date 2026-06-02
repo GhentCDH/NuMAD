@@ -70,6 +70,86 @@ union
 }
 union
 {
+    ?id nmo:hasObjectType ?objectType__id .
+    ?objectType__id rdfs:label ?objectType__prefLabel .
+}
+union
+{
+    ?id nmd:hasObjectClassification ?objectClassification__id .
+    ?objectClassification__id rdfs:label ?objectClassification__prefLabel .
+}
+union
+{
+    ?id nmd:hasObjectSubclass ?objectSubclass__id .
+    ?objectSubclass__id rdfs:label ?objectSubclass__prefLabel .
+}
+union
+{
+    ?id nmd:hasState ?state__id .
+    ?state__id rdfs:label ?state__prefLabel .
+}
+union
+{
+    ?id nmo:hasStatedAuthority ?statedAuthority__id .
+    ?statedAuthority__id rdfs:label ?statedAuthority__prefLabel .
+}
+union
+{
+    ?id nmo:hasIssuer ?issuer__id .
+    ?issuer__id rdfs:label ?issuer__prefLabel .
+}
+union
+{
+    ?id nmo:hasAuthenticity ?authenticity__id .
+    ?authenticity__id rdfs:label ?authenticity__prefLabel .
+}
+union
+{
+    ?id nmd:hasCoinType ?coinType__id .
+    ?coinType__id rdfs:label ?coinType__prefLabel .
+}
+union
+{
+    ?id nmd:hasReecePeriods ?reecePeriods__id .
+    bind(?reecePeriods__id as ?reecePeriods__prefLabel)
+}
+union
+{
+    ?id nmd:hasReferenceWork ?referenceWork__id .
+    bind(?referenceWork__id as ?referenceWork__prefLabel)
+}
+union
+{
+    ?id nmd:hasDenominationDetail ?denominationDetail__id .
+    bind(?denominationDetail__id as ?denominationDetail__prefLabel)
+}
+union
+{
+    ?id nmd:hasCountermark ?countermark__id .
+    bind(?countermark__id as ?countermark__prefLabel)
+}
+union
+{
+    ?id nmd:hasObverseDesign ?obverseDesign__id .
+    bind(?obverseDesign__id as ?obverseDesign__prefLabel)
+}
+union
+{
+    ?id nmd:hasObverseLegend ?obverseLegend__id .
+    bind(?obverseLegend__id as ?obverseLegend__prefLabel)
+}
+union
+{
+    ?id nmd:hasReverseDesign ?reverseDesign__id .
+    bind(?reverseDesign__id as ?reverseDesign__prefLabel)
+}
+union
+{
+    ?id nmd:hasReverseLegend ?reverseLegend__id .
+    bind(?reverseLegend__id as ?reverseLegend__prefLabel)
+}
+union
+{
     ?id owl:sameAs ?nomismaUri__id .
     bind(?nomismaUri__id as ?nomismaUri__prefLabel)
     bind(?nomismaUri__id as ?nomismaUri__dataProviderUrl)

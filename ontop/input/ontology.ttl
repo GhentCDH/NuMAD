@@ -40,6 +40,30 @@ nmd:FindSpot
     rdfs:label "Describes a spot where there have been finds"@en ;
     rdfs:comment "Again nomisma has no specific class to formally describe find spots."@en .
 
+nmd:ObjectClassification
+    a          owl:Class ;
+    rdfs:label "Object Classification"@en .
+
+nmd:ObjectSubclass
+    a          owl:Class ;
+    rdfs:label "Object Subclass"@en .
+
+nmd:State
+    a          owl:Class ;
+    rdfs:label "Preservation state"@en .
+
+nmd:StatedAuthority
+    a          owl:Class ;
+    rdfs:label "Stated Authority"@en .
+
+nmd:Issuer
+    a          owl:Class ;
+    rdfs:label "Issuer"@en .
+
+nmd:CoinType
+    a          owl:Class ;
+    rdfs:label "Coin Type"@en .
+
 
 #############
 # PROPERTIES
@@ -87,3 +111,75 @@ nmd:hasArchaeologicalStructure
     rdfs:domain nmd:FindSpot ;
     rdfs:range xsd:string ;
     rdfs:label "Has archeological structure"@en .
+
+nmd:hasObjectClassification
+    a            owl:ObjectProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   nmd:ObjectClassification ;
+    rdfs:label   "Has object classification"@en .
+
+nmd:hasObjectSubclass
+    a            owl:ObjectProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   nmd:ObjectSubclass ;
+    rdfs:label   "Has object subclass"@en .
+
+nmd:hasState
+    a            owl:ObjectProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   nmd:State ;
+    rdfs:label   "Has state"@en .
+
+nmd:hasCoinType
+    a            owl:ObjectProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   nmd:CoinType ;
+    rdfs:label   "Has coin type"@en .
+
+nmd:hasReecePeriods
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has Reece periods"@en .
+
+nmd:hasReferenceWork
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has reference work"@en .
+
+nmd:hasDenominationDetail
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has denomination detail"@en .
+
+nmd:hasCountermark
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has countermark"@en .
+
+nmd:hasObverseDesign
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has obverse design"@en .
+
+nmd:hasObverseLegend
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has obverse legend"@en .
+
+nmd:hasReverseDesign
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has reverse design"@en .
+
+nmd:hasReverseLegend
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Has reverse legend"@en .

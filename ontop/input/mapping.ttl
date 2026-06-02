@@ -20,7 +20,10 @@
 :COIN
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT id, year_start, year_end, weight, diameter, die_axis, original_id FROM coin""" ] ;
+                                    """SELECT id, year_start, year_end, weight, diameter, die_axis, original_id,
+                                              reece_periods, reference_work, denomination_detail, countermark,
+                                              obverse_design, obverse_legend, reverse_design, reverse_legend
+                                       FROM coin""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
                             rr:class    nmo:Coin ] ;
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
@@ -40,7 +43,31 @@
                                            rr:datatype xsd:decimal ] ] ;
     rr:predicateObjectMap [ rr:predicate nmo:hasAxis ;
                             rr:objectMap [ rr:column   "die_axis" ;
-                                           rr:datatype xsd:int ] ] .
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReecePeriods ;
+                            rr:objectMap [ rr:column   "reece_periods" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReferenceWork ;
+                            rr:objectMap [ rr:column   "reference_work" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasDenominationDetail ;
+                            rr:objectMap [ rr:column   "denomination_detail" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasCountermark ;
+                            rr:objectMap [ rr:column   "countermark" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasObverseDesign ;
+                            rr:objectMap [ rr:column   "obverse_design" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasObverseLegend ;
+                            rr:objectMap [ rr:column   "obverse_legend" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReverseDesign ;
+                            rr:objectMap [ rr:column   "reverse_design" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReverseLegend ;
+                            rr:objectMap [ rr:column   "reverse_legend" ;
+                                           rr:datatype xsd:string ] ] .
 
 
 :COIN-IDENTIFIER
@@ -333,3 +360,168 @@
     rr:predicateObjectMap [ rr:predicate schema:longitude ;
                             rr:objectMap [ rr:column   "long" ;
                                            rr:datatype xsd:decimal ] ] .
+
+
+####################
+# OBJECT TYPES
+####################
+:OBJECTTYPE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM objecttype""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/objecttype/{id}" ;
+                            rr:class    nmo:ObjectType ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-OBJECTTYPE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, object_type_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasObjectType ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/objecttype/{object_type_id}" ] ] .
+
+
+##########################
+# OBJECT CLASSIFICATIONS
+##########################
+:OBJECTCLASSIFICATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM objectclassification""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/objectclassification/{id}" ;
+                            rr:class    nmd:ObjectClassification ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-OBJECTCLASSIFICATION
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, object_classification_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasObjectClassification ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/objectclassification/{object_classification_id}" ] ] .
+
+
+####################
+# OBJECT SUBCLASSES
+####################
+:OBJECTSUBCLASS
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM objectsubclass""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/objectsubclass/{id}" ;
+                            rr:class    nmd:ObjectSubclass ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-OBJECTSUBCLASS
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, object_subclass_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasObjectSubclass ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/objectsubclass/{object_subclass_id}" ] ] .
+
+
+##########
+# STATES
+##########
+:STATE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM numadstate""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/state/{id}" ;
+                            rr:class    nmd:State ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-STATE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, state_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasState ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/state/{state_id}" ] ] .
+
+
+#####################
+# STATED AUTHORITIES
+#####################
+:STATEDAUTHORITY
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM statedauthority""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/statedauthority/{id}" ;
+                            rr:class    nmd:StatedAuthority ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-STATEDAUTHORITY
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, stated_authority_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasStatedAuthority ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/statedauthority/{stated_authority_id}" ] ] .
+
+
+##########
+# ISSUERS
+##########
+:ISSUER
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM issuer""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/issuer/{id}" ;
+                            rr:class    nmd:Issuer ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-ISSUER
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, issuer_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasIssuer ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/issuer/{issuer_id}" ] ] .
+
+
+################
+# AUTHENTICITIES
+################
+:AUTHENTICITY
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM authenticity""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/authenticity/{id}" ;
+                            rr:class    nmo:Authenticity ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-AUTHENTICITY
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, authenticity_id FROM coin""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasAuthenticity ;
+                            rr:objectMap [ rr:template
+                                                   "http://numad.ugent.be/resource/authenticity/{authenticity_id}" ] ] .
+
+
+##############
+# COIN TYPES
+##############
+:COINTYPE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, name FROM cointype""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/cointype/{id}" ;
+                            rr:class    nmd:CoinType ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "name" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-TYPE
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT coin_id, coin_type_id FROM coincointype""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{coin_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasCoinType ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/cointype/{coin_type_id}" ] ] .

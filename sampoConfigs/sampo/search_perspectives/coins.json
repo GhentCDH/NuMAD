@@ -196,6 +196,168 @@
             "minWidth": 75
         },
         {
+            "id": "localAdminUnit",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "identifier",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "findSpot",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "objectType",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "objectClassification",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "objectSubclass",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "state",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
+            "id": "reecePeriods",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
+            "id": "authority",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "statedAuthority",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "issuer",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "mint",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "referenceWork",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": false,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "material",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
+            "id": "denomination",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "denominationDetail",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "authenticity",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
+            "id": "countermark",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 100
+        },
+        {
             "id": "yearStart",
             "valueType": "object",
             "makeLink": false,
@@ -212,69 +374,6 @@
             "sortValues": false,
             "numberedList": false,
             "minWidth": 75
-        },
-        {
-            "id": "denomination",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 150
-        },
-        {
-            "id": "authority",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 150
-        },
-        {
-            "id": "identifier",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 150
-        },
-        {
-            "id": "mint",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 150
-        },
-        {
-            "id": "material",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 100
-        },
-        {
-            "id": "localAdminUnit",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
-            "id": "findSpot",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": false,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
         },
         {
             "id": "weight",
@@ -302,6 +401,51 @@
             "sortValues": false,
             "numberedList": false,
             "minWidth": 100
+        },
+        {
+            "id": "coinType",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "obverseDesign",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": false,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "obverseLegend",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": false,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "reverseDesign",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": false,
+            "numberedList": false,
+            "minWidth": 200
+        },
+        {
+            "id": "reverseLegend",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": false,
+            "numberedList": false,
+            "minWidth": 200
         }
     ],
     "facets": {
@@ -311,62 +455,6 @@
             "facetType": "text",
             "filterType": "textFilter",
             "textQueryProperty": "rdfs:label"
-        },
-        "denomination": {
-            "containerClass": "ten",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "nmo:hasDenomination/rdfs:label",
-            "pieChartButton": true,
-            "barChartButton": true,
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortByPredicate": "nmo:hasDenomination/rdfs:label",
-            "sortDirection": "desc",
-            "literal": true
-        },
-        "authority": {
-            "containerClass": "ten",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "nmo:hasAuthority/rdfs:label",
-            "pieChartButton": true,
-            "barChartButton": true,
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortByPredicate": "nmo:hasAuthority/rdfs:label",
-            "sortDirection": "desc",
-            "literal": true
-        },
-        "mint": {
-            "containerClass": "ten",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "nmo:hasMint/rdfs:label",
-            "pieChartButton": true,
-            "barChartButton": true,
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortByPredicate": "nmo:hasMint/rdfs:label",
-            "sortDirection": "desc",
-            "literal": true
-        },
-        "material": {
-            "containerClass": "ten",
-            "facetType": "list",
-            "filterType": "uriFilter",
-            "predicate": "nmo:hasMaterial/rdfs:label",
-            "pieChartButton": true,
-            "barChartButton": true,
-            "searchField": true,
-            "sortButton": true,
-            "sortBy": "instanceCount",
-            "sortByPredicate": "nmo:hasMaterial/rdfs:label",
-            "sortDirection": "desc",
-            "literal": true
         },
         "localAdminUnit": {
             "containerClass": "ten",
@@ -379,6 +467,20 @@
             "sortButton": true,
             "sortBy": "instanceCount",
             "sortByPredicate": "nmo:hasFindContext/nmd:hasLocalAdminUnit/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "identifier": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasIdentifier/schema:name",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasIdentifier/schema:name",
             "sortDirection": "desc",
             "literal": true
         },
@@ -396,17 +498,213 @@
             "sortDirection": "desc",
             "literal": true
         },
-        "identifier": {
+        "objectType": {
             "containerClass": "ten",
             "facetType": "list",
             "filterType": "uriFilter",
-            "predicate": "nmd:hasIdentifier/schema:name",
+            "predicate": "nmo:hasObjectType/rdfs:label",
             "pieChartButton": true,
             "barChartButton": true,
             "searchField": true,
             "sortButton": true,
             "sortBy": "instanceCount",
-            "sortByPredicate": "nmd:hasIdentifier/schema:name",
+            "sortByPredicate": "nmo:hasObjectType/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "objectClassification": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasObjectClassification/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasObjectClassification/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "objectSubclass": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasObjectSubclass/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasObjectSubclass/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "state": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasState/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasState/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "reecePeriods": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasReecePeriods",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasReecePeriods",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "authority": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasAuthority/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasAuthority/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "statedAuthority": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasStatedAuthority/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasStatedAuthority/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "issuer": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasIssuer/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasIssuer/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "mint": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasMint/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasMint/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "referenceWork": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasReferenceWork",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasReferenceWork",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "material": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasMaterial/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasMaterial/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "denomination": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasDenomination/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasDenomination/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "denominationDetail": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasDenominationDetail",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasDenominationDetail",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "authenticity": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasAuthenticity/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasAuthenticity/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "countermark": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasCountermark",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasCountermark",
             "sortDirection": "desc",
             "literal": true
         },
@@ -437,6 +735,62 @@
             "filterType": "integerFilter",
             "predicate": "nmo:hasDiameter",
             "sortByPredicate": "nmo:hasDiameter"
+        },
+        "axis": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmo:hasAxis",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmo:hasAxis",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "coinType": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "nmd:hasCoinType/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "nmd:hasCoinType/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "obverseDesign": {
+            "sortByPredicate": "nmd:hasObverseDesign",
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "textQueryProperty": "nmd:hasObverseDesign"
+        },
+        "obverseLegend": {
+            "sortByPredicate": "nmd:hasObverseLegend",
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "textQueryProperty": "nmd:hasObverseLegend"
+        },
+        "reverseDesign": {
+            "sortByPredicate": "nmd:hasReverseDesign",
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "textQueryProperty": "nmd:hasReverseDesign"
+        },
+        "reverseLegend": {
+            "sortByPredicate": "nmd:hasReverseLegend",
+            "containerClass": "one",
+            "facetType": "text",
+            "filterType": "textFilter",
+            "textQueryProperty": "nmd:hasReverseLegend"
         }
 
     }
