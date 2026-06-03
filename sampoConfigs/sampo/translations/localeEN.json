@@ -187,6 +187,10 @@
                     "label": "municipality",
                     "description": "Local administrative unit where the coin was found"
                 },
+                "find": {
+                    "label": "find",
+                    "description": "Find context this coin belongs to"
+                },
                 "findSpot": {
                     "label": "find spot toponym",
                     "description": "find spot name"
@@ -318,6 +322,10 @@
                 "yearEnd": {
                     "label": "find year (to)",
                     "description": "Latest possible year of the find"
+                },
+                "coin": {
+                    "label": "coins",
+                    "description": "Coins found in this find context"
                 }
             }
         },

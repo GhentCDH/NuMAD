@@ -39,9 +39,9 @@ union
         ", ",
         coalesce(?findSpotToponym__prefLabel, "..."),
         ", ",
-        coalesce(str(?yearStart_prefLabel), "..."),
+        coalesce(str(?yearStart__prefLabel), "..."),
         " - ",
-        coalesce(str(?yearEnd_prefLabel), "...")
+        coalesce((?yearEnd__prefLabel), "...")
       )
       AS ?prefLabel__prefLabel
     )
@@ -68,6 +68,102 @@ union
 {
     ?id nmd:hasDepositionType ?depositionType__id .
     bind(?depositionType__id as ?depositionType__prefLabel)
+}
+
+`
+
+export const findPropertiesDetail = `
+{
+    ?id rdf:type nmo:Find ;
+        rdfs:label ?findId__prefLabel .
+    bind(?id as ?uri__id)
+    bind(?id as ?uri__prefLabel)
+    bind(?id as ?findId__id)
+    bind(concat("/finds/page/", str(?findId__prefLabel)) as ?uri__dataProviderUrl)
+    bind(?uri__dataProviderUrl as ?findId__dataProviderUrl)
+
+    bind(?uri__dataProviderUrl as ?prefLabel__dataProviderUrl)
+}
+union
+{
+    ?id nmd:hasLocalAdminUnit ?localAdminUnit__id .
+    ?localAdminUnit__id rdfs:label ?localAdminUnit__prefLabel .
+    bind(concat("/localadminunits/page/", STRAFTER(str(?localAdminUnit__id), "localadminunit/")) as ?localAdminUnit__dataProviderUrl)
+
+
+    optional {
+      ?id nmo:hasFindSpot ?findSpot__id .
+
+      optional {
+        ?findSpot__id nmd:hasFindSpotToponym ?findSpotToponym__id .
+        bind(?findSpotToponym__id as ?findSpotToponym__prefLabel)
+      }
+      optional {
+        ?id nmo:hasStartDate ?yearStart__id .
+        bind(?yearStart__id as ?yearStart__prefLabel)
+      }
+      optional {
+        ?id nmo:hasEndDate ?yearEnd__id .
+        bind(?yearEnd__id as ?yearEnd__prefLabel)
+      }
+    }
+    bind (
+      concat (
+        ?localAdminUnit__prefLabel,
+        ", ",
+        coalesce(?findSpotToponym__prefLabel, "..."),
+        ", ",
+        coalesce(str(?yearStart_prefLabel), "..."),
+        " - ",
+        coalesce(str(?yearEnd_prefLabel), "...")
+      )
+      AS ?prefLabel__prefLabel
+    )
+
+}
+union
+{
+    ?id nmo:hasFindSpot ?findSpot__id .
+    ?findSpot__id nmd:hasSiteClassification ?siteClassification__id .
+    bind(?siteClassification__id as ?siteClassification__prefLabel)
+}
+union
+{
+    ?id nmo:hasFindSpot ?findSpot__id .
+    ?findSpot__id nmd:hasArchaeologicalStructure ?archaeologicalStructure__id .
+    bind(?archaeologicalStructure__id as ?archaeologicalStructure__prefLabel)
+}
+union
+{
+    ?id nmd:hasDiscoveryType ?discoveryType__id .
+    bind(?discoveryType__id as ?discoveryType__prefLabel)
+}
+union
+{
+    ?id nmd:hasDepositionType ?depositionType__id .
+    bind(?depositionType__id as ?depositionType__prefLabel)
+}
+union
+{
+    ?coin__id nmo:hasFindContext ?id ;
+              rdfs:label ?coin__label .
+    optional {
+        ?coin__id nmo:hasAuthority ?coinAuthority__id .
+        ?coinAuthority__id rdfs:label ?coinAuthority__prefLabel .
+    }
+    optional {
+        ?coin__id nmo:hasDenomination ?coinDenomination__id .
+        ?coinDenomination__id rdfs:label ?coinDenomination__prefLabel .
+    }
+    bind(
+        concat(
+            ?coin__label,
+            COALESCE(concat(", ", ?coinAuthority__prefLabel), ""),
+            COALESCE(concat(", ", ?coinDenomination__prefLabel), "")
+        )
+        as ?coin__prefLabel
+    )
+    bind(concat("/coins/page/", str(?coin__label)) as ?coin__dataProviderUrl)
 }
 
 `

@@ -33,7 +33,7 @@
                 "sortDirection": null
             },
             "instanceConfig": {
-                "propertiesQueryBlock": "findProperties",
+                "propertiesQueryBlock": "findPropertiesDetail",
                 "instancePageResultClasses": {
                     "instancePageTable": {
                         "tabID": 0,
@@ -166,6 +166,16 @@
             "sortValues": false,
             "numberedList": false,
             "minWidth": 100
+        },
+        {
+            "id": "coin",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         }
     ],
     "facets": {

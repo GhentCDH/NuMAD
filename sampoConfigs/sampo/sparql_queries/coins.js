@@ -157,7 +157,9 @@ union
 union
 {
     ?id nmo:hasFindContext ?find__id .
-    
+    ?find__id rdfs:label ?find__prefLabel .
+    bind(concat("/finds/page/", str(?find__prefLabel)) as ?find__dataProviderUrl)
+
     optional {
       ?find__id nmd:hasLocalAdminUnit ?localAdminUnit__id .
       ?localAdminUnit__id rdfs:label ?localAdminUnit__prefLabel .
@@ -167,7 +169,6 @@ union
       ?id nmo:hasFindContext ?find__id .
       ?find__id nmo:hasFindSpot ?findSpot__id .
       ?findSpot__id rdfs:label ?findSpot__prefLabel .
-      bind(concat("/findspots/page/", STRAFTER(str(?findSpot__id), "findspot/")) as ?findSpot__dataProviderUrl)   
     }
 }
 
