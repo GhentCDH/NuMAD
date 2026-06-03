@@ -271,7 +271,7 @@
         SELECT
             id
         FROM mint m
-        WHERE m.location IS NOT NULL
+        WHERE m.latitude IS NOT NULL AND m.longitude IS NOT NULL
     """ ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/mint/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate schema:geo ;
@@ -282,10 +282,10 @@
     rr:logicalTable       [ rr:sqlQuery """
         SELECT
             id,
-            ST_Y(m.location::geometry) as lat,
-            ST_X(m.location::geometry) as long
+            m.latitude as lat,
+            m.longitude as long
         FROM mint m
-        WHERE m.location IS NOT NULL
+        WHERE m.latitude IS NOT NULL AND m.longitude IS NOT NULL
     """ ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/mint/{id}/geo" ;
                             rr:class    schema:GeoCoordinates ] ;
@@ -338,7 +338,7 @@
         SELECT
             id
         FROM localadminunit a
-        WHERE a.location IS NOT NULL
+        WHERE a.latitude IS NOT NULL AND a.longitude IS NOT NULL
     """ ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}" ] ;
     rr:predicateObjectMap [ rr:predicate schema:geo ;
@@ -350,10 +350,10 @@
     rr:logicalTable       [ rr:sqlQuery """
         SELECT
             id,
-            ST_Y(a.location::geometry) as lat,
-            ST_X(a.location::geometry) as long
+            a.latitude as lat,
+            a.longitude as long
         FROM localadminunit a
-        WHERE a.location IS NOT NULL
+        WHERE a.latitude IS NOT NULL AND a.longitude IS NOT NULL
     """ ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}/geo" ;
                             rr:class    schema:GeoCoordinates ] ;

@@ -1,9 +1,8 @@
 from datetime import date, datetime
-from typing import Any, List
+from typing import List
 
-from geoalchemy2 import Geography
 from sqlalchemy import DateTime, func
-from sqlmodel import CheckConstraint, Column, Field, Relationship, SQLModel
+from sqlmodel import CheckConstraint, Field, Relationship, SQLModel
 
 
 class Table(SQLModel):
@@ -29,9 +28,8 @@ class Identifier(Table, table=True):
 
 class Mint(Table, table=True):
     name: str = Field(index=True, unique=True)
-    location: Any | None = Field(
-        default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
-    )
+    latitude: float | None = None
+    longitude: float | None = None
     nomisma_uri: str | None = Field(default=None, index=True)
     coins: List["Coin"] = Relationship(back_populates="mint")
 
@@ -66,17 +64,15 @@ class FindSpot(Table, table=True):
     name: str = Field(index=True)
     site_classification: str | None = None
     archaeological_structure: str | None = None
-    location: Any | None = Field(
-        default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
-    )
+    latitude: float | None = None
+    longitude: float | None = None
     finds: List["Find"] = Relationship(back_populates="find_spot")
 
 
 class LocalAdminUnit(Table, table=True):
     name: str = Field(index=True)
-    location: Any | None = Field(
-        default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
-    )
+    latitude: float | None = None
+    longitude: float | None = None
     finds: List["Find"] = Relationship(back_populates="local_admin_unit")
 
 

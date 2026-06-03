@@ -3,7 +3,6 @@ import re
 from datetime import date
 
 from dateutil import parser as dateparser
-from geoalchemy2 import WKTElement
 
 from .model import Date
 
@@ -136,13 +135,3 @@ def parse_string(value: str | None) -> str | None:
     return value.strip()
 
 
-def to_location(
-    longitude_field: str | None, latitude_field: str | None
-) -> WKTElement | None:
-    longitude = parse_float(longitude_field)
-    latitude = parse_float(latitude_field)
-
-    if longitude is None or latitude is None:
-        return None
-
-    return WKTElement(f"POINT({longitude} {latitude})", srid=4326)

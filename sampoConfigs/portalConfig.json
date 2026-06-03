@@ -73,7 +73,7 @@
             "perspectives": [
                 {
                     "id": "part1",
-                    "cardsPerRow": 3,
+                    "cardsPerRow": 2,
                     "perspectives": [
                         "coins",
                         "mints",

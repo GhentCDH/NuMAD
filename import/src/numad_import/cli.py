@@ -31,7 +31,7 @@ from .model import (
     StatedAuthority,
     Table, Find,
 )
-from .parse import parse_date, parse_float, parse_int, to_location, parse_string
+from .parse import parse_date, parse_float, parse_int, parse_string
 
 handler = RichHandler(
     rich_tracebacks=True,
@@ -146,10 +146,8 @@ def get_or_create_find(
             LocalAdminUnit,
             caches["local_admin_unit"],
             name=row.get("local admin-unit"),
-            location=to_location(
-                row.get("local_admin_unit_longitude"),
-                row.get("local_admin_unit_latitude"),
-            ),
+            latitude=parse_float(row.get("local_admin_unit_latitude")),
+            longitude=parse_float(row.get("local_admin_unit_longitude")),
         ),
         "find_spot": get_or_create(
             session,
@@ -158,9 +156,8 @@ def get_or_create_find(
             name=row.get("FindSpot_toponym"),
             site_classification=parse_string(row.get("site_classification")),
             archaeological_structure=parse_string(row.get("archaeological_structure")),
-            location=to_location(
-                row.get("FindSpot_longitude"), row.get("FindSpot_latitude")
-            ),
+            latitude=parse_float(row.get("FindSpot_latitude")),
+            longitude=parse_float(row.get("FindSpot_longitude")),
         )
     }
 
@@ -334,9 +331,8 @@ def main():
                         Mint,
                         caches["mint"],
                         name=clean_name(row.get("Mint")),
-                        location=to_location(
-                            row.get("Mint_longitude"), row.get("Mint_latitude")
-                        ),
+                        latitude=parse_float(row.get("Mint_latitude")),
+                        longitude=parse_float(row.get("Mint_longitude")),
                     ),
                     "object_classification": get_or_create(
                         session,
