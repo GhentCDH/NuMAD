@@ -24,6 +24,24 @@ union
     ?id nmo:hasEndDate ?yearEnd__id .
     bind(?yearEnd__id as ?yearEnd__prefLabel)
 }
+union
+{
+    ?coin nmo:hasAuthority ?id ;
+          nmd:hasState ?state__id .
+    ?state__id rdfs:label ?state__prefLabel .
+}
+union
+{
+    ?coin nmo:hasAuthority ?id ;
+          nmo:hasStatedAuthority ?statedAuthority__id .
+    ?statedAuthority__id rdfs:label ?statedAuthority__prefLabel .
+}
+union
+{
+    ?coin nmo:hasAuthority ?id ;
+          nmo:hasIssuer ?issuer__id .
+    ?issuer__id rdfs:label ?issuer__prefLabel .
+}
 `
 
 export const authorityPropertiesDetail = `
@@ -51,6 +69,24 @@ union
 {
     ?id nmo:hasEndDate ?yearEnd__id .
     bind(?yearEnd__id as ?yearEnd__prefLabel)
+}
+union
+{
+    ?coin nmo:hasAuthority ?id ;
+          nmd:hasState ?state__id .
+    ?state__id rdfs:label ?state__prefLabel .
+}
+union
+{
+    ?coin nmo:hasAuthority ?id ;
+          nmo:hasStatedAuthority ?statedAuthority__id .
+    ?statedAuthority__id rdfs:label ?statedAuthority__prefLabel .
+}
+union
+{
+    ?coin nmo:hasAuthority ?id ;
+          nmo:hasIssuer ?issuer__id .
+    ?issuer__id rdfs:label ?issuer__prefLabel .
 }
 union
 {

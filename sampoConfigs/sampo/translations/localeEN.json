@@ -114,9 +114,9 @@
         "coinsMigrations": {
             "legendTitle": "Arc colouring",
             "legendFrom": "Mint",
-            "legendTo": "Find municipality",
+            "legendTo": "Find (former) municipality",
             "from": "Mint:",
-            "to": "Find municipality:",
+            "to": "Find (former) municipality:",
             "count": "Coin count",
             "listHeadingSingleInstance": "Find:",
             "listHeadingMultipleInstances": "Finds:"
@@ -184,7 +184,7 @@
                     "description": "Find date"
                 },
                 "localAdminUnit": {
-                    "label": "municipality",
+                    "label": "(former) municipality",
                     "description": "Local administrative unit where the coin was found"
                 },
                 "find": {
@@ -292,7 +292,7 @@
                     "description": "Database identifier of the find"
                 },
                 "localAdminUnit": {
-                    "label": "municipality",
+                    "label": "(former) municipality",
                     "description": "Local administrative unit where the find was made"
                 },
                 "findSpotToponym": {
@@ -358,6 +358,18 @@
                 "nomismaUri": {
                     "label": "nomisma uri",
                     "description": "Link to the nomisma entity of this same ruler"
+                },
+                "state": {
+                    "label": "state",
+                    "description": "Preservation states of coins attributed to this authority"
+                },
+                "statedAuthority": {
+                    "label": "stated authority",
+                    "description": "Stated authorities on coins attributed to this authority"
+                },
+                "issuer": {
+                    "label": "issuer",
+                    "description": "Issuers on coins attributed to this authority"
                 },
                 "denomination": {
                     "label": "denominations",
@@ -499,8 +511,8 @@
         "localAdminUnits": {
             "label": "Municipalities",
             "instancePage": {
-                "label": "Municipality",
-                "description": "Municipality"
+                "label": "(former) municipality",
+                "description": "(former) municipality"
             },
             "properties": {
                 "uri": {

@@ -64,15 +64,6 @@
             "minWidth": 200
         },
         {
-            "id": "nomismaUri",
-            "valueType": "object",
-            "makeLink": true,
-            "externalLink": true,
-            "sortValues": true,
-            "numberedList": false,
-            "minWidth": 200
-        },
-        {
             "id": "yearStart",
             "valueType": "object",
             "makeLink": false,
@@ -89,6 +80,33 @@
             "sortValues": false,
             "numberedList": false,
             "minWidth": 100
+        },
+        {
+            "id": "state",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 120
+        },
+        {
+            "id": "statedAuthority",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
+        },
+        {
+            "id": "issuer",
+            "valueType": "object",
+            "makeLink": false,
+            "externalLink": false,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 150
         },
         {
             "id": "denomination",
@@ -111,6 +129,16 @@
             "onlyOnInstancePage": true
         },
         {
+            "id": "nomismaUri",
+            "valueType": "object",
+            "makeLink": true,
+            "externalLink": true,
+            "sortValues": true,
+            "numberedList": false,
+            "minWidth": 200,
+            "onlyOnInstancePage": true
+        },
+        {
             "id": "coin",
             "valueType": "object",
             "makeLink": true,
@@ -128,6 +156,48 @@
             "filterType": "textFilter",
             "sortByPredicate": "rdfs:label",
             "textQueryProperty": "rdfs:label"
+        },
+        "state": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "^nmo:hasAuthority/nmd:hasState/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "^nmo:hasAuthority/nmd:hasState/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "statedAuthority": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "^nmo:hasAuthority/nmo:hasStatedAuthority/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "^nmo:hasAuthority/nmo:hasStatedAuthority/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
+        },
+        "issuer": {
+            "containerClass": "ten",
+            "facetType": "list",
+            "filterType": "uriFilter",
+            "predicate": "^nmo:hasAuthority/nmo:hasIssuer/rdfs:label",
+            "pieChartButton": true,
+            "barChartButton": true,
+            "searchField": true,
+            "sortButton": true,
+            "sortBy": "instanceCount",
+            "sortByPredicate": "^nmo:hasAuthority/nmo:hasIssuer/rdfs:label",
+            "sortDirection": "desc",
+            "literal": true
         },
         "nomismaUri": {
             "sortByPredicate": "owl:sameAs"
