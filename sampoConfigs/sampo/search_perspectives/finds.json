@@ -43,6 +43,39 @@
                     }
                 }
             }
+        },
+        "findsPlaces": {
+            "tabID": 1,
+            "tabPath": "map",
+            "tabIcon": "AddLocation",
+            "component": "LeafletMap",
+            "showInstanceCountInClusters": false,
+            "showExternalLayers": true,
+            "customMapControl": true,
+            "sparqlQuery": "findPlaces",
+            "filterTarget": "id",
+            "facetClass": "finds",
+            "resultMapper": "mapPlaces",
+            "instanceConfig": {
+                "propertiesQueryBlock": "findProperties",
+                "createPopUpContent": "createPopUpContentDefault"
+            },
+            "customTilesLayer": {
+                "type": "pmtiles",
+                "inConfig": true,
+                "url": "maps/world.pmtiles",
+                "maxZoom": 14,
+                "minZoom": 8
+            }
+        }
+    },
+    "maps": {
+        "findsPlaces": {
+            "center": [
+                50.851301,
+                4.357218
+            ],
+            "zoom": 8
         }
     },
     "properties": [

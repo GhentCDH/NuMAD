@@ -7,18 +7,45 @@ export const findProperties = `
     bind(?id as ?findId__id)
     bind(concat("/finds/page/", str(?findId__prefLabel)) as ?uri__dataProviderUrl)
     bind(?uri__dataProviderUrl as ?findId__dataProviderUrl)
+    
+    bind(?uri__dataProviderUrl as ?prefLabel__dataProviderUrl)
 }
 union
 {
     ?id nmd:hasLocalAdminUnit ?localAdminUnit__id .
     ?localAdminUnit__id rdfs:label ?localAdminUnit__prefLabel .
     bind(concat("/localadminunits/page/", STRAFTER(str(?localAdminUnit__id), "localadminunit/")) as ?localAdminUnit__dataProviderUrl)
-}
-union
-{
-    ?id nmo:hasFindSpot ?findSpot__id .
-    ?findSpot__id nmd:hasFindSpotToponym ?findSpotToponym__id .
-    bind(?findSpotToponym__id as ?findSpotToponym__prefLabel)
+    
+    
+    optional {
+      ?id nmo:hasFindSpot ?findSpot__id .
+      
+      optional {
+        ?findSpot__id nmd:hasFindSpotToponym ?findSpotToponym__id .
+        bind(?findSpotToponym__id as ?findSpotToponym__prefLabel)
+      }
+      optional {
+        ?id nmo:hasStartDate ?yearStart__id .
+        bind(?yearStart__id as ?yearStart__prefLabel)
+      }
+      optional {
+        ?id nmo:hasEndDate ?yearEnd__id .
+        bind(?yearEnd__id as ?yearEnd__prefLabel)
+      }
+    }
+    bind (
+      concat (
+        ?localAdminUnit__prefLabel,
+        ", ",
+        coalesce(?findSpotToponym__prefLabel, "..."),
+        ", ",
+        coalesce(str(?yearStart_prefLabel), "..."),
+        " - ",
+        coalesce(str(?yearEnd_prefLabel), "...")
+      )
+      AS ?prefLabel__prefLabel
+    )
+    
 }
 union
 {
@@ -42,17 +69,21 @@ union
     ?id nmd:hasDepositionType ?depositionType__id .
     bind(?depositionType__id as ?depositionType__prefLabel)
 }
-union
-{
-    ?id nmo:hasStartDate ?yearStart__id .
-    bind(?yearStart__id as ?yearStart__prefLabel)
-}
-union
-{
-    ?id nmo:hasEndDate ?yearEnd__id .
-    bind(?yearEnd__id as ?yearEnd__prefLabel)
-}
 
+`
+
+export const findPlaces = `
+SELECT DISTINCT ?id ?lat ?long ?markerColor
+(1 as ?instanceCount)
+WHERE {
+    <FILTER>
+    ?id a nmo:Find ;
+        nmd:hasLocalAdminUnit ?lau .
+    ?lau schema:geo ?geo .
+    ?geo schema:latitude ?lat ;
+         schema:longitude ?long .
+    BIND("Red" AS ?markerColor)
+}
 `
 
 export const facetResultSetQueryOntop = `
