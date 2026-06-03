@@ -16,7 +16,7 @@ Maps the data in real time from the database to a sparql endpoint using
 the nomisma ontology for the most part.
 
 #### Diagram of classes used:
-![diagram.png](docs/diagram.png)
+![diagram](docs/diagram.png)
 
 
 The nomisma ontology is extremely loosely defined without any domains or ranges for any class.
