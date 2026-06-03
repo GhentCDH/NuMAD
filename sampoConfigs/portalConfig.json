@@ -6,7 +6,8 @@
         "searchPerspectives": [
             "coins",
             "authorities",
-            "mints"
+            "mints",
+            "finds"
         ],
         "onlyInstancePages": [
             "denominations",
@@ -76,7 +77,8 @@
                     "perspectives": [
                         "coins",
                         "mints",
-                        "authorities"
+                        "authorities",
+                        "finds"
                     ]
                 }
             ]

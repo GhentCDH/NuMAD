@@ -173,8 +173,8 @@ def get_or_create_find(
         hoard_number = hoard_number,
         chrr_link = chrr_link,
         site_information = parse_string(site_information),
-        find_year_start = parse_int(row.get("Find_year_StartDate")),
-        find_year_end = parse_int(row.get("Find_year_EndDate"))
+        find_year_start = parse_int(row.get("Find_year_StartDate")) or None,
+        find_year_end = parse_int(row.get("Find_year_EndDate")) or None
     )
 
     session.add(find)

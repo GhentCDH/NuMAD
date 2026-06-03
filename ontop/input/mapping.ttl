@@ -135,9 +135,12 @@
 :FIND
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT id, find_spot_id, local_admin_unit_id, discovery_type, deposition_type, find_year_start, find_year_end FROM find""" ] ;
+                                    """SELECT id, find_spot_id, local_admin_unit_id, discovery_type, deposition_type, find_year_start, find_year_end, CAST(id AS TEXT) AS find_label FROM find""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/find/{id}" ;
                             rr:class    nmo:Find ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "find_label" ;
+                                           rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
                             rr:objectMap [ rr:column   "find_year_start" ;
                                            rr:datatype xsd:int ] ] ;

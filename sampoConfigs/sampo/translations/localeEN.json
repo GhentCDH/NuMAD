@@ -269,6 +269,58 @@
                 }
             }
         },
+        "finds": {
+            "label": "finds",
+            "facetResultsType": "finds",
+            "shortDescription": "NuMAD find contexts",
+            "longDescription": "",
+            "instancePage": {
+                "label": "Find",
+                "description": "NuMAD find context"
+            },
+            "properties": {
+                "uri": {
+                    "label": "uri",
+                    "description": "identifier of the resource"
+                },
+                "findId": {
+                    "label": "ID",
+                    "description": "Database identifier of the find"
+                },
+                "localAdminUnit": {
+                    "label": "municipality",
+                    "description": "Local administrative unit where the find was made"
+                },
+                "findSpotToponym": {
+                    "label": "find spot toponym",
+                    "description": "Name of the find spot"
+                },
+                "siteClassification": {
+                    "label": "site classification",
+                    "description": "Classification of the archaeological site"
+                },
+                "archaeologicalStructure": {
+                    "label": "archaeological structure",
+                    "description": "Archaeological structure at the find spot"
+                },
+                "discoveryType": {
+                    "label": "discovery type",
+                    "description": "How the find was discovered"
+                },
+                "depositionType": {
+                    "label": "deposition type",
+                    "description": "How the find was deposited"
+                },
+                "yearStart": {
+                    "label": "find year (from)",
+                    "description": "Earliest possible year of the find"
+                },
+                "yearEnd": {
+                    "label": "find year (to)",
+                    "description": "Latest possible year of the find"
+                }
+            }
+        },
         "authorities": {
             "label": "authorities",
             "facetResultsType": "authorities",
