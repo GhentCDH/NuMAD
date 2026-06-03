@@ -110,7 +110,7 @@ nmd:hasArchaeologicalStructure
     a owl:DatatypeProperty ;
     rdfs:domain nmd:FindSpot ;
     rdfs:range xsd:string ;
-    rdfs:label "Has archeological structure"@en .
+    rdfs:label "Has archaeological structure"@en .
 
 nmd:hasObjectClassification
     a            owl:ObjectProperty ;

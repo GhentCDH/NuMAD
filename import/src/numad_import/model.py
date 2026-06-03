@@ -65,7 +65,7 @@ class Denomination(Table, table=True):
 class FindSpot(Table, table=True):
     name: str = Field(index=True)
     site_classification: str | None = None
-    archeological_structure: str | None = None
+    archaeological_structure: str | None = None
     location: Any | None = Field(
         default=None, sa_column=Column(Geography(geometry_type="POINT", srid=4326))
     )

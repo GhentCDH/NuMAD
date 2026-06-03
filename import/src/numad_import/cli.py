@@ -157,7 +157,7 @@ def get_or_create_find(
             caches["find_spot"],
             name=row.get("FindSpot_toponym"),
             site_classification=parse_string(row.get("site_classification")),
-            archeological_structure=parse_string(row.get("archeological_structure")),
+            archaeological_structure=parse_string(row.get("archaeological_structure")),
             location=to_location(
                 row.get("FindSpot_longitude"), row.get("FindSpot_latitude")
             ),

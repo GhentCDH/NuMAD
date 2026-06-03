@@ -165,7 +165,7 @@
 :FINDSPOT
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
-                                    """SELECT id, name, site_classification, archeological_structure FROM findspot""" ] ;
+                                    """SELECT id, name, site_classification, archaeological_structure FROM findspot""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/findspot/{id}" ;
                             rr:class    nmd:FindSpot ] ;
     rr:predicateObjectMap [ rr:predicate nmd:hasFindSpotToponym ;
@@ -178,7 +178,7 @@
                             rr:objectMap [ rr:column   "site_classification" ;
                                            rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate nmd:hasArchaeologicalStructure ;
-                            rr:objectMap [ rr:column   "archeological_structure" ;
+                            rr:objectMap [ rr:column   "archaeological_structure" ;
                                            rr:datatype xsd:string ] ] .
 
 ################
