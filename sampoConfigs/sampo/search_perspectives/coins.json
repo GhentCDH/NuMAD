@@ -592,6 +592,22 @@
             "sortDirection": "desc",
             "literal": true
         },
+        "localAdminUnitRadius": {
+            "containerClass": "ten",
+            "facetType": "text",
+            "filterType": "CustomComponent",
+            "componentName": "RadiusMapFacet",
+            "customFilterName": "localAdminUnitRadiusFilter",
+            "priority": 10,
+            "componentConfig": {
+                "initialLng": 4.357218,
+                "initialLat": 50.851301,
+                "initialZoom": 6,
+                "sliderMin": 1,
+                "sliderMax": 150,
+                "defaultRadiusKm": 50
+            }
+        },
         "identifier": {
             "containerClass": "ten",
             "facetType": "list",

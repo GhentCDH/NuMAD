@@ -68,7 +68,7 @@
         "heatmap": "Heatmap",
         "mintsheatmap": "Mints",
         "migrations": "Migrations",
-        "aoristic_chart": "aoristic chart"
+        "aoristic_chart": "Aoristic chart"
     },
     "table": {
         "rowsPerPage": "Rows per page",
@@ -81,15 +81,15 @@
         "pie": "Pie chart",
         "bar": "Bar chart",
         "resultClasses": {
-          "coinsByAoristicTime10": "10 year intervals",
-          "coinsByAoristicTime20": "20 year intervals",
-          "coinsByAoristicTime50": "50 year intervals",
-          "coinsByAoristicTime100": "100 year intervals",
-          "coinCountByRuler": "Coins per ruler",
-          "coinCountByRulerRelative": "Coins per ruler (relative)",
-          "coinCountByReecePeriod": "Coins per Reece period"
+            "coinsByAoristicTime10": "10 year intervals",
+            "coinsByAoristicTime20": "20 year intervals",
+            "coinsByAoristicTime50": "50 year intervals",
+            "coinsByAoristicTime100": "100 year intervals",
+            "coinCountByRuler": "Coins per ruler",
+            "coinCountByRulerRelative": "Coins per ruler (relative)",
+            "coinCountByReecePeriod": "Coins per Reece period"
         }
-      },
+    },
     "facets": {
         "dateFacet": {
             "invalidDate": "Invalid date.",
@@ -157,7 +157,7 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "nomismaUri": {
@@ -165,63 +165,63 @@
                     "description": "Other uri of this same entity."
                 },
                 "coinId": {
-                    "label": "id",
+                    "label": "ID",
                     "description": "id of the coin"
                 },
                 "yearStart": {
-                    "label": "t.p.q",
+                    "label": "T.p.q.",
                     "description": "Terminus post quem, or earliest possible year of minting."
                 },
                 "yearEnd": {
-                    "label": "t.a.q",
+                    "label": "T.a.q.",
                     "description": "Terminus ante quem, or latest possible year of minting."
                 },
                 "denomination": {
-                    "label": "denomination",
+                    "label": "Denomination",
                     "description": "Denomination"
                 },
                 "authority": {
-                    "label": "authority",
+                    "label": "Authority",
                     "description": "Authority"
                 },
                 "identifier": {
-                    "label": "identifier",
+                    "label": "Identifier",
                     "description": "Person who identified this find"
                 },
                 "mint": {
-                    "label": "mint",
+                    "label": "Mint",
                     "description": "Mint"
                 },
                 "material": {
-                    "label": "material",
+                    "label": "Material",
                     "description": "Material"
                 },
                 "findDate": {
-                    "label": "find date",
+                    "label": "Find date",
                     "description": "Find date"
                 },
                 "localAdminUnit": {
-                    "label": "(former) municipality",
+                    "label": "Municipality (former)",
                     "description": "Local administrative unit where the coin was found"
                 },
                 "find": {
-                    "label": "find",
+                    "label": "Find",
                     "description": "Find context this coin belongs to"
                 },
                 "findSpot": {
-                    "label": "find spot toponym",
+                    "label": "Find spot toponym",
                     "description": "find spot name"
                 },
                 "weight": {
-                    "label": "weight",
+                    "label": "Weight",
                     "description": "Weight in grams"
                 },
                 "diameter": {
-                    "label": "diameter",
+                    "label": "Diameter",
                     "description": "Diameter in millimeters"
                 },
                 "axis": {
-                    "label": "axis",
+                    "label": "Axis",
                     "description": "Axis"
                 },
                 "objectType": {
@@ -287,6 +287,11 @@
                 "reverseLegend": {
                     "label": "Reverse legend",
                     "description": "Legend text on the reverse"
+                },
+                "localAdminUnitRadius": {
+                    "label": "Municipality (former) radius",
+                    "description": "Filter coins by distance from a map point",
+                    "facetDescription": "Click the map to set a centre point, then adjust the radius slider"
                 }
             }
         },
@@ -301,7 +306,7 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "findId": {
@@ -309,40 +314,45 @@
                     "description": "Database identifier of the find"
                 },
                 "localAdminUnit": {
-                    "label": "(former) municipality",
+                    "label": "Municipality (former)",
                     "description": "Local administrative unit where the find was made"
                 },
                 "findSpotToponym": {
-                    "label": "find spot toponym",
+                    "label": "Find spot toponym",
                     "description": "Name of the find spot"
                 },
                 "siteClassification": {
-                    "label": "site classification",
+                    "label": "Site classification",
                     "description": "Classification of the archaeological site"
                 },
                 "archaeologicalStructure": {
-                    "label": "archaeological structure",
+                    "label": "Archaeological structure",
                     "description": "Archaeological structure at the find spot"
                 },
                 "discoveryType": {
-                    "label": "discovery type",
+                    "label": "Discovery type",
                     "description": "How the find was discovered"
                 },
                 "depositionType": {
-                    "label": "deposition type",
+                    "label": "Deposition type",
                     "description": "How the find was deposited"
                 },
                 "yearStart": {
-                    "label": "find year (from)",
+                    "label": "Find year (from)",
                     "description": "Earliest possible year of the find"
                 },
                 "yearEnd": {
-                    "label": "find year (to)",
+                    "label": "Find year (to)",
                     "description": "Latest possible year of the find"
                 },
                 "coin": {
-                    "label": "coins",
+                    "label": "Coins",
                     "description": "Coins found in this find context"
+                },
+                "localAdminUnitRadius": {
+                    "label": "Municipality (former) radius",
+                    "description": "Filter finds by distance from a map point",
+                    "facetDescription": "Click the map to set a centre point, then adjust the radius slider"
                 }
             }
         },
@@ -357,47 +367,47 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "name": {
-                    "label": "name",
+                    "label": "Name",
                     "description": ""
                 },
                 "yearStart": {
-                    "label": "rule start year",
+                    "label": "Rule start year",
                     "description": ""
                 },
                 "yearEnd": {
-                    "label": "rule end year",
+                    "label": "Rule end year",
                     "description": ""
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link to the nomisma entity of this same ruler"
                 },
                 "state": {
-                    "label": "state",
+                    "label": "State",
                     "description": "Preservation states of coins attributed to this authority"
                 },
                 "statedAuthority": {
-                    "label": "stated authority",
+                    "label": "Stated authority",
                     "description": "Stated authorities on coins attributed to this authority"
                 },
                 "issuer": {
-                    "label": "issuer",
+                    "label": "Issuer",
                     "description": "Issuers on coins attributed to this authority"
                 },
                 "denomination": {
-                    "label": "denominations",
+                    "label": "Denominations",
                     "description": ""
                 },
                 "material": {
-                    "label": "materials",
+                    "label": "Materials",
                     "description": ""
                 },
                 "coin": {
-                    "label": "coin finds",
+                    "label": "Coin finds",
                     "description": ""
                 }
             }
@@ -413,31 +423,31 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "prefLabel": {
-                    "label": "name",
+                    "label": "Name",
                     "description": ""
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link to the nomisma entity of this same mint"
                 },
                 "denomination": {
-                    "label": "denominations",
+                    "label": "Denominations",
                     "description": ""
                 },
                 "material": {
-                    "label": "materials",
+                    "label": "Materials",
                     "description": ""
                 },
                 "authority": {
-                    "label": "authorities",
+                    "label": "Authorities",
                     "description": ""
                 },
                 "coin": {
-                    "label": "coin finds",
+                    "label": "Coin finds",
                     "description": ""
                 }
             }
@@ -450,23 +460,23 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link to the nomisma entity of this same denomination"
                 },
                 "name": {
-                    "label": "name",
+                    "label": "Name",
                     "description": ""
                 },
                 "authority": {
-                    "label": "authorities",
+                    "label": "Authorities",
                     "description": ""
                 },
                 "material": {
-                    "label": "materials",
+                    "label": "Materials",
                     "description": ""
                 }
             }
@@ -479,15 +489,15 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "name": {
-                    "label": "name",
+                    "label": "Name",
                     "description": ""
                 },
                 "coin": {
-                    "label": "coin finds",
+                    "label": "Coin finds",
                     "description": ""
                 }
             }
@@ -500,27 +510,27 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link to the nomisma entity of this same material"
                 },
                 "name": {
-                    "label": "name",
+                    "label": "Name",
                     "description": ""
                 },
                 "label": {
-                    "label": "label",
+                    "label": "Label",
                     "description": ""
                 },
                 "authority": {
-                    "label": "authorities",
+                    "label": "Authorities",
                     "description": ""
                 },
                 "mint": {
-                    "label": "mints",
+                    "label": "Mints",
                     "description": ""
                 }
             }
@@ -533,19 +543,19 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier of the resource"
                 },
                 "name": {
-                    "label": "name",
+                    "label": "Name",
                     "description": ""
                 },
                 "authority": {
-                    "label": "authorities",
+                    "label": "Authorities",
                     "description": ""
                 },
                 "material": {
-                    "label": "materials",
+                    "label": "Materials",
                     "description": ""
                 }
             }

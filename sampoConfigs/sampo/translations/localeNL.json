@@ -67,7 +67,8 @@
         "map": "Kaart",
         "heatmap": "Heatmap",
         "mintsheatmap": "Muntsites",
-        "migrations": "Migraties"
+        "migrations": "Migraties",
+        "aoristic_chart": "Aoristisch diagram"
     },
     "table": {
         "rowsPerPage": "Rijen per pagina",
@@ -140,7 +141,7 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "nomismaUri": {
@@ -148,56 +149,133 @@
                     "description": "Andere uri van dezelfde entiteit."
                 },
                 "coinId": {
-                    "label": "id",
-                    "description": "id van de munt"
+                    "label": "ID",
+                    "description": "ID van de munt"
                 },
                 "yearStart": {
-                    "label": "t.p.q.",
+                    "label": "T.p.q.",
                     "description": "Terminus post quem, of vroegst mogelijke muntjaar."
                 },
                 "yearEnd": {
-                    "label": "t.a.q.",
+                    "label": "T.a.q.",
                     "description": "Terminus ante quem, of laatst mogelijke muntjaar."
                 },
                 "denomination": {
-                    "label": "denominatie",
+                    "label": "Denominatie",
                     "description": "Denominatie"
                 },
                 "authority": {
-                    "label": "overheid",
+                    "label": "Overheid",
                     "description": "Overheid"
                 },
                 "identifier": {
-                    "label": "identifier",
+                    "label": "Identifier",
                     "description": "Persoon die deze vondst geïdentificeerd heeft"
                 },
                 "mint": {
-                    "label": "muntsite",
+                    "label": "Muntsite",
                     "description": "Muntsite"
                 },
                 "material": {
-                    "label": "materiaal",
+                    "label": "Materiaal",
                     "description": "Materiaal"
                 },
                 "findDate": {
-                    "label": "vinddatum",
+                    "label": "Vinddatum",
                     "description": "Vinddatum"
                 },
                 "localAdminUnit": {
-                    "label": "gemeente",
+                    "label": "Gemeente (voormalige)",
                     "description": "Gemeente waar de munt gevonden werd"
                 },
                 "weight": {
-                    "label": "gewicht",
+                    "label": "Gewicht",
                     "description": "Gewicht in gram"
                 },
                 "diameter": {
-                    "label": "diameter",
+                    "label": "Diameter",
                     "description": "Diameter in millimeter"
                 },
                 "axis": {
-                    "label": "as",
+                    "label": "As",
                     "description": "As"
+                },
+                "find": {
+                    "label": "Vondst",
+                    "description": "Vondstcontext"
+                },
+                "findSpot": {
+                    "label": "Toponiemen vindplaats",
+                    "description": "Naam van de vindplaats"
+                },
+                "objectType": {
+                    "label": "Objecttype",
+                    "description": "Type object"
+                },
+                "objectClassification": {
+                    "label": "Objectclassificatie",
+                    "description": "Classificatie van het object"
+                },
+                "objectSubclass": {
+                    "label": "Objectsubklasse",
+                    "description": "Subklasse van het object"
+                },
+                "state": {
+                    "label": "Toestand",
+                    "description": "Toestand van de munt"
+                },
+                "authenticity": {
+                    "label": "Echtheid",
+                    "description": "Echtheid van de munt"
+                },
+                "coinType": {
+                    "label": "Type",
+                    "description": "Munttype"
+                },
+                "statedAuthority": {
+                    "label": "Opgegeven overheid",
+                    "description": "Opgegeven uitgevende overheid"
+                },
+                "issuer": {
+                    "label": "Uitvaardigende instantie",
+                    "description": "Instantie die de munt uitvaardigde"
+                },
+                "reecePeriods": {
+                    "label": "Reece-periode",
+                    "description": "Periode volgens de aangepaste Reece-classificatie"
+                },
+                "referenceWork": {
+                    "label": "Referentiewerk",
+                    "description": "Bibliografische referentie voor dit munttype"
+                },
+                "denominationDetail": {
+                    "label": "Denominatiedetail",
+                    "description": "Gedetailleerde denominatiegegevens"
+                },
+                "countermark": {
+                    "label": "Contramerk",
+                    "description": "Contramerk op de munt"
+                },
+                "obverseDesign": {
+                    "label": "Voorzijde – afbeelding",
+                    "description": "Beschrijving van de voorzijde"
+                },
+                "obverseLegend": {
+                    "label": "Voorzijde – legende",
+                    "description": "Legendetekst op de voorzijde"
+                },
+                "reverseDesign": {
+                    "label": "Keerzijde – afbeelding",
+                    "description": "Beschrijving van de keerzijde"
+                },
+                "reverseLegend": {
+                    "label": "Keerzijde – legende",
+                    "description": "Legendetekst op de keerzijde"
+                },
+                "localAdminUnitRadius": {
+                    "label": "Gemeente (voormalige) straal",
+                    "description": "Filter munten op afstand van een punt op de kaart",
+                    "facetDescription": "Klik op de kaart om een middelpunt in te stellen en gebruik de schuifregelaar om de straal aan te passen"
                 }
             }
         },
@@ -212,36 +290,48 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "name": {
-                    "label": "naam",
+                    "label": "Naam",
                     "description": ""
                 },
                 "yearStart": {
-                    "label": "start regeringsjaar",
+                    "label": "Start regeringsjaar",
                     "description": ""
                 },
                 "yearEnd": {
-                    "label": "einde regeringsjaar",
+                    "label": "Einde regeringsjaar",
                     "description": ""
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link naar de nomisma-entiteit van dezezelfde heerser"
                 },
                 "denomination": {
-                    "label": "denominaties",
+                    "label": "Denominaties",
                     "description": ""
                 },
                 "material": {
-                    "label": "materialen",
+                    "label": "Materialen",
                     "description": ""
                 },
                 "coin": {
-                    "label": "muntvondsten",
+                    "label": "Muntvondsten",
                     "description": ""
+                },
+                "state": {
+                    "label": "Toestand",
+                    "description": "Toestand"
+                },
+                "statedAuthority": {
+                    "label": "Opgegeven overheid",
+                    "description": "Opgegeven uitgevende overheid"
+                },
+                "issuer": {
+                    "label": "Uitvaardigende instantie",
+                    "description": "Instantie die de munt uitvaardigde"
                 }
             }
         },
@@ -256,31 +346,31 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "prefLabel": {
-                    "label": "naam",
+                    "label": "Naam",
                     "description": ""
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link naar de nomisma-entiteit van dezezelfde muntsite"
                 },
                 "denomination": {
-                    "label": "denominaties",
+                    "label": "Denominaties",
                     "description": ""
                 },
                 "material": {
-                    "label": "materialen",
+                    "label": "Materialen",
                     "description": ""
                 },
                 "authority": {
-                    "label": "overheden",
+                    "label": "Overheden",
                     "description": ""
                 },
                 "coin": {
-                    "label": "muntvondsten",
+                    "label": "Muntvondsten",
                     "description": ""
                 }
             }
@@ -293,23 +383,23 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link naar de nomisma-entiteit van dezezelfde denominatie"
                 },
                 "name": {
-                    "label": "naam",
+                    "label": "Naam",
                     "description": ""
                 },
                 "authority": {
-                    "label": "overheden",
+                    "label": "Overheden",
                     "description": ""
                 },
                 "material": {
-                    "label": "materialen",
+                    "label": "Materialen",
                     "description": ""
                 }
             }
@@ -322,15 +412,15 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "name": {
-                    "label": "naam",
+                    "label": "Naam",
                     "description": ""
                 },
                 "coin": {
-                    "label": "muntvondsten",
+                    "label": "Muntvondsten",
                     "description": ""
                 }
             }
@@ -343,27 +433,27 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "nomismaUri": {
-                    "label": "nomisma uri",
+                    "label": "Nomisma URI",
                     "description": "Link naar de nomisma-entiteit van ditzelfde materiaal"
                 },
                 "name": {
-                    "label": "naam",
+                    "label": "Naam",
                     "description": ""
                 },
                 "label": {
-                    "label": "label",
+                    "label": "Label",
                     "description": ""
                 },
                 "authority": {
-                    "label": "overheden",
+                    "label": "Overheden",
                     "description": ""
                 },
                 "mint": {
-                    "label": "muntsites",
+                    "label": "Muntsites",
                     "description": ""
                 }
             }
@@ -376,25 +466,102 @@
             },
             "properties": {
                 "uri": {
-                    "label": "uri",
+                    "label": "URI",
                     "description": "identifier van de bron"
                 },
                 "name": {
-                    "label": "naam",
+                    "label": "Naam",
                     "description": ""
                 },
                 "authority": {
-                    "label": "overheden",
+                    "label": "Overheden",
                     "description": ""
                 },
                 "material": {
-                    "label": "materialen",
+                    "label": "Materialen",
                     "description": ""
+                }
+            }
+        },
+        "finds": {
+            "label": "Vondsten",
+            "facetResultsType": "vondsten",
+            "shortDescription": "NuMAD vondstcontexten",
+            "longDescription": "",
+            "instancePage": {
+                "label": "Vondst",
+                "description": "NuMAD vondstcontext"
+            },
+            "properties": {
+                "uri": {
+                    "label": "URI",
+                    "description": "Identifier van de bron"
+                },
+                "findId": {
+                    "label": "ID",
+                    "description": "Database-identifier van de vondst"
+                },
+                "localAdminUnit": {
+                    "label": "Gemeente (voormalige)",
+                    "description": "Gemeente waar de vondst gemaakt werd"
+                },
+                "findSpotToponym": {
+                    "label": "Toponiemen vindplaats",
+                    "description": "Naam van de vindplaats"
+                },
+                "siteClassification": {
+                    "label": "Siteclassificatie",
+                    "description": "Classificatie van de archeologische site"
+                },
+                "archaeologicalStructure": {
+                    "label": "Archeologische structuur",
+                    "description": "Archeologische structuur op de vindplaats"
+                },
+                "discoveryType": {
+                    "label": "Ontdekkingstype",
+                    "description": "Hoe de vondst ontdekt werd"
+                },
+                "depositionType": {
+                    "label": "Depositietype",
+                    "description": "Hoe de vondst gedeponeerd werd"
+                },
+                "yearStart": {
+                    "label": "Vondstjaar (van)",
+                    "description": "Vroegst mogelijke jaar van de vondst"
+                },
+                "yearEnd": {
+                    "label": "Vondstjaar (tot)",
+                    "description": "Laatst mogelijke jaar van de vondst"
+                },
+                "coin": {
+                    "label": "Muntvondsten",
+                    "description": "Munten gevonden in deze vondstcontext"
+                },
+                "localAdminUnitRadius": {
+                    "label": "Gemeente (voormalige) straal",
+                    "description": "Filter vondsten op afstand van een punt op de kaart",
+                    "facetDescription": "Klik op de kaart om een middelpunt in te stellen en gebruik de schuifregelaar om de straal aan te passen"
                 }
             }
         }
     },
     "aboutThePortalPartOne": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> Over de portaalsite </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Morbi nunc ex, ultrices vitae molestie eu, fringilla quis dolor. Vivamus in enim nibh. Nunc rutrum molestie ex eget dictum. Mauris lectus leo, ultrices in sodales ac, fermentum ut massa. In porta, mauris sed facilisis lacinia, eros magna sollicitudin tortor, quis venenatis nisl ipsum lacinia justo. Duis pretium bibendum consequat. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst. Curabitur consectetur aliquet est, ac dapibus ante semper vitae. Sed consequat at est ac lobortis. In vitae metus in ligula pretium vehicula. Aliquam maximus ac massa euismod eleifend. Vestibulum vehicula mattis libero at tempus. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Gegevens </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p>",
     "aboutThePortalPartTwo": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Gegevenshergebruik </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Meer informatie </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p>",
-    "instructions": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> Instructies </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> De zoekfunctionaliteit van dit semantische portaal is gebaseerd op het <a href=\"https://doi.org/10.2200/S00190ED1V01Y200904ICR005\" target='_blank' rel='noopener noreferrer'>faceted search</a>-principe. Standaard toont elk perspectief alle resultaten van de bijbehorende klasse. Deze standaardresultatenset kan verfijnd worden met de filters aan de linkerkant. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Eén filter gebruiken </h2> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Waarden selecteren binnen een filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Alle mogelijke waarden voor een filter worden weergegeven als lijst of als hiërarchische boomstructuur (indien beschikbaar). Het aantal resultaten staat tussen haakjes bij elke waarde. Zodra u een waarde selecteert, worden de resultaten automatisch bijgewerkt. Om te vermijden dat u waarden kiest die geen resultaten opleveren, worden ook de mogelijke waarden van alle andere filters tegelijk bijgewerkt. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Binnen één filter kunnen meerdere waarden geselecteerd worden. Meerdere waarden selecteren levert resultaten op die minstens één van de geselecteerde waarden bevatten. Bijvoorbeeld: als u zowel <i>Sint-Augustinus</i> als <i>Sint-Jerome</i> als auteur selecteert, krijgt u resultaten die ofwel <i>Sint-Augustinus</i> <strong>OF</strong> <i>Sint-Jerome</i> als auteur hebben. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Geselecteerde waarden van een filter verschijnen in het gedeelte 'Actieve filters' bovenaan de filterlijst. Om een filter te deselecteren, klikt u op het kruisje ernaast in het gedeelte Actieve filters. U kunt een filterwaarde ook deselecteren door het vinkje in de filterlijst uit te vinken. Het gedeelte Actieve filters verschijnt enkel als er momenteel filterwaarden geselecteerd zijn. </p> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Zoeken binnen een filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Zoek binnen een filter via het zoekveld bovenaan elk filter. Alle mogelijke waarden van het filter blijven altijd zichtbaar. De waarden die overeenkomen met de zoekterm worden aangeduid met een paarse onderlijning. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Stappen om binnen filters te zoeken: </p> <ol class=\"MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom\"> <li> Typ de zoekterm in het zoekveld. Als er overeenkomsten zijn, verschijnt rechts van het zoekveld een getal dat het aantal overeenkomende filterwaarden aangeeft. </li> <li> Klik op de pijltjes rechts van het zoekveld om door de resultaten te bladeren. Telkens u klikt, verschijnt een andere filterwaarde bovenaan de lijst. Overeenkomende waarden zijn paars onderlijnd. </li> <li> Klik op het vinkje naast een filterwaarde om ze te activeren. De resultaten (en ook de andere filters) worden automatisch bijgewerkt. </li> </ol> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Meerdere filters tegelijk gebruiken </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> De kracht van faceted search komt tot uiting wanneer meerdere filters tegelijk worden toegepast. Net zoals op veel webshops wordt er altijd een logisch EN (AND) gebruikt tussen de verschillende filters. Bijvoorbeeld: als u <i>Sint-Augustinus</i> en <i>Sint-Jerome</i> als auteur selecteert én <i>Sir Thomas Phillipps</i> en <i>Thomas Thorpe</i> als eigenaar, dan worden de resultaten als volgt verfijnd: </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Auteur: <i>Sint-Augustinus</i> <strong>OF</strong> Auteur: <i>Sint-Jerome</i>) </p> <p class=\"MuiTypography-root MuiTypography-body1\"> <strong>EN</strong> </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Eigenaar: <i>Sir Thomas Phillipps</i> <strong>OF</strong> Eigenaar: <i>Thomas Thorpe</i>) </p>"
+    "instructions": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> Instructies </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> De zoekfunctionaliteit van dit semantische portaal is gebaseerd op het <a href=\"https://doi.org/10.2200/S00190ED1V01Y200904ICR005\" target='_blank' rel='noopener noreferrer'>faceted search</a>-principe. Standaard toont elk perspectief alle resultaten van de bijbehorende klasse. Deze standaardresultatenset kan verfijnd worden met de filters aan de linkerkant. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Eén filter gebruiken </h2> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Waarden selecteren binnen een filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Alle mogelijke waarden voor een filter worden weergegeven als lijst of als hiërarchische boomstructuur (indien beschikbaar). Het aantal resultaten staat tussen haakjes bij elke waarde. Zodra u een waarde selecteert, worden de resultaten automatisch bijgewerkt. Om te vermijden dat u waarden kiest die geen resultaten opleveren, worden ook de mogelijke waarden van alle andere filters tegelijk bijgewerkt. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Binnen één filter kunnen meerdere waarden geselecteerd worden. Meerdere waarden selecteren levert resultaten op die minstens één van de geselecteerde waarden bevatten. Bijvoorbeeld: als u zowel <i>Sint-Augustinus</i> als <i>Sint-Jerome</i> als auteur selecteert, krijgt u resultaten die ofwel <i>Sint-Augustinus</i> <strong>OF</strong> <i>Sint-Jerome</i> als auteur hebben. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Geselecteerde waarden van een filter verschijnen in het gedeelte 'Actieve filters' bovenaan de filterlijst. Om een filter te deselecteren, klikt u op het kruisje ernaast in het gedeelte Actieve filters. U kunt een filterwaarde ook deselecteren door het vinkje in de filterlijst uit te vinken. Het gedeelte Actieve filters verschijnt enkel als er momenteel filterwaarden geselecteerd zijn. </p> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Zoeken binnen een filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Zoek binnen een filter via het zoekveld bovenaan elk filter. Alle mogelijke waarden van het filter blijven altijd zichtbaar. De waarden die overeenkomen met de zoekterm worden aangeduid met een paarse onderlijning. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Stappen om binnen filters te zoeken: </p> <ol class=\"MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom\"> <li> Typ de zoekterm in het zoekveld. Als er overeenkomsten zijn, verschijnt rechts van het zoekveld een getal dat het aantal overeenkomende filterwaarden aangeeft. </li> <li> Klik op de pijltjes rechts van het zoekveld om door de resultaten te bladeren. Telkens u klikt, verschijnt een andere filterwaarde bovenaan de lijst. Overeenkomende waarden zijn paars onderlijnd. </li> <li> Klik op het vinkje naast een filterwaarde om ze te activeren. De resultaten (en ook de andere filters) worden automatisch bijgewerkt. </li> </ol> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Meerdere filters tegelijk gebruiken </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> De kracht van faceted search komt tot uiting wanneer meerdere filters tegelijk worden toegepast. Net zoals op veel webshops wordt er altijd een logisch EN (AND) gebruikt tussen de verschillende filters. Bijvoorbeeld: als u <i>Sint-Augustinus</i> en <i>Sint-Jerome</i> als auteur selecteert én <i>Sir Thomas Phillipps</i> en <i>Thomas Thorpe</i> als eigenaar, dan worden de resultaten als volgt verfijnd: </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Auteur: <i>Sint-Augustinus</i> <strong>OF</strong> Auteur: <i>Sint-Jerome</i>) </p> <p class=\"MuiTypography-root MuiTypography-body1\"> <strong>EN</strong> </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Eigenaar: <i>Sir Thomas Phillipps</i> <strong>OF</strong> Eigenaar: <i>Thomas Thorpe</i>) </p>",
+    "apexCharts": {
+        "grouping": "Sorteren op:",
+        "property": "Eigenschap:",
+        "chartType": "Diagramtype:",
+        "pie": "Taartdiagram",
+        "bar": "Staafdiagram",
+        "resultClasses": {
+            "coinsByAoristicTime10": "Intervallen van 10 jaar",
+            "coinsByAoristicTime20": "Intervallen van 20 jaar",
+            "coinsByAoristicTime50": "Intervallen van 50 jaar",
+            "coinsByAoristicTime100": "Intervallen van 100 jaar",
+            "coinCountByRuler": "Munten per heerser",
+            "coinCountByRulerRelative": "Munten per heerser (relatief)",
+            "coinCountByReecePeriod": "Munten per Reece-periode"
+        }
+    }
 }

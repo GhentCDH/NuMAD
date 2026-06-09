@@ -8,4 +8,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 prefix nmd:  <http://numad.ugent.be/ontology#>
 prefix nmo: <http://nomisma.org/ontology#>
+PREFIX geo: <http://www.opengis.net/ont/geosparql#>
+PREFIX geof: <http://www.opengis.net/def/function/geosparql/>
+PREFIX uom: <http://www.opengis.net/def/uom/OGC/1.0/>
 `
