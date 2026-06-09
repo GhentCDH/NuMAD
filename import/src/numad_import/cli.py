@@ -7,7 +7,7 @@ from sqlmodel import Session, SQLModel, select
 from .data import get_data
 from .db import create_updated_at_trigger, engine
 from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material, \
-    fix_online_reference, clean_name
+    fix_online_reference, clean_name, clean_ruler_name
 from .model import (
     Authenticity,
     Coin,
@@ -356,7 +356,7 @@ def main():
                         session,
                         Ruler,
                         caches["ruler"],
-                        name=clean_name(row.get("Ruler")),
+                        name=clean_ruler_name(clean_name(row.get("Ruler"))),
                         start_date=parse_int(row.get("Ruler_StartDate")),
                         end_date=parse_int(row.get("Ruler_EndDate")),
                     ),

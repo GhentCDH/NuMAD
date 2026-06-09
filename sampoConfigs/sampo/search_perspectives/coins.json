@@ -136,6 +136,118 @@
             "sparqlQuery": "migrationsDialog",
             "filterTarget": "id",
             "resultMapper": "makeObjectList"
+        },
+        "aoristicCoins": {
+            "tabID": 5,
+            "component": "ApexCharts",
+            "doNotRenderOnMount": true,
+            "tabPath": "aoristic_chart",
+            "tabIcon": "ShowChart",
+            "facetClass": "coins",
+            "dropdownForResultClasses": true,
+            "defaultResultClass": "coinsByAoristicTime10",
+            "resultClasses": {
+                "coinsByAoristicTime10": {
+                    "sparqlQuery": "coinsByTimeSpansQuery10",
+                    "filterTarget": "id",
+                    "resultMapper": "mapAoristicChart",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartAoristictData"
+                        }
+                    ]
+                },
+                "coinsByAoristicTime20": {
+                    "sparqlQuery": "coinsByTimeSpansQuery20",
+                    "filterTarget": "id",
+                    "resultMapper": "mapAoristicChart",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartAoristictData"
+                        }
+                    ]
+                },
+                "coinsByAoristicTime50": {
+                    "sparqlQuery": "coinsByTimeSpansQuery50",
+                    "filterTarget": "id",
+                    "resultMapper": "mapAoristicChart",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartAoristictData"
+                        }
+                    ]
+                },
+                "coinsByAoristicTime100": {
+                    "sparqlQuery": "coinsByTimeSpansQuery100",
+                    "filterTarget": "id",
+                    "resultMapper": "mapAoristicChart",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartAoristictData"
+                        }
+                    ]
+                },
+                "coinCountByRuler": {
+                    "sparqlQuery": "coinCountByRulerQuery",
+                    "filterTarget": "coin",
+                    "resultMapper": "mapPieChart",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "seriesTitle": "Number of coins",
+                    "xaxisTitle": "Ruler",
+                    "yaxisTitle": "Number of coins",
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartData"
+                        }
+                    ]
+                },
+                "coinCountByRulerRelative": {
+                    "sparqlQuery": "coinCountByRulerRelativeQuery",
+                    "filterTarget": "coin",
+                    "resultMapper": "mapPieChartFloat",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "seriesTitle": "Coins per year of reign",
+                    "xaxisTitle": "Ruler",
+                    "yaxisTitle": "Coins per year of reign",
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartData"
+                        }
+                    ]
+                },
+                "coinCountByReecePeriod": {
+                    "sparqlQuery": "coinCountByReecePeriodQuery",
+                    "filterTarget": "coin",
+                    "resultMapper": "mapPieChart",
+                    "sliceVisibilityThreshold": 0.01,
+                    "dropdownForChartTypes": false,
+                    "seriesTitle": "Number of coins",
+                    "xaxisTitle": "Reece period",
+                    "yaxisTitle": "Number of coins",
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartData"
+                        }
+                    ]
+                }
+            }
         }
     },
     "maps": {

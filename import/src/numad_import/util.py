@@ -91,6 +91,10 @@ MATERIALS = {
 def clean_name(name:str) -> str :
     return re.sub(r"[<>!;?]", "", name.replace("-", " ").replace(",", " "))
 
+def clean_ruler_name(name:str) -> str | None :
+    if name == "n/a" or name == "unidentified" or name == "type_to_rulers" or name == "<type_to_rulers>":
+        return None
+    return name
 
 def get_nomisma_ruler(name: str, start_date: int, end_date: int) -> str | None:
     if name is None or start_date is None or end_date is None:

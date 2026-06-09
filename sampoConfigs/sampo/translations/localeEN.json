@@ -67,12 +67,29 @@
         "map": "Map",
         "heatmap": "Heatmap",
         "mintsheatmap": "Mints",
-        "migrations": "Migrations"
+        "migrations": "Migrations",
+        "aoristic_chart": "aoristic chart"
     },
     "table": {
         "rowsPerPage": "Rows per page",
         "of": "of"
     },
+    "apexCharts": {
+        "grouping": "Sort by:",
+        "property": "Property:",
+        "chartType": "Chart type:",
+        "pie": "Pie chart",
+        "bar": "Bar chart",
+        "resultClasses": {
+          "coinsByAoristicTime10": "10 year intervals",
+          "coinsByAoristicTime20": "20 year intervals",
+          "coinsByAoristicTime50": "50 year intervals",
+          "coinsByAoristicTime100": "100 year intervals",
+          "coinCountByRuler": "Coins per ruler",
+          "coinCountByRulerRelative": "Coins per ruler (relative)",
+          "coinCountByReecePeriod": "Coins per Reece period"
+        }
+      },
     "facets": {
         "dateFacet": {
             "invalidDate": "Invalid date.",

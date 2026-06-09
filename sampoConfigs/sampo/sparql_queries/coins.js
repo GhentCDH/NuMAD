@@ -308,3 +308,107 @@ export const facetValuesQueryOntop = `
   }
   <ORDER_BY>
 `
+
+
+
+export const coinsByTimeSpansQuery10 = `
+  SELECT DISTINCT ?id ?earliestYear ?latestYear ?interval
+  WHERE {
+    <FILTER>
+    {
+      ?id a nmo:Coin .
+      ?id nmo:hasStartDate ?earliestYear .
+      ?id nmo:hasEndDate ?latestYear .
+      BIND(10 AS ?interval)
+    }
+  }
+  ORDER BY ?earliestYear
+`
+
+export const coinsByTimeSpansQuery20 = `
+  SELECT DISTINCT ?id ?earliestYear ?latestYear ?interval
+  WHERE {
+    <FILTER>
+    {
+      ?id a nmo:Coin .
+      ?id nmo:hasStartDate ?earliestYear .
+      ?id nmo:hasEndDate ?latestYear .
+      BIND(20 AS ?interval)
+    }
+  }
+  ORDER BY ?earliestYear
+`
+
+export const coinsByTimeSpansQuery50 = `
+  SELECT DISTINCT ?id ?earliestYear ?latestYear ?interval
+  WHERE {
+    <FILTER>
+    {
+      ?id a nmo:Coin .
+      ?id nmo:hasStartDate ?earliestYear .
+      ?id nmo:hasEndDate ?latestYear .
+      BIND(50 AS ?interval)
+    }
+  }
+  ORDER BY ?earliestYear
+`
+
+export const coinsByTimeSpansQuery100 = `
+  SELECT DISTINCT ?id ?earliestYear ?latestYear ?interval
+  WHERE {
+    <FILTER>
+    {
+      ?id a nmo:Coin .
+      ?id nmo:hasStartDate ?earliestYear .
+      ?id nmo:hasEndDate ?latestYear .
+      BIND(100 AS ?interval)
+    }
+  }
+  ORDER BY ?earliestYear
+`
+
+export const coinCountByRulerQuery = `
+  SELECT ?category ?prefLabel (COUNT(?coin) AS ?instanceCount) ?earliestYear
+  WHERE {
+    <FILTER>
+    {
+      ?coin a nmo:Coin .
+      ?coin nmo:hasAuthority ?category .
+      ?category rdfs:label ?prefLabel .
+      ?category nmo:hasStartDate ?earliestYear .
+    }
+  }
+  GROUP BY ?category ?prefLabel ?earliestYear
+  ORDER BY ?earliestYear
+`
+
+export const coinCountByRulerRelativeQuery = `
+  SELECT ?category ?prefLabel (COUNT(?coin) / (?latestYear - ?earliestYear) AS ?instanceCount) ?earliestYear
+  WHERE {
+    <FILTER>
+    {
+      ?coin a nmo:Coin .
+      ?coin nmo:hasAuthority ?category .
+      ?category rdfs:label ?prefLabel .
+      ?category nmo:hasStartDate ?earliestYear .
+      ?category nmo:hasEndDate ?latestYear .
+      FILTER(?latestYear != ?earliestYear)
+    }
+  }
+  GROUP BY ?category ?prefLabel ?earliestYear ?latestYear
+  ORDER BY ?earliestYear
+`
+
+export const coinCountByReecePeriodQuery = `
+  SELECT ?category ?prefLabel (COUNT(?coin) AS ?instanceCount)
+  WHERE {
+    <FILTER>
+    {
+      ?coin a nmo:Coin .
+      ?coin nmd:hasReecePeriods ?category .
+      BIND(?category AS ?prefLabel)
+    }
+  }
+  GROUP BY ?category ?prefLabel
+  ORDER BY DESC(?instanceCount)
+`
