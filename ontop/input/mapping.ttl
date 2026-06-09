@@ -13,6 +13,7 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 @prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
 @prefix nmo:    <http://nomisma.org/ontology#> .
+@prefix geo:  <http://www.opengis.net/ont/geosparql#> .
 
 ##############
 # COINS
@@ -364,6 +365,19 @@
                             rr:objectMap [ rr:column   "long" ;
                                            rr:datatype xsd:decimal ] ] .
 
+:LOCAL-ADMIN-UNIT-WKT
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT
+            id,
+            ST_SetSRID(ST_MakePoint(longitude, latitude), 4326) AS geom
+        FROM localadminunit
+        WHERE latitude IS NOT NULL AND longitude IS NOT NULL
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/localadminunit/{id}/geo" ] ;
+    rr:predicateObjectMap [ rr:predicate geo:asWKT ;
+                            rr:objectMap [ rr:column   "geom" ;
+                                           rr:datatype geo:wktLiteral ] ] .
 
 ####################
 # OBJECT TYPES
