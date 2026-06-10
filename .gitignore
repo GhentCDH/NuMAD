@@ -8,4 +8,3 @@ __pycache__
 import/erd.mermaid
 
 .DS_Store
-/ontop/jdbc/postgresql-42.7.8.jar

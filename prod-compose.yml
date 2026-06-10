@@ -45,8 +45,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    volumes:
-      - ./ontop/jdbc:/opt/ontop/jdbc
     environment:
       DB_URL: ${ONTOP_DB_URL}
       DB_USER: ${ONTOP_DB_USER}
