@@ -36,14 +36,16 @@ services:
 
   ontop:
     container_name: numad-ontop
-    image: ontop/ontop:latest
+    build:
+      context: ontop/
+      dockerfile: Dockerfile
+    image: numad-ontop
     env_file:
       - .env
     depends_on:
       db:
         condition: service_healthy
     volumes:
-      - ./ontop/input:/opt/ontop/input
       - ./ontop/jdbc:/opt/ontop/jdbc
     environment:
       DB_URL: ${ONTOP_DB_URL}

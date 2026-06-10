@@ -36,7 +36,7 @@ services:
 
   ontop:
     container_name: numad-ontop
-    image: ontop/ontop:latest
+    image: ontop/ontop:5.5.0
     env_file:
       - .env
     depends_on:
@@ -72,8 +72,8 @@ services:
 
   # Sampo UI - Server
   server:
-#    image: ghcr.io/ghentcdh/sampo-ui-server:latest
-    image: sampo-ui-server:prod
+    image: ghcr.io/ghentcdh/sampo-ui-server:latest
+#    image: sampo-ui-server:prod
     platform: linux/amd64
     container_name: sampo-ui-server-prod
 #    network_mode: host
