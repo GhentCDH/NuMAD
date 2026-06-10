@@ -45,11 +45,6 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      DB_URL: ${ONTOP_DB_URL}
-      DB_USER: ${ONTOP_DB_USER}
-      DB_PASSWORD: ${ONTOP_DB_PASSWORD}
-      DB_DRIVER: ${ONTOP_JDBC_DRIVER}
     ports:
       - "8080:8080"
     command: ./ontop endpoint
