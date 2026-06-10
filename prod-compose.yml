@@ -77,7 +77,7 @@ services:
   numad:
     build:
       context: .
-      dockerfile: ./sampoConfigs/Dockerfile
+      dockerfile: Dockerfile
       target: prod
     image: numad:prod
     container_name: numad-prod

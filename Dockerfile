@@ -1,7 +1,7 @@
 FROM node:22.17-slim AS base
 WORKDIR /app
 
-COPY ../custom_components .
+COPY custom_components .
 RUN npm install --legacy-peer-deps
 
 RUN npm run build
