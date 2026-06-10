@@ -14,9 +14,7 @@ The system runs as Docker Compose services:
 - **import** — Python 3.13 data pipeline that loads CSV into PostgreSQL (`import/`)
 - **ontop** — Virtual Knowledge Graph mapping PostgreSQL → SPARQL endpoint (port 8080) (`ontop/`)
 - **client/server** — Sampo UI frontend (port 3000) and backend (port 3001) for semantic search (`sampoConfigs/`)
-- **kottster** — React/Vite app for structured data browsing (port 5480/5481) (`kottster/`)
-
-Data flows: CSV → import script → PostgreSQL → Ontop VKG → SPARQL → Sampo UI. Kottster connects directly to PostgreSQL via Knex.js.
+Data flows: CSV → import script → PostgreSQL → Ontop VKG → SPARQL → Sampo UI.
 
 ## Commands
 
@@ -35,9 +33,6 @@ just import
 # Download PostgreSQL JDBC driver for Ontop
 just jdbc
 
-# Start Kottster dev server
-just kottster
-
 # Start/stop all services
 docker compose up -d
 docker compose down
@@ -55,7 +50,6 @@ docker compose exec import uv run import
   - `mapping.ttl` — R2RML mappings from PostgreSQL tables to RDF
   - `ontology.ttl` — NuMAD custom ontology extending Nomisma
 - `sampoConfigs/` — Sampo UI configuration (search perspectives, SPARQL queries, translations)
-- `kottster/` — React frontend with Kottster framework
 - `data/` — CSV data files and SQL init scripts
 
 ## Environment

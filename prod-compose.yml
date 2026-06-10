@@ -33,26 +33,6 @@ services:
         condition: service_healthy
     command: tail -f /dev/null
 
-  kottster:
-    container_name: numad-kottster
-    platform: linux/amd64
-    build:
-      context: kottster
-      dockerfile: Dockerfile
-    ports:
-      - "5480:5480"
-      - "5481:5481"
-    volumes:
-      - ./kottster:/app
-      - /app/node_modules
-    env_file:
-      - .env
-    tty: true
-    stdin_open: true
-    command: tail -f /dev/null
-    depends_on:
-      db:
-        condition: service_healthy
 
   ontop:
     container_name: numad-ontop

@@ -5,9 +5,6 @@
 .python-version
 __pycache__
 
-# kottster
-kottster/dist
-kottster/app.db
 import/erd.mermaid
 
 .DS_Store
