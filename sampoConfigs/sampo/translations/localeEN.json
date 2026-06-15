@@ -87,7 +87,8 @@
             "coinsByAoristicTime100": "100 year intervals",
             "coinCountByRuler": "Coins per ruler",
             "coinCountByRulerRelative": "Coins per ruler (relative)",
-            "coinCountByReecePeriod": "Coins per Reece period"
+            "coinCountByReecePeriod": "Coins per Reece period",
+            "coinCountByReecePeriodRelative": "Coins per Reece period (relative)"
         }
     },
     "facets": {
@@ -256,7 +257,7 @@
                     "label": "Issuer",
                     "description": "Person or institution who issued the coin"
                 },
-                "reecePeriods": {
+                "reecePeriod": {
                     "label": "Reece period",
                     "description": "Period according to Reece's adapted classification"
                 },
@@ -557,6 +558,55 @@
                 "material": {
                     "label": "Materials",
                     "description": ""
+                }
+            }
+        },
+        "reecePeriods": {
+            "label": "Reece periods",
+            "instancePage": {
+                "label": "Reece Period",
+                "description": "NuMAD Reece period"
+            },
+            "properties": {
+                "uri": {
+                    "label": "URI",
+                    "description": "Identifier of the resource"
+                },
+                "name": {
+                    "label": "Name",
+                    "description": "Full period name"
+                },
+                "startDate": {
+                    "label": "From",
+                    "description": "Start year of the period"
+                },
+                "endDate": {
+                    "label": "To",
+                    "description": "End year of the period"
+                },
+                "duration": {
+                    "label": "Duration",
+                    "description": "Duration in years"
+                },
+                "lallemand": {
+                    "label": "Lallemand",
+                    "description": "Lallemand identifier"
+                },
+                "lallemandDates": {
+                    "label": "Lallemand dates",
+                    "description": "Date range in Lallemand classification"
+                },
+                "reeceSequence": {
+                    "label": "Reece sequence",
+                    "description": "Reece sequence identifier (e.g. Reece 01)"
+                },
+                "reeceNames": {
+                    "label": "Reece names",
+                    "description": "Descriptive Reece period name"
+                },
+                "reeceDates": {
+                    "label": "Reece dates",
+                    "description": "Date range in Reece classification"
                 }
             }
         }

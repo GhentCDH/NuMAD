@@ -235,11 +235,27 @@
                     "sparqlQuery": "coinCountByReecePeriodQuery",
                     "filterTarget": "coin",
                     "resultMapper": "mapPieChart",
-                    "sliceVisibilityThreshold": 0.01,
+                    "sliceVisibilityThreshold": false,
                     "dropdownForChartTypes": false,
                     "seriesTitle": "Number of coins",
                     "xaxisTitle": "Reece period",
                     "yaxisTitle": "Number of coins",
+                    "chartTypes": [
+                        {
+                            "id": "bar",
+                            "createChartData": "createApexBarChartData"
+                        }
+                    ]
+                },
+                "coinCountByReecePeriodRelative": {
+                    "sparqlQuery": "coinCountByReecePeriodRelativeQuery",
+                    "filterTarget": "coin",
+                    "resultMapper": "mapPieChart",
+                    "sliceVisibilityThreshold": false,
+                    "dropdownForChartTypes": false,
+                    "seriesTitle": "Number of coins per year of period",
+                    "xaxisTitle": "Reece period",
+                    "yaxisTitle": "Number of coins per year of period",
                     "chartTypes": [
                         {
                             "id": "bar",
@@ -381,9 +397,9 @@
             "minWidth": 100
         },
         {
-            "id": "reecePeriods",
+            "id": "reecePeriod",
             "valueType": "object",
-            "makeLink": false,
+            "makeLink": true,
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
@@ -692,17 +708,17 @@
             "sortDirection": "desc",
             "literal": true
         },
-        "reecePeriods": {
+        "reecePeriod": {
             "containerClass": "ten",
             "facetType": "list",
             "filterType": "uriFilter",
-            "predicate": "nmd:hasReecePeriods",
+            "predicate": "nmd:hasReecePeriod/rdfs:label",
             "pieChartButton": true,
             "barChartButton": true,
             "searchField": true,
             "sortButton": true,
             "sortBy": "instanceCount",
-            "sortByPredicate": "nmd:hasReecePeriods",
+            "sortByPredicate": "nmd:hasReecePeriod/rdfs:label",
             "sortDirection": "desc",
             "literal": true
         },

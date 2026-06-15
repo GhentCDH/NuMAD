@@ -4,7 +4,7 @@ from typing import Dict, Type, TypeVar
 from rich.logging import RichHandler
 from sqlmodel import Session, SQLModel, select
 
-from .data import get_data
+from .data import get_data, get_periods
 from .db import create_updated_at_trigger, engine
 from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material, \
     fix_online_reference, clean_name, clean_ruler_name
@@ -29,7 +29,7 @@ from .model import (
     Ruler,
     State,
     StatedAuthority,
-    Table, Find,
+    Table, Find, ReecePeriod,
 )
 from .parse import parse_date, parse_float, parse_int, parse_string
 
@@ -54,6 +54,16 @@ T = TypeVar("T", bound=SQLModel)
 
 def get_id(obj: Table | Date | None) -> int | None:
     return obj.id if obj else None
+
+
+def normalize_period_name(name: str | None) -> str | None:
+    """Strip leading number prefix (e.g. '011 ') from a period name for fuzzy matching."""
+    if not name:
+        return None
+    parts = name.strip().split(' ', 1)
+    if len(parts) < 2 or not parts[0][0].isdigit():
+        return None
+    return parts[1]
 
 
 def get_or_create(
@@ -220,10 +230,10 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         weight=parse_float(row.get("Weight ")),
         diameter=parse_float(row.get("Diameter")),
         die_axis=parse_int(row.get("Die axis")),
+        reece_period_id=get_id(relations["reece_period"]),
         # Dates
         year_start=parse_int(row.get("Object_StardDate")),
         year_end=parse_int(row.get("ObjectEndDate")),
-        reece_periods=parse_string(row.get("Periods (Reece adapted)")),
         # Descriptions
         reference_work=parse_string(row.get("ReferenceWork")),
         online_reference=fix_online_reference(row.get("Online reference")),
@@ -243,6 +253,29 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
 def main():
     SQLModel.metadata.create_all(engine)
     create_updated_at_trigger(engine)
+
+    logger.info("Importing Reece periods...")
+    with Session(engine) as session:
+        for row in get_periods():
+            session.add(ReecePeriod(
+                period_name=row.get("Period name"),
+                from_year=parse_int(row.get("from")),
+                to_year=parse_int(row.get("to")),
+                duration=parse_int(row.get("duration")),
+                lallemand=parse_string(row.get("Lallemand")),
+                lallemand_dates=parse_string(row.get("Lallemand_dates")),
+                reece_sequence=parse_string(row.get("Reece_sequence")),
+                reece_names=parse_string(row.get("Reece_names")),
+                reece_dates=parse_string(row.get("Reece_dates")),
+            ))
+        session.commit()
+
+    period_by_suffix: dict[str, ReecePeriod] = {}
+    with Session(engine) as session:
+        for period in session.exec(select(ReecePeriod)).all():
+            suffix = normalize_period_name(period.period_name)
+            if suffix:
+                period_by_suffix[suffix] = period
 
     caches: dict[str, dict] = {
         "authenticity": {},
@@ -384,6 +417,9 @@ def main():
                     ),
                 }
 
+                period_suffix = normalize_period_name(parse_string(row.get("Periods (Reece adapted)")))
+                relations["reece_period"] = period_by_suffix.get(period_suffix) if period_suffix else None
+
                 session.add(coin := create_coin(row, relations))
                 session.flush()
 
@@ -466,6 +502,11 @@ def main():
         session.commit()
 
         logger.info("Import complete.")
+
+
+def drop_tables():
+    SQLModel.metadata.drop_all(engine)
+    logger.info("All tables dropped.")
 
 
 def erd():

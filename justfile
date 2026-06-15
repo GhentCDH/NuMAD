@@ -17,6 +17,9 @@ rebuild:
 import:
     docker compose exec import uv run import
 
+drop:
+    docker compose exec import uv run drop
+
 
 
 reinit: rebuild import

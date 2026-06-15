@@ -64,6 +64,10 @@ nmd:CoinType
     a          owl:Class ;
     rdfs:label "Coin Type"@en .
 
+nmd:ReecePeriod
+    a owl:Class ;
+    rdfs:label "Reece Period"@en .
+
 
 #############
 # PROPERTIES
@@ -136,12 +140,6 @@ nmd:hasCoinType
     rdfs:range   nmd:CoinType ;
     rdfs:label   "Has coin type"@en .
 
-nmd:hasReecePeriods
-    a            owl:DatatypeProperty ;
-    rdfs:domain  nmo:Coin ;
-    rdfs:range   xsd:string ;
-    rdfs:label   "Has Reece periods"@en .
-
 nmd:hasReferenceWork
     a            owl:DatatypeProperty ;
     rdfs:domain  nmo:Coin ;
@@ -183,3 +181,45 @@ nmd:hasReverseLegend
     rdfs:domain  nmo:Coin ;
     rdfs:range   xsd:string ;
     rdfs:label   "Has reverse legend"@en .
+
+nmd:hasReecePeriod
+    a owl:ObjectProperty ;
+    rdfs:domain nmo:Coin ;
+    rdfs:range nmd:ReecePeriod ;
+    rdfs:label "From Reece Period"@en .
+
+nmd:hasDuration
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:ReecePeriod ;
+    rdfs:range xsd:int ;
+    rdfs:label "Has duration"@en .
+
+nmd:hasLallemand_dates
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:ReecePeriod ;
+    rdfs:range xsd:string ;
+    rdfs:label "Lallemand dates"@en .
+
+nmd:hasLallemand
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:ReecePeriod ;
+    rdfs:range xsd:string ;
+    rdfs:label "Lallemand identifier"@en .
+
+nmd:hasReeceSequence
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:ReecePeriod ;
+    rdfs:range xsd:string ;
+    rdfs:label "Reece sequence"@en .
+
+nmd:hasReeceNames
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:ReecePeriod ;
+    rdfs:range xsd:string ;
+    rdfs:label "Reece names"@en .
+
+nmd:hasReeceDates
+    a owl:DatatypeProperty ;
+    rdfs:domain nmd:ReecePeriod ;
+    rdfs:range xsd:string ;
+    rdfs:label "Reece dates"@en .

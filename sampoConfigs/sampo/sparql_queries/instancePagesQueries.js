@@ -102,19 +102,68 @@ export const localAdminUnitsInstanceProperties = `
 union
 {
     ?coin__id nmd:hasLocalAdminUnit ?id .
-    
+
     optional
     {
         ?coin__id nmo:hasAuthority ?authority__id .
         ?authority__id rdfs:label ?authority__prefLabel .
         bind(concat("/authorities/page/", STRAFTER(str(?authority__id), "ruler/")) as ?authority__dataProviderUrl)
     }
-    
+
     optional
     {
         ?coin__id nmo:hasMaterial ?material__id .
         ?material__id skos:prefLabel ?material__prefLabel .
         bind(concat("/materials/page/", STRAFTER(str(?material__id), "material/")) as ?material__dataProviderUrl)
     }
+}
+`
+
+export const reecePeriodsInstanceProperties = `
+{
+    ?id rdfs:label ?name__id .
+    bind(?name__id as ?name__prefLabel)
+    bind(?id as ?uri__id)
+    bind(?id as ?uri__prefLabel)
+}
+union
+{
+    ?id nmo:hasStartDate ?startDate__id .
+    bind(?startDate__id as ?startDate__prefLabel)
+}
+union
+{
+    ?id nmo:hasEndDate ?endDate__id .
+    bind(?endDate__id as ?endDate__prefLabel)
+}
+union
+{
+    ?id nmd:hasDuration ?duration__id .
+    bind(?duration__id as ?duration__prefLabel)
+}
+union
+{
+    ?id nmd:hasLallemand ?lallemand__id .
+    bind(?lallemand__id as ?lallemand__prefLabel)
+}
+union
+{
+    ?id nmd:hasLallemand_dates ?lallemandDates__id .
+    bind(?lallemandDates__id as ?lallemandDates__prefLabel)
+}
+union
+{
+    ?id nmd:hasReeceSequence ?reeceSequence__id .
+    bind(?reeceSequence__id as ?reeceSequence__prefLabel)
+}
+union
+{
+    ?id nmd:hasReeceNames ?reeceNames__id .
+    bind(?reeceNames__id as ?reeceNames__prefLabel)
+}
+union
+{
+    ?id nmd:hasReeceDates ?reeceDates__id .
+    bind(?reeceDates__id as ?reeceDates__prefLabel)
 }
 `

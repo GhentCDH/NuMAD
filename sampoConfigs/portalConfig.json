@@ -13,7 +13,8 @@
             "denominations",
             "identifiers",
             "materials",
-            "localAdminUnits"
+            "localAdminUnits",
+            "reecePeriods"
         ]
     },
     "localeConfig": {

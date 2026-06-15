@@ -1,0 +1,39 @@
+{
+    "id": "reecePeriods",
+    "endpoint": {
+        "url": "",
+        "useAuth": false,
+        "prefixesFile": "prefixes.js",
+        "defaultSparql": true
+    },
+    "sparqlQueriesFile": "instancePagesQueries.js",
+    "baseURI": "http://numad.ugent.be/resource",
+    "URITemplate": "<BASE_URI>/reeceperiod/<LOCAL_ID>",
+    "resultClasses": {
+        "reecePeriods": {
+            "instanceConfig": {
+                "propertiesQueryBlock": "reecePeriodsInstanceProperties",
+                "instancePageResultClasses": {
+                    "instancePageTable": {
+                        "tabID": 0,
+                        "component": "InstancePageTable",
+                        "tabPath": "table",
+                        "tabIcon": "CalendarViewDay"
+                    }
+                }
+            }
+        }
+    },
+    "properties": [
+        { "id": "uri",            "valueType": "object", "minWidth": 250, "makeLink": true, "externalLink": false },
+        { "id": "name",           "valueType": "object", "minWidth": 250 },
+        { "id": "startDate",      "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 100 },
+        { "id": "endDate",        "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 100 },
+        { "id": "duration",       "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 100 },
+        { "id": "lallemand",      "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 150 },
+        { "id": "lallemandDates", "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 150 },
+        { "id": "reeceSequence",  "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 150 },
+        { "id": "reeceNames",     "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 200 },
+        { "id": "reeceDates",     "valueType": "object", "makeLink": false, "externalLink": false, "minWidth": 150 }
+    ]
+}

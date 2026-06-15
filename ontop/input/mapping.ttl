@@ -22,7 +22,7 @@
     a                     rr:TriplesMap ;
     rr:logicalTable       [ rr:sqlQuery
                                     """SELECT id, year_start, year_end, weight, diameter, die_axis, original_id,
-                                              reece_periods, reference_work, denomination_detail, countermark,
+                                              reference_work, denomination_detail, countermark,
                                               obverse_design, obverse_legend, reverse_design, reverse_legend
                                        FROM coin""" ] ;
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ;
@@ -45,9 +45,6 @@
     rr:predicateObjectMap [ rr:predicate nmo:hasAxis ;
                             rr:objectMap [ rr:column   "die_axis" ;
                                            rr:datatype xsd:int ] ] ;
-    rr:predicateObjectMap [ rr:predicate nmd:hasReecePeriods ;
-                            rr:objectMap [ rr:column   "reece_periods" ;
-                                           rr:datatype xsd:string ] ] ;
     rr:predicateObjectMap [ rr:predicate nmd:hasReferenceWork ;
                             rr:objectMap [ rr:column   "reference_work" ;
                                            rr:datatype xsd:string ] ] ;
@@ -542,3 +539,50 @@
     rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{coin_id}" ] ;
     rr:predicateObjectMap [ rr:predicate nmd:hasCoinType ;
                             rr:objectMap [ rr:template "http://numad.ugent.be/resource/cointype/{coin_type_id}" ] ] .
+
+####################
+# REECE PERIODS
+####################
+:REECEPERIOD
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """
+        SELECT id, period_name, from_year, to_year, duration,
+               lallemand, lallemand_dates, reece_sequence, reece_names, reece_dates
+        FROM reeceperiod
+    """ ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/reeceperiod/{id}" ;
+                            rr:class    nmd:ReecePeriod ] ;
+    rr:predicateObjectMap [ rr:predicate rdfs:label ;
+                            rr:objectMap [ rr:column   "period_name" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
+                            rr:objectMap [ rr:column   "from_year" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmo:hasEndDate ;
+                            rr:objectMap [ rr:column   "to_year" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasDuration ;
+                            rr:objectMap [ rr:column   "duration" ;
+                                           rr:datatype xsd:int ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasLallemand ;
+                            rr:objectMap [ rr:column   "lallemand" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasLallemand_dates ;
+                            rr:objectMap [ rr:column   "lallemand_dates" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReeceSequence ;
+                            rr:objectMap [ rr:column   "reece_sequence" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReeceNames ;
+                            rr:objectMap [ rr:column   "reece_names" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReeceDates ;
+                            rr:objectMap [ rr:column   "reece_dates" ;
+                                           rr:datatype xsd:string ] ] .
+
+:COIN-REECEPERIOD
+    a                     rr:TriplesMap ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT id, reece_period_id FROM coin WHERE reece_period_id IS NOT NULL""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasReecePeriod ;
+                            rr:objectMap [ rr:template "http://numad.ugent.be/resource/reeceperiod/{reece_period_id}" ] ] .

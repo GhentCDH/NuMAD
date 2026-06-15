@@ -10,6 +10,7 @@ ROOT = Path(__file__).parent.parent.parent.parent
 load_dotenv(ROOT / "dev.env")
 
 CSV = ROOT / "data" / "numad-data.csv"
+PERIODS_CSV = ROOT / "data" / "numad-periods.csv"
 
 _db_host = os.getenv("DB_HOST")
 _db_name = os.getenv("DB_NAME")

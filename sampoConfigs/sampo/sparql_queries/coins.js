@@ -110,8 +110,9 @@ union
 }
 union
 {
-    ?id nmd:hasReecePeriods ?reecePeriods__id .
-    bind(?reecePeriods__id as ?reecePeriods__prefLabel)
+    ?id nmd:hasReecePeriod ?reecePeriod__id .
+    ?reecePeriod__id rdfs:label ?reecePeriod__prefLabel .
+    bind(concat("/reeceperiods/page/", STRAFTER(str(?reecePeriod__id), "reeceperiod/")) as ?reecePeriod__dataProviderUrl)
 }
 union
 {
@@ -400,15 +401,32 @@ export const coinCountByRulerRelativeQuery = `
 `
 
 export const coinCountByReecePeriodQuery = `
-  SELECT ?category ?prefLabel (COUNT(?coin) AS ?instanceCount)
+  SELECT ?category ?prefLabel (COUNT(?coin) AS ?instanceCount) ?earliestYear
   WHERE {
     <FILTER>
     {
       ?coin a nmo:Coin .
-      ?coin nmd:hasReecePeriods ?category .
-      BIND(?category AS ?prefLabel)
+      ?coin nmd:hasReecePeriod ?category .
+      ?category rdfs:label ?prefLabel .
+      ?category nmo:hasStartDate ?earliestYear .
     }
   }
-  GROUP BY ?category ?prefLabel
-  ORDER BY DESC(?instanceCount)
+  GROUP BY ?category ?prefLabel ?earliestYear
+  ORDER BY ?earliestYear
+`
+
+export const coinCountByReecePeriodRelativeQuery = `
+  SELECT ?category ?prefLabel (COUNT(?coin) / ?duration AS ?instanceCount) ?earliestYear
+  WHERE {
+    <FILTER>
+    {
+      ?coin a nmo:Coin .
+      ?coin nmd:hasReecePeriod ?category .
+      ?category rdfs:label ?prefLabel .
+      ?category nmo:hasStartDate ?earliestYear .
+      ?category nmd:hasDuration ?duration .
+    }
+  }
+  GROUP BY ?category ?prefLabel ?earliestYear ?duration
+  ORDER BY ?earliestYear
 `

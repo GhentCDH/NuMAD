@@ -221,8 +221,8 @@
                     "description": "Subklasse van het object"
                 },
                 "state": {
-                    "label": "Toestand",
-                    "description": "Toestand van de munt"
+                    "label": "Staat",
+                    "description": "Staat van de munt"
                 },
                 "authenticity": {
                     "label": "Echtheid",
@@ -240,7 +240,7 @@
                     "label": "Uitvaardigende instantie",
                     "description": "Instantie die de munt uitvaardigde"
                 },
-                "reecePeriods": {
+                "reecePeriod": {
                     "label": "Reece-periode",
                     "description": "Periode volgens de aangepaste Reece-classificatie"
                 },
@@ -322,8 +322,8 @@
                     "description": ""
                 },
                 "state": {
-                    "label": "Toestand",
-                    "description": "Toestand"
+                    "label": "Staat",
+                    "description": "Staat"
                 },
                 "statedAuthority": {
                     "label": "Opgegeven overheid",
@@ -483,6 +483,55 @@
                 }
             }
         },
+        "reecePeriods": {
+            "label": "Reece-periodes",
+            "instancePage": {
+                "label": "Reece-periode",
+                "description": "NuMAD Reece-periode"
+            },
+            "properties": {
+                "uri": {
+                    "label": "URI",
+                    "description": "Identifier van de bron"
+                },
+                "name": {
+                    "label": "Naam",
+                    "description": "Volledige periodenaam"
+                },
+                "startDate": {
+                    "label": "Van",
+                    "description": "Beginjaar van de periode"
+                },
+                "endDate": {
+                    "label": "Tot",
+                    "description": "Eindjaar van de periode"
+                },
+                "duration": {
+                    "label": "Duur",
+                    "description": "Duur in jaren"
+                },
+                "lallemand": {
+                    "label": "Lallemand",
+                    "description": "Lallemand-identifier"
+                },
+                "lallemandDates": {
+                    "label": "Lallemand-datering",
+                    "description": "Datering volgens Lallemand"
+                },
+                "reeceSequence": {
+                    "label": "Reece-reeks",
+                    "description": "Reece-reeksidentifier (bijv. Reece 01)"
+                },
+                "reeceNames": {
+                    "label": "Reece-namen",
+                    "description": "Beschrijvende Reece-periodenaam"
+                },
+                "reeceDates": {
+                    "label": "Reece-datering",
+                    "description": "Datering volgens Reece"
+                }
+            }
+        },
         "finds": {
             "label": "Vondsten",
             "facetResultsType": "vondsten",
@@ -561,7 +610,8 @@
             "coinsByAoristicTime100": "Intervallen van 100 jaar",
             "coinCountByRuler": "Munten per heerser",
             "coinCountByRulerRelative": "Munten per heerser (relatief)",
-            "coinCountByReecePeriod": "Munten per Reece-periode"
+            "coinCountByReecePeriod": "Munten per Reece-periode",
+            "coinCountByReecePeriodRelative": "Munten per Reece-periode (relatief)"
         }
     }
 }
