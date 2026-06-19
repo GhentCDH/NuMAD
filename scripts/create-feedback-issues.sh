@@ -13,6 +13,11 @@
 # NOTE: This script is NOT idempotent — running it twice creates duplicate issues.
 #       Run it once, or delete the previous issues first.
 #
+# Implementation note: issue bodies are passed via `--body-file -` with a quoted
+# heredoc (<<'EOF') piped on stdin. This keeps backticks, parentheses and quotes in
+# the body literal — do NOT switch to `--body "$(cat <<'EOF' ...)"`, because the
+# command substitution would try to execute backtick-quoted text in the body.
+#
 set -euo pipefail
 
 REPO="GhentCDH/NuMAD"
@@ -30,7 +35,7 @@ echo "Creating feedback issues in $REPO (assignee: $ASSIGNEE)..."
 gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
   --label "enhancement" \
   --title "COINS: limit result-table to the 13 agreed columns" \
-  --body "$(cat <<'EOF'
+  --body-file - <<'EOF'
 **Feedback (v2026-06-10) — Perspective Coins, "Kolommen per munt"**
 
 Keep every field available on the coin **detail page**, but the **table view** of the
@@ -69,7 +74,6 @@ Obverse legend, Reverse design, Reverse legend.
 - The dropped fields are still visible on a coin's detail page.
 - The "Narrow down by" facets are unchanged.
 EOF
-)"
 
 # ---------------------------------------------------------------------------
 # Issue 2 — MINTS map: replace faint heatmap with a normal marker map
@@ -77,7 +81,7 @@ EOF
 gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
   --label "enhancement" \
   --title "MINTS map: replace faint heatmap with a normal marker map" \
-  --body "$(cat <<'EOF'
+  --body-file - <<'EOF'
 **Feedback (v2026-06-10) — Mints**
 
 > The map with the heatmaps is unclear because the colour is so faint that many mint
@@ -99,7 +103,6 @@ sparse mint dataset.)
 **Acceptance**
 - Each mint location is shown as a clearly visible marker on a normal map.
 EOF
-)"
 
 # ---------------------------------------------------------------------------
 # Issue 3 — COINS Aoristic chart: show Reece-period breakdown / fix layout
@@ -107,7 +110,7 @@ EOF
 gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
   --label "bug" \
   --title "COINS Aoristic chart: Reece periods are not all represented" \
-  --body "$(cat <<'EOF'
+  --body-file - <<'EOF'
 **Feedback (v2026-06-10) — Aoristic chart**
 
 > Looks nice, but the Reece Periods are not all on it (could it be that the chart is too
@@ -130,7 +133,6 @@ the way to 2000–2009), which makes the populated Roman range look cramped.
 - The aoristic chart shows the Reece periods (series/legend), and the axis is scoped to
   the data range.
 EOF
-)"
 
 # ---------------------------------------------------------------------------
 # Issue 4 — Reece period facet: split multi-value (semicolon-joined) entries
@@ -138,7 +140,7 @@ EOF
 gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
   --label "bug" \
   --title "Reece period facet: split multi-value (semicolon-joined) entries" \
-  --body "$(cat <<'EOF'
+  --body-file - <<'EOF'
 **Feedback (v2026-06-10) — Reece periods filter**
 
 > The filter does not yet split fields with more than one Reece period; whenever there is
@@ -147,7 +149,7 @@ gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
 
 **Verified:**
 - A combined value exists in the data, e.g.
-  `"002b Augustan I / Late Celtic ; 003 Augustan II / Gallo-Roman"` — a single field
+  `002b Augustan I / Late Celtic ; 003 Augustan II / Gallo-Roman` — a single field
   holding two Reece periods joined by `;`. The Reece period facet keeps these as one
   combined entry instead of splitting them, so exact-period filtering fails.
 - The **Authority** facet, by contrast, lists each ruler individually (Unknown,
@@ -165,7 +167,6 @@ gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
 - Coins with multiple Reece periods appear under each individual period in the facet; no
   semicolon-joined entries remain in the filter list.
 EOF
-)"
 
 # ---------------------------------------------------------------------------
 # Issue 5 — "Name" facets show no selectable value list (AUTHORITIES & MINTS)
@@ -173,7 +174,7 @@ EOF
 gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
   --label "enhancement" \
   --title 'AUTHORITIES & MINTS: "Name" facet shows no selectable value list' \
-  --body "$(cat <<'EOF'
+  --body-file - <<'EOF'
 **Feedback (v2026-06-10) — Authorities "Name (Ruler)" and Mints "Name (Mint)"**
 
 > No list of possible filter values is shown.
@@ -196,7 +197,6 @@ text-only filters (`textQueryProperty: "rdfs:label"`).
 **Acceptance**
 - Expanding "Name (Ruler)" and "Name (Mint)" shows a selectable list of values with counts.
 EOF
-)"
 
 # ---------------------------------------------------------------------------
 # Issue 6 — FINDS facet charts truncate categories vs the filter list
@@ -204,7 +204,7 @@ EOF
 gh issue create --repo "$REPO" --assignee "$ASSIGNEE" \
   --label "bug" \
   --title "FINDS facet charts (pie/bar) show only some of the filter values" \
-  --body "$(cat <<'EOF'
+  --body-file - <<'EOF'
 **Feedback (v2026-06-10) — reported under "Mints", but the facets are in FINDS**
 
 > For many of the filters (e.g. 'deposition type', 'discovery type'…) I do get the list
@@ -215,8 +215,8 @@ Note: the feedback was written under the "Mints" heading, but "deposition type" 
 Scoping this to FINDS.
 
 **Verified:** in FINDS, the "Deposition type" facet lists 12 distinct values in the
-filter (e.g. `<isolated find>` [523], Unknown [463], Chance loss [92], Burial deposit
-[11], Hoard [5], `hoard ; funerary deposition` [3], …). Its **pie chart shows only 3
+filter (e.g. <isolated find> [523], Unknown [463], Chance loss [92], Burial deposit
+[11], Hoard [5], "hoard ; funerary deposition" [3], …). Its **pie chart shows only 3
 slices plus an aggregated "Other: 26 (2.36%)" bucket** — the 9 smaller categories are
 collapsed and not individually shown. Same effect applies to other facet charts.
 
@@ -229,6 +229,5 @@ collapsed and not individually shown. Same effect applies to other facet charts.
 - The pie/bar charts for FINDS facets show all categories present in the filter list (no
   silent "Other" bucket hiding the smaller ones), or this is a deliberate, documented cap.
 EOF
-)"
 
 echo "Done. View them: gh issue list --repo $REPO --assignee $ASSIGNEE"
