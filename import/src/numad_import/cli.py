@@ -29,7 +29,7 @@ from .model import (
     Ruler,
     State,
     StatedAuthority,
-    Table, Find, ReecePeriod,
+    Table, Find, ReecePeriod, CoinReecePeriod,
 )
 from .parse import parse_date, parse_float, parse_int, parse_string
 
@@ -230,7 +230,6 @@ def create_coin(row: dict, relations: dict[str, Table | Date | None]) -> Coin:
         weight=parse_float(row.get("Weight ")),
         diameter=parse_float(row.get("Diameter")),
         die_axis=parse_int(row.get("Die axis")),
-        reece_period_id=get_id(relations["reece_period"]),
         # Dates
         year_start=parse_int(row.get("Object_StardDate")),
         year_end=parse_int(row.get("ObjectEndDate")),
@@ -417,9 +416,6 @@ def main():
                     ),
                 }
 
-                period_suffix = normalize_period_name(parse_string(row.get("Periods (Reece adapted)")))
-                relations["reece_period"] = period_by_suffix.get(period_suffix) if period_suffix else None
-
                 session.add(coin := create_coin(row, relations))
                 session.flush()
 
@@ -442,6 +438,12 @@ def main():
                             certainty=parse_int(row.get("type_certainty_attribute")),
                         )
                     )
+
+                raw_periods = row.get("Periods (Reece adapted)") or ""
+                for token in raw_periods.split(";"):
+                    suffix = normalize_period_name(token.strip())
+                    if suffix and (period := period_by_suffix.get(suffix)):
+                        session.add(CoinReecePeriod(coin_id=coin.id, reece_period_id=period.id))
 
                 if i % 100 == 0:
                     logger.info(f"Processed {i} rows...")

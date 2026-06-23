@@ -339,7 +339,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         },
         {
             "id": "find",
@@ -367,7 +368,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         },
         {
             "id": "objectClassification",
@@ -376,7 +378,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         },
         {
             "id": "objectSubclass",
@@ -385,7 +388,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         },
         {
             "id": "state",
@@ -394,7 +398,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "reecePeriod",
@@ -448,7 +453,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         },
         {
             "id": "material",
@@ -457,7 +463,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "denomination",
@@ -475,7 +482,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 150
+            "minWidth": 150,
+            "onlyOnInstancePage": true
         },
         {
             "id": "authenticity",
@@ -484,7 +492,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "countermark",
@@ -493,7 +502,8 @@
             "externalLink": false,
             "sortValues": true,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "yearStart",
@@ -520,7 +530,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "diameter",
@@ -529,7 +540,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "axis",
@@ -538,7 +550,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 100
+            "minWidth": 100,
+            "onlyOnInstancePage": true
         },
         {
             "id": "coinType",
@@ -556,7 +569,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 200,
+            "onlyOnInstancePage": true
         },
         {
             "id": "obverseLegend",
@@ -565,7 +579,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 200,
+            "onlyOnInstancePage": true
         },
         {
             "id": "reverseDesign",
@@ -574,7 +589,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 200,
+            "onlyOnInstancePage": true
         },
         {
             "id": "reverseLegend",
@@ -583,7 +599,8 @@
             "externalLink": false,
             "sortValues": false,
             "numberedList": false,
-            "minWidth": 200
+            "minWidth": 200,
+            "onlyOnInstancePage": true
         }
     ],
     "facets": {

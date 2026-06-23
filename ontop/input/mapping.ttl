@@ -582,7 +582,7 @@
 
 :COIN-REECEPERIOD
     a                     rr:TriplesMap ;
-    rr:logicalTable       [ rr:sqlQuery """SELECT id, reece_period_id FROM coin WHERE reece_period_id IS NOT NULL""" ] ;
-    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{id}" ] ;
+    rr:logicalTable       [ rr:sqlQuery """SELECT coin_id, reece_period_id FROM coinreeceperiod""" ] ;
+    rr:subjectMap         [ rr:template "http://numad.ugent.be/resource/coin/{coin_id}" ] ;
     rr:predicateObjectMap [ rr:predicate nmd:hasReecePeriod ;
                             rr:objectMap [ rr:template "http://numad.ugent.be/resource/reeceperiod/{reece_period_id}" ] ] .

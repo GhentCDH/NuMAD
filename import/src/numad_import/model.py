@@ -157,7 +157,11 @@ class ReecePeriod(Table, table=True):
     reece_sequence: str | None = None
     reece_names: str | None = None
     reece_dates: str | None = None
-    coins: List["Coin"] = Relationship(back_populates="reece_period")
+
+
+class CoinReecePeriod(SQLModel, table=True):
+    reece_period_id: int = Field(foreign_key="reeceperiod.id", primary_key=True)
+    coin_id: int = Field(foreign_key="coin.id", primary_key=True)
 
 
 class Find(Table, table=True):
@@ -231,7 +235,6 @@ class Coin(Table, table=True):
     diameter: float | None = None
     die_axis: int | None = None
 
-    reece_period_id: int | None = Field(default=None, foreign_key="reeceperiod.id")
 
     # Dating
     year_start: int | None = None
@@ -254,7 +257,6 @@ class Coin(Table, table=True):
     image_notes: str | None = None
 
     # Relationships
-    reece_period: ReecePeriod | None = Relationship(back_populates="coins")
     identifier: Identifier | None = Relationship(back_populates="coins")
     mint: Mint | None = Relationship(back_populates="coins")
     material: Material | None = Relationship(back_populates="coins")
