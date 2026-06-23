@@ -117,7 +117,7 @@ const RadiusMapFacet = ({
   }, [facetClass, facetID, clearFacet])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '8px 4px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: '8px 4px', fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif' }}>
       <div style={{ height: 260, borderRadius: 4, overflow: 'hidden', cursor: 'crosshair' }}>
         <Map
           initialViewState={{ longitude: initialLng, latitude: initialLat, zoom: initialZoom }}

@@ -20,6 +20,7 @@ import { useConfigsStore } from '@sampo-ui/configsStore'
 const styles = (theme, props) => ({
     root: {
         height: 400,
+        fontFamily: theme.typography.fontFamily,
         [theme.breakpoints.up(props.layoutConfig.hundredPercentHeightBreakPoint)]: {
             height: `calc(100% - ${props.layoutConfig.tabHeight}px)`
         }

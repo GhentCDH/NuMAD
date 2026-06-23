@@ -84,16 +84,16 @@
                 "url": "maps/world.pmtiles"
             }
         },
-        "mintsPlacesHeatmap": {
+        "mintsCoinCount": {
             "tabID": 3,
             "tabPath": "mintsheatmap",
             "tabIcon": "BubbleChart",
-            "component": "Deck",
-            "layerType": "heatmapLayer",
-            "sparqlQuery": "mintPlaces",
+            "component": "CustomComponent",
+            "componentName": "MintsCoinCountMap",
+            "sparqlQuery": "mintCoinCountsQuery",
             "facetClass": "coins",
-            "filterTarget": "id",
-            "resultMapper": "mapPlaces",
+            "filterTarget": "coin",
+            "resultMapper": "makeObjectList",
             "customTilesLayer": {
                 "type": "pmtiles",
                 "inConfig": true,
@@ -281,7 +281,7 @@
             ],
             "zoom": 8
         },
-        "mintsPlacesHeatmap": {
+        "mintsCoinCount": {
             "center": [
                 41.881488,
                 12.527705

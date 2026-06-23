@@ -415,6 +415,23 @@ export const coinCountByReecePeriodQuery = `
   ORDER BY ?earliestYear
 `
 
+export const mintCoinCountsQuery = `
+  SELECT ?id ?prefLabel ?lat ?long (COUNT(DISTINCT ?coin) AS ?instanceCount)
+  WHERE {
+    <FILTER>
+    {
+      ?coin a nmo:Coin ;
+            nmo:hasMint ?id .
+      ?id rdfs:label ?prefLabel .
+      ?id schema:geo ?geo .
+      ?geo schema:latitude ?lat ;
+           schema:longitude ?long .
+    }
+  }
+  GROUP BY ?id ?prefLabel ?lat ?long
+  ORDER BY DESC(?instanceCount)
+`
+
 export const coinCountByReecePeriodRelativeQuery = `
   SELECT ?category ?prefLabel (COUNT(?coin) / ?duration AS ?instanceCount) ?earliestYear
   WHERE {
