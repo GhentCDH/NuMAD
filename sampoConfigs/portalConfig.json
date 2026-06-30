@@ -53,7 +53,6 @@
         "tableFontSize": "0.8rem",
         "topBar": {
             "showSearchField": false,
-            "logoImage": "logos/logo.png",
             "logoTextTransform": "none",
             "hideLogoTextOnMobile": true,
             "showLanguageButton": true,
