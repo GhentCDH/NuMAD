@@ -73,6 +73,22 @@
     "table": {
         "rowsPerPage": "Rijen per pagina",
         "of": "van"
+    },"apexCharts": {
+        "grouping": "Sorteren op:",
+        "property": "Eigenschap:",
+        "chartType": "Diagramtype:",
+        "pie": "Taartdiagram",
+        "bar": "Staafdiagram",
+        "resultClasses": {
+            "coinsByAoristicTime10": "Intervallen van 10 jaar",
+            "coinsByAoristicTime20": "Intervallen van 20 jaar",
+            "coinsByAoristicTime50": "Intervallen van 50 jaar",
+            "coinsByAoristicTime100": "Intervallen van 100 jaar",
+            "coinCountByRuler": "Munten per heerser",
+            "coinCountByRulerRelative": "Munten per heerser (relatief)",
+            "coinCountByReecePeriod": "Munten per Reece-periode",
+            "coinCountByReecePeriodRelative": "Munten per Reece-periode (relatief)"
+        }
     },
     "facets": {
         "dateFacet": {
@@ -100,14 +116,7 @@
         "mapModeButtons": {
             "markers": "Markers",
             "heatmap": "Heatmap"
-        },
-        "wrongZoomLevel": "Het zoomniveau van de kaart moet minstens 11 zijn",
-        "wrongZoomLevelFHA": "Het zoomniveau van de kaart moet minstens 13 zijn om deze laag te tonen",
-        "tooManyResults": "Meer dan 500 resultaten, gelieve de geclusterde kaart of heatmap te gebruiken"
-    },
-    "instancePageGeneral": {
-        "introduction": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Deze landingspagina biedt een mensvriendelijke samenvatting van de datapunten die naar dit {entity} linken. De gegevens in deze samenvatting bevatten enkel de datapunten die in de NuMAD-portaalsite worden gebruikt. Klik op de knop 'Open in Linked Data Browser' op het tabblad Export om de volledige set klassen en eigenschappen van dit record te bekijken. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Om naar dit record te verwijzen, gebruikt u best de URL. U kunt deze URL ook gebruiken om op elk moment rechtstreeks naar het record terug te keren. </p>",
-        "repetition": "<h6 class=\"MuiTypography-root MuiTypography-h6\"> Herhaling van gegevens </h6> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Dezelfde of gelijkaardige gegevens kunnen binnen één gegevensveld meerdere keren voorkomen. Deze herhaling ontstaat door het samenvoegen van meerdere records uit verschillende datasets om het NuMAD-record te creëren. </p>"
+        }
     },
     "deckGlMap": {
         "arcColouring": "Boogkleur:",
@@ -594,24 +603,5 @@
             }
         }
     },
-    "aboutThePortalPartOne": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> Over de portaalsite </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Morbi nunc ex, ultrices vitae molestie eu, fringilla quis dolor. Vivamus in enim nibh. Nunc rutrum molestie ex eget dictum. Mauris lectus leo, ultrices in sodales ac, fermentum ut massa. In porta, mauris sed facilisis lacinia, eros magna sollicitudin tortor, quis venenatis nisl ipsum lacinia justo. Duis pretium bibendum consequat. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In hac habitasse platea dictumst. Curabitur consectetur aliquet est, ac dapibus ante semper vitae. Sed consequat at est ac lobortis. In vitae metus in ligula pretium vehicula. Aliquam maximus ac massa euismod eleifend. Vestibulum vehicula mattis libero at tempus. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Gegevens </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p>",
-    "aboutThePortalPartTwo": "<p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Gegevenshergebruik </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Meer informatie </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Nullam eu blandit ex, quis consectetur enim. Nulla aliquam, enim non euismod tincidunt, neque eros tincidunt urna, eget elementum diam metus vel elit. Donec dui augue, vehicula a cursus ut, efficitur eget velit. Aliquam pellentesque odio vel metus sodales tempor. Donec in lectus magna. Cras at odio a libero laoreet viverra nec sed lorem. In malesuada tempus dolor. Suspendisse et ligula quis nisi facilisis maximus. Sed dictum justo eu condimentum efficitur. Mauris porttitor ante nec auctor vulputate. Phasellus varius, odio sed egestas bibendum, dolor lacus consequat turpis, ac pulvinar libero lorem maximus nunc. Praesent egestas volutpat leo, vel faucibus dui convallis sed. Ut sed libero eu nisi accumsan mollis. Pellentesque ultricies est non porta luctus. Maecenas eget viverra mauris. </p>",
-    "instructions": "<h1 class=\"MuiTypography-root MuiTypography-h2 MuiTypography-gutterBottom\"> Instructies </h1> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> De zoekfunctionaliteit van dit semantische portaal is gebaseerd op het <a href=\"https://doi.org/10.2200/S00190ED1V01Y200904ICR005\" target='_blank' rel='noopener noreferrer'>faceted search</a>-principe. Standaard toont elk perspectief alle resultaten van de bijbehorende klasse. Deze standaardresultatenset kan verfijnd worden met de filters aan de linkerkant. </p> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Eén filter gebruiken </h2> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Waarden selecteren binnen een filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Alle mogelijke waarden voor een filter worden weergegeven als lijst of als hiërarchische boomstructuur (indien beschikbaar). Het aantal resultaten staat tussen haakjes bij elke waarde. Zodra u een waarde selecteert, worden de resultaten automatisch bijgewerkt. Om te vermijden dat u waarden kiest die geen resultaten opleveren, worden ook de mogelijke waarden van alle andere filters tegelijk bijgewerkt. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Binnen één filter kunnen meerdere waarden geselecteerd worden. Meerdere waarden selecteren levert resultaten op die minstens één van de geselecteerde waarden bevatten. Bijvoorbeeld: als u zowel <i>Sint-Augustinus</i> als <i>Sint-Jerome</i> als auteur selecteert, krijgt u resultaten die ofwel <i>Sint-Augustinus</i> <strong>OF</strong> <i>Sint-Jerome</i> als auteur hebben. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Geselecteerde waarden van een filter verschijnen in het gedeelte 'Actieve filters' bovenaan de filterlijst. Om een filter te deselecteren, klikt u op het kruisje ernaast in het gedeelte Actieve filters. U kunt een filterwaarde ook deselecteren door het vinkje in de filterlijst uit te vinken. Het gedeelte Actieve filters verschijnt enkel als er momenteel filterwaarden geselecteerd zijn. </p> <h3 class=\"MuiTypography-root MuiTypography-h6 MuiTypography-gutterBottom\"> Zoeken binnen een filter </h3> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Zoek binnen een filter via het zoekveld bovenaan elk filter. Alle mogelijke waarden van het filter blijven altijd zichtbaar. De waarden die overeenkomen met de zoekterm worden aangeduid met een paarse onderlijning. </p> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> Stappen om binnen filters te zoeken: </p> <ol class=\"MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom\"> <li> Typ de zoekterm in het zoekveld. Als er overeenkomsten zijn, verschijnt rechts van het zoekveld een getal dat het aantal overeenkomende filterwaarden aangeeft. </li> <li> Klik op de pijltjes rechts van het zoekveld om door de resultaten te bladeren. Telkens u klikt, verschijnt een andere filterwaarde bovenaan de lijst. Overeenkomende waarden zijn paars onderlijnd. </li> <li> Klik op het vinkje naast een filterwaarde om ze te activeren. De resultaten (en ook de andere filters) worden automatisch bijgewerkt. </li> </ol> <h2 class=\"MuiTypography-root MuiTypography-h4 MuiTypography-gutterBottom\"> Meerdere filters tegelijk gebruiken </h2> <p class=\"MuiTypography-root MuiTypography-body1 MuiTypography-paragraph\"> De kracht van faceted search komt tot uiting wanneer meerdere filters tegelijk worden toegepast. Net zoals op veel webshops wordt er altijd een logisch EN (AND) gebruikt tussen de verschillende filters. Bijvoorbeeld: als u <i>Sint-Augustinus</i> en <i>Sint-Jerome</i> als auteur selecteert én <i>Sir Thomas Phillipps</i> en <i>Thomas Thorpe</i> als eigenaar, dan worden de resultaten als volgt verfijnd: </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Auteur: <i>Sint-Augustinus</i> <strong>OF</strong> Auteur: <i>Sint-Jerome</i>) </p> <p class=\"MuiTypography-root MuiTypography-body1\"> <strong>EN</strong> </p> <p class=\"MuiTypography-root MuiTypography-body1\"> (Eigenaar: <i>Sir Thomas Phillipps</i> <strong>OF</strong> Eigenaar: <i>Thomas Thorpe</i>) </p>",
-    "apexCharts": {
-        "grouping": "Sorteren op:",
-        "property": "Eigenschap:",
-        "chartType": "Diagramtype:",
-        "pie": "Taartdiagram",
-        "bar": "Staafdiagram",
-        "resultClasses": {
-            "coinsByAoristicTime10": "Intervallen van 10 jaar",
-            "coinsByAoristicTime20": "Intervallen van 20 jaar",
-            "coinsByAoristicTime50": "Intervallen van 50 jaar",
-            "coinsByAoristicTime100": "Intervallen van 100 jaar",
-            "coinCountByRuler": "Munten per heerser",
-            "coinCountByRulerRelative": "Munten per heerser (relatief)",
-            "coinCountByReecePeriod": "Munten per Reece-periode",
-            "coinCountByReecePeriodRelative": "Munten per Reece-periode (relatief)"
-        }
-    }
+    "instructions": "htmlFile:pages/instructions_nl.html"
 }
