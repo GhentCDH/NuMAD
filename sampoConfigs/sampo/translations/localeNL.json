@@ -128,8 +128,8 @@
             "from": "Muntsite:",
             "to": "Gemeente van vondst:",
             "count": "Aantal munten",
-            "listHeadingSingleInstance": "Vondst:",
-            "listHeadingMultipleInstances": "Vondsten:"
+            "listHeadingSingleInstance": "Munt:",
+            "listHeadingMultipleInstances": "Munten:"
         }
     },
     "mainPageLayout": {

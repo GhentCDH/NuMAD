@@ -129,8 +129,8 @@
             "from": "Mint:",
             "to": "Find (former) municipality:",
             "count": "Coin count",
-            "listHeadingSingleInstance": "Find:",
-            "listHeadingMultipleInstances": "Finds:"
+            "listHeadingSingleInstance": "Coin:",
+            "listHeadingMultipleInstances": "Coins:"
         }
     },
     "mainPageLayout": {
