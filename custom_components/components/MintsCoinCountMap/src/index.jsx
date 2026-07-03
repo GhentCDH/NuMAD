@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'tss-react/mui'
-import DeckGL from '@deck.gl/react'
+import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox'
 import { ScatterplotLayer, TextLayer } from '@deck.gl/layers'
 
-import ReactMapGL, { FullscreenControl, NavigationControl } from 'react-map-gl/maplibre'
+import { Map, useControl, FullscreenControl, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import maplibregl from 'maplibre-gl'
@@ -71,6 +71,17 @@ const circleColor = n => {
     if (n >= 100) return [202, 0, 32, 220]
     if (n >= 10)  return [252, 141, 89, 220]
     return [26, 150, 65, 220]
+}
+
+/**
+ * Renders deck.gl layers as an overlay on top of the maplibre map. Keeping deck.gl
+ * as a MapboxOverlay child of <Map> (instead of wrapping <Map> in <DeckGL>) leaves
+ * the maplibre controls in the map's own DOM so they stay clickable.
+ */
+function DeckGLOverlay (props) {
+    const overlay = useControl(() => new DeckOverlay(props))
+    overlay.setProps(props)
+    return null
 }
 
 class MintsCoinCountMap extends React.Component {
@@ -254,31 +265,23 @@ class MintsCoinCountMap extends React.Component {
                 style={{ position: 'relative' }}
                 onContextMenu={e => e.preventDefault()}
             >
-                <DeckGL
-                    viewState={viewport}
-                    controller
-                    layers={layerList}
-                    onViewStateChange={({ viewState }) => this.handleOnViewportChange(viewState)}
-                    onClick={info => { if (!info.object) this.setState({ clickInfo: null }) }}
-                    style={{ width: '100%', height: '100%', position: 'relative' }}
-                    getCursor={({ isDragging, isHovering }) => {
-                        if (isDragging) return 'grabbing'
-                        if (isHovering) return 'pointer'
-                        return 'grab'
-                    }}
+                <Map
+                    reuseMaps
+                    mapStyle={this.getMapStyle()}
+                    initialViewState={viewport}
+                    onMove={evt => this.handleOnViewportChange(evt.viewState)}
+                    attributionControl={false}
+                    style={{ width: '100%', height: '100%', zIndex: 0 }}
                 >
-                    <ReactMapGL
-                        reuseMaps
-                        mapStyle={this.getMapStyle()}
-                        preventStyleDiffing
-                        style={{ width: '100%', height: '100%' }}
-                    >
-                        <NavigationControl position='top-left' />
-                        <FullscreenControl position='top-left' containerId='map-root' />
-                    </ReactMapGL>
-                    {this.renderPopup()}
+                    <DeckGLOverlay
+                        layers={layerList}
+                        onClick={info => { if (!info.object) this.setState({ clickInfo: null }) }}
+                    />
+                    <NavigationControl position='top-left' />
+                    <FullscreenControl position='top-left' />
                     {this.renderSpinner()}
-                </DeckGL>
+                </Map>
+                {this.renderPopup()}
             </div>
         )
     }

@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from 'tss-react/mui'
-import DeckGL from '@deck.gl/react'
+import { MapboxOverlay as DeckOverlay } from '@deck.gl/mapbox'
 import { ArcLayer } from '@deck.gl/layers'
 import intl from 'react-intl-universal'
 
-import ReactMapGL, { FullscreenControl, NavigationControl } from 'react-map-gl/maplibre'
+import { Map, useControl, FullscreenControl, NavigationControl } from 'react-map-gl/maplibre'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import maplibregl from 'maplibre-gl'
@@ -32,29 +32,19 @@ const styles = (theme, props) => ({
         left: '50%',
         top: '50%',
         transform: 'translate(-50%,-50%)'
-    },
-    navigationContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        padding: theme.spacing(1),
-        zIndex: 2
-    },
-    fullscreenButton: {
-        position: 'absolute',
-        top: 105
-    },
-    mapWrapper: {
-        '& .maplibregl-ctrl-top-left': {
-            pointerEvents: 'all',
-            zIndex: 3
-        },
-        '& .maplibregl-ctrl-top-right': {
-            pointerEvents: 'all',
-            zIndex: 3
-        }
     }
 })
+
+/**
+ * Renders deck.gl layers as an overlay on top of the maplibre map. Keeping deck.gl
+ * as a MapboxOverlay child of <Map> (instead of wrapping <Map> in <DeckGL>) leaves
+ * the maplibre controls in the map's own DOM so they stay clickable.
+ */
+function DeckGLOverlay (props) {
+    const overlay = useControl(() => new DeckOverlay(props))
+    overlay.setProps(props)
+    return null
+}
 
 /**
  * A component for WebGL maps using deck.gl and ReactMapGL.
@@ -255,28 +245,20 @@ class MigrationsMapWithRoads extends React.Component {
         const showMoreText = intl.get('deckGlMap.showMoreInformation')
 
         return (
-            <DeckGL
-                viewState={this.state.viewport}
-                controller
-                layers={[layer]}
-                onViewStateChange={({ viewState }) => this.handleOnViewportChange(viewState)}
-                style={{ width: '100%', height: '100%', position: 'relative' }}
-                getCursor={({ isDragging, isHovering }) => {
-                    if (isDragging) return 'grabbing'
-                    if (isHovering) return 'pointer'
-                    return 'grab'
-                }}
-            >
-                {/* ReactMapGL as a child — DeckGL passes it the map context automatically */}
-                <ReactMapGL
+            <>
+                <Map
                     reuseMaps
                     mapStyle={this.getMapStyle()}
-                    preventStyleDiffing
-                    style={{ width: '100%', height: '100%' }}
+                    initialViewState={this.state.viewport}
+                    onMove={evt => this.handleOnViewportChange(evt.viewState)}
+                    attributionControl={false}
+                    style={{ width: '100%', height: '100%', zIndex: 0 }}
                 >
+                    <DeckGLOverlay layers={[layer]} />
                     <NavigationControl position='top-left' />
-                    <FullscreenControl position='top-left' containerId='map-root' />
-                </ReactMapGL>
+                    <FullscreenControl position='top-left' />
+                    {this.renderSpinner()}
+                </Map>
 
                 <DeckArcLayerLegend
                     title={title}
@@ -308,9 +290,7 @@ class MigrationsMapWithRoads extends React.Component {
                         countText={countText}
                         showMoreText={showMoreText}
                     />}
-
-                {this.renderSpinner()}
-            </DeckGL>
+            </>
         )
     }
 
