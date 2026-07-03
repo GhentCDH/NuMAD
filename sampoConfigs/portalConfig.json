@@ -38,6 +38,7 @@
         "perspective": "coins"
     },
     "layoutConfig": {
+        "customCssFile": "custom.css",
         "colorPalette": {
             "primary": {
                 "main": "#bf9b30"

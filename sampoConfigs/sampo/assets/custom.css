@@ -1,0 +1,8 @@
+/* Hide the hardcoded SECO research-group logo in the topbar (not config-driven) */
+a[href="https://seco.cs.aalto.fi"] {
+  display: none !important;
+}
+/* Fallback selector in case the link wrapper changes but the img stays */
+img[alt="Semantic Computing research group logo"] {
+  display: none !important;
+}
