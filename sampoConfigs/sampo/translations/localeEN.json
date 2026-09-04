@@ -13,6 +13,7 @@
     "selectPerspective": "",
     "mainPageImageLicence": "",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
+    "aboutNuMAD": "htmlFile:pages/about_en.html",
     "infoHeader": {
         "toggleInstructions": "Click to show or hide instructions"
     },
@@ -21,7 +22,7 @@
             "info": "Info",
             "blog": "Project blog",
             "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
-            "aboutThePortal": "About the Portal"
+            "aboutThePortal": "About NuMAD"
         },
         "instructions": "instructions"
     },

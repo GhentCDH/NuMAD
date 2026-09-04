@@ -13,6 +13,7 @@
     "selectPerspective": "",
     "mainPageImageLicence": "",
     "backendErrorText": "Een van de backenddiensten is momenteel niet beschikbaar. Probeer het later opnieuw.",
+    "aboutNuMAD": "htmlFile:pages/about_nl.html",
     "infoHeader": {
         "toggleInstructions": "Klik om de instructies te tonen of te verbergen"
     },
@@ -21,7 +22,7 @@
             "info": "Info",
             "blog": "Projectblog",
             "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
-            "aboutThePortal": "Over de portaalsite"
+            "aboutThePortal": "Over NuMAD"
         },
         "instructions": "instructies"
     },

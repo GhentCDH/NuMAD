@@ -51,7 +51,10 @@ services:
 
   # Sampo UI - Client
   client:
-    image: ghcr.io/ghentcdh/sampo-ui-client:latest
+    build:
+      context: .
+      target: client
+    image: numad-client
     platform: linux/amd64
     container_name: sampo-ui-client-prod
 #    network_mode: host

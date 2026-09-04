@@ -11,3 +11,5 @@ import/erd.mermaid
 .DS_Store
 
 msar
+
+*.xlsx
