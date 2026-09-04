@@ -6,7 +6,7 @@ RUN npm install --legacy-peer-deps
 
 RUN npm run build
 
-FROM ghcr.io/ghentcdh/sampo-ui-combo:v4.4.2 AS prod
+FROM ghcr.io/ghentcdh/sampo-ui-combo:v4.4.3 AS prod
 COPY --from=base /app/dist/ /app/custom-components
 COPY sampoConfigs/ /app/configs/
 COPY sampoConfigs/sampo/assets/custom.css /usr/share/nginx/html/custom.css

@@ -7,7 +7,8 @@
             "coins",
             "authorities",
             "mints",
-            "finds"
+            "finds",
+            "infoPage"
         ],
         "onlyInstancePages": [
             "denominations",
@@ -59,15 +60,16 @@
             "showLanguageButton": true,
             "showFeedbackButton": false,
             "externalInstructions": false,
-            "externalAboutPage": true,
+            "externalAboutPage": false,
             "reducedHeight": 48,
             "defaultHeight": 64,
             "mobileMenuBreakpoint": 1360,
             "infoDropdown": [
                 {
-                    "id": "aboutNuMAD",
-                    "translatedText": "aboutThePortal",
-                    "internalLink": "/about"
+                    "id": "infoPage",
+                    "externalLink": false,
+                    "translatedText": "infoPage",
+                    "internalLink": "/info"
                 }
             ]
         },
