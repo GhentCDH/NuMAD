@@ -17,6 +17,9 @@ rebuild:
 import:
     docker compose exec import uv run import
 
+drop-db:
+    docker compose run --rm --no-deps --build import uv run drop-db
+
 
 
 reinit: rebuild import

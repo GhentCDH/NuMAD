@@ -2,7 +2,7 @@ import logging
 from typing import Dict, Type, TypeVar
 
 from rich.logging import RichHandler
-from sqlmodel import Session, SQLModel, select
+from sqlmodel import Session, SQLModel, select, text
 
 from .data import get_data
 from .db import create_updated_at_trigger, engine
@@ -50,6 +50,20 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=SQLModel)
+LEGACY_TABLES = ("coinreeceperiod", "reeceperiod")
+
+
+def drop_db():
+    """Drop only tables managed by the NuMAD import models."""
+    logger.warning(
+        "Dropping up to %d known NuMAD tables",
+        len(SQLModel.metadata.tables) + len(LEGACY_TABLES),
+    )
+    with engine.begin() as connection:
+        for table_name in LEGACY_TABLES:
+            connection.execute(text(f'DROP TABLE IF EXISTS "{table_name}"'))
+        SQLModel.metadata.drop_all(connection, checkfirst=True)
+    logger.info("NuMAD tables dropped")
 
 
 def get_id(obj: Table | Date | None) -> int | None:
