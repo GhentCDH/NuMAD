@@ -50,17 +50,20 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=SQLModel)
-LEGACY_TABLES = ("coinreeceperiod", "reeceperiod")
+KNOWN_LEGACY_TABLES = ("coinreeceperiod", "reeceperiod")
 
 
 def drop_db():
-    """Drop only tables managed by the NuMAD import models."""
+    """Drop current and known legacy NuMAD tables without touching other tables."""
+    additional_tables = [
+        name for name in KNOWN_LEGACY_TABLES if name not in SQLModel.metadata.tables
+    ]
     logger.warning(
         "Dropping up to %d known NuMAD tables",
-        len(SQLModel.metadata.tables) + len(LEGACY_TABLES),
+        len(SQLModel.metadata.tables) + len(additional_tables),
     )
     with engine.begin() as connection:
-        for table_name in LEGACY_TABLES:
+        for table_name in additional_tables:
             connection.execute(text(f'DROP TABLE IF EXISTS "{table_name}"'))
         SQLModel.metadata.drop_all(connection, checkfirst=True)
     logger.info("NuMAD tables dropped")
@@ -557,13 +560,6 @@ def main():
         session.commit()
 
         logger.info("Import complete.")
-
-
-def drop_tables():
-    SQLModel.metadata.drop_all(engine)
-    logger.info("All tables dropped.")
-
-
 def erd():
     import subprocess
 

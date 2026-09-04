@@ -18,10 +18,7 @@ import:
     docker compose exec import uv run import
 
 drop:
-    docker compose exec import uv run drop
-
-drop-db:
-    docker compose run --rm --no-deps --build import uv run drop-db
+    docker compose run --rm --no-deps --build import uv run drop
 
 
 

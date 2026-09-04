@@ -16,5 +16,5 @@ docker volume rm numad_pgdata || echo "pg_data already removed"
 docker compose up -d --build
 ```
 
-To drop only the tables managed by the NuMAD import models, run `just drop-db`. The command
-checks whether each table exists and can therefore also be run against an empty database.
+To drop only current and known legacy NuMAD tables, run `just drop`. The command checks whether
+each table exists and can therefore also be run against an empty database.

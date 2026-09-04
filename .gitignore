@@ -1,5 +1,6 @@
 .env
 *.csv
+!data/numad-periods.csv
 
 .serena
 # import

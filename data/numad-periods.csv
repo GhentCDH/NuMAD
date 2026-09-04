@@ -1,0 +1,28 @@
+Period name;from;to;duration;Lallemand;Lallemand_dates;Reece_sequence;Reece_names;Reece_dates
+001a Roman Republic / Celtic;-212;-58;155;;before 50 BCE;Reece 01;Pre-Claudian and Iron Age;
+001b Gallic War;-57;-50;8;;57-50 BCE;Reece 01;Pre-Claudian and Iron Age;
+002a Civil War - Imperatorial / Late Celtic;-49;-31;19;;49-31 BCE;Reece 01;Pre-Claudian and Iron Age;
+002b Augustan I / Late Celtic;-30;-16;15;;31-15 BCE;Reece 01;Pre-Claudian and Iron Age;
+003 Augustan II / Gallo-Roman;-15;14;30;;15 BCE - 14 CE;Reece 01;Pre-Claudian and Iron Age;
+004 Tiberius - Caligula;15;41;27;;14-41;Reece 01;Pre-Claudian and Iron Age;
+005 Claudius;41;54;14;;41-54;Reece 02;Claudian;
+006 Nero / Bellum Civile;54;69;16;;54-68;Reece 03;Neronian;
+007 Flavii;69;96;28;;69-96;Reece 04;Flavian;
+008 Nerva - Traianus;96;117;22;;96-117;Reece 05;Trajanic;
+009 Hadrianus;117;138;22;;117-138;Reece 06;Hadrianic;
+010 Antoninus Pius;138;161;24;;138-161;Reece 07;Antonine I;
+011 L. Verus & M. Aurelius;161;180;20;;161-180;Reece 08;Antonine II;
+012 Commodus;180;192;13;;180-193;Reece 09;Antonine III;
+013 Severus - Elegabalus;193;222;30;;193-222;Reece 10;Early Severan;
+014 Severus Alexander - Maximinus Thrax;222;238;17;;222-238;Reece 11;Later Severan;
+015 Gordian III - Valerian;238;260;23;;238-260;Reece 12;Gordian III - Valerian;
+016 Gallienus (solus) - Aurelianus;260;275;16;;260-275;Reece 13;Gallienus sole reign - Aurelian;
+017 Tacitus - Diocletian;275;294;20;;275-294;Reece 14;Tacitus - Allectus;
+018 Tetrarchy (294-317);294;317;24;Lallemand Periods;294-318;Reece 15;Tetrarchy;294-317
+019 Constantinian I (317-330);318;330;13;Lallemand Periods;318-330;Reece 16;Constantinian I;317-330
+020a Constantinian IIa (330-340);330;340;11;Lallemand Periods;330-340;Reece 17;Constantinian II;330-346
+020b Constantinian IIb (340-348);340;348;9;Lallemand Periods;340-348;Reece 17;Constantinian II;330-346
+021 Constantinian III;348;364;17;Lallemand Periods;348-364;Reece 18;Constantinian III;346-364
+022 Valentinianic;364;378;15;Lallemand Periods;364-378;Reece 19;Valentinianic;364-378
+023 Theodosianic I;378;388;11;Lallemand Periods;378-388;Reece 20;Theodosian I;378-388
+024 Theodosianic II;388;402;15;Lallemand Periods;388-402;Reece 21;Theodosian II;388-402
