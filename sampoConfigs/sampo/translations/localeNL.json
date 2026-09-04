@@ -13,6 +13,7 @@
     "selectPerspective": "",
     "mainPageImageLicence": "",
     "backendErrorText": "Een van de backenddiensten is momenteel niet beschikbaar. Probeer het later opnieuw.",
+    "infoPage": "htmlFile:pages/about_nl.html",
     "infoHeader": {
         "toggleInstructions": "Klik om de instructies te tonen of te verbergen"
     },
@@ -21,7 +22,8 @@
             "info": "Info",
             "blog": "Projectblog",
             "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
-            "aboutThePortal": "Over de portaalsite"
+            "aboutThePortal": "Over NuMAD",
+            "infoPage": "Over NuMAD"
         },
         "instructions": "instructies"
     },
@@ -143,7 +145,7 @@
             "label": "munten",
             "facetResultsType": "munten",
             "shortDescription": "NuMAD munten",
-            "longDescription": "",
+            "longDescription": "<p>Munten bevatten metadata over de numismatische objecten zelf, waaronder hun datering, denominatie, materiaal, overheid, muntsite, fysieke kenmerken en vondstcontext.</p>",
             "instancePage": {
                 "label": "Munt",
                 "description": "NuMAD munt"
@@ -292,7 +294,7 @@
             "label": "overheden",
             "facetResultsType": "overheden",
             "shortDescription": "NuMAD overheden",
-            "longDescription": "",
+            "longDescription": "<p>Overheden zijn personen of instellingen onder wier gezag munten werden uitgegeven. In NuMAD zijn dit vaak Romeinse keizers.</p>",
             "instancePage": {
                 "label": "Overheid",
                 "description": "NuMAD overheid"
@@ -348,7 +350,7 @@
             "label": "muntsites",
             "facetResultsType": "muntsites",
             "shortDescription": "NuMAD muntsites",
-            "longDescription": "",
+            "longDescription": "<p>Muntsites beschrijven de plaatsen waar munten werden geslagen en koppelen die plaatsen aan de munten die er zijn geproduceerd.</p>",
             "instancePage": {
                 "label": "Muntsite",
                 "description": "NuMAD muntsite"
@@ -545,7 +547,7 @@
             "label": "Vondsten",
             "facetResultsType": "vondsten",
             "shortDescription": "NuMAD vondstcontexten",
-            "longDescription": "",
+            "longDescription": "<p>Vondsten beschrijven de vondstcontext en vindplaats van munten, waaronder de gemeente, de vindplaats, de archeologische context en de vinddatum.</p>",
             "instancePage": {
                 "label": "Vondst",
                 "description": "NuMAD vondstcontext"

@@ -1,0 +1,6 @@
+{
+    "id": "infoPage",
+    "searchMode": "dummy-internal",
+    "internalLink": "/info",
+    "hideTopPerspectiveButton": true
+}

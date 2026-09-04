@@ -13,6 +13,7 @@
     "selectPerspective": "",
     "mainPageImageLicence": "",
     "backendErrorText": "One of the backend services is not available at the moment. Please try again later.",
+    "infoPage": "htmlFile:pages/about_en.html",
     "infoHeader": {
         "toggleInstructions": "Click to show or hide instructions"
     },
@@ -21,7 +22,8 @@
             "info": "Info",
             "blog": "Project blog",
             "blogUrl": "https://seco.cs.aalto.fi/tools/sampo-ui/",
-            "aboutThePortal": "About the Portal"
+            "aboutThePortal": "About NuMAD",
+            "infoPage": "About NuMAD"
         },
         "instructions": "instructions"
     },
@@ -144,7 +146,7 @@
             "label": "coins",
             "facetResultsType": "coins",
             "shortDescription": "NuMAD coins",
-            "longDescription": "",
+            "longDescription": "<p>Coins contain metadata about the numismatic objects themselves, including their date, denomination, material, authority, mint, physical characteristics, and find context.</p>",
             "instancePage": {
                 "label": "Coin",
                 "description": "NuMAD coin"
@@ -293,7 +295,7 @@
             "label": "finds",
             "facetResultsType": "finds",
             "shortDescription": "NuMAD find contexts",
-            "longDescription": "",
+            "longDescription": "<p>Finds describe the discovery context and location of coins, including the municipality, find spot, archaeological context, and find date.</p>",
             "instancePage": {
                 "label": "Find",
                 "description": "NuMAD find context"
@@ -354,7 +356,7 @@
             "label": "authorities",
             "facetResultsType": "authorities",
             "shortDescription": "NuMAD authorities",
-            "longDescription": "",
+            "longDescription": "<p>Authorities are the people or institutions under whose authority coins were issued. In NuMAD, these are often Roman emperors.</p>",
             "instancePage": {
                 "label": "Authority",
                 "description": "NuMAD authority"
@@ -410,7 +412,7 @@
             "label": "mints",
             "facetResultsType": "mints",
             "shortDescription": "NuMAD mints",
-            "longDescription": "",
+            "longDescription": "<p>Mints describe the places where coins were minted and connect those places to the coins produced there.</p>",
             "instancePage": {
                 "label": "Mint",
                 "description": "NuMAD mint"

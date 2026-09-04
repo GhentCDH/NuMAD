@@ -23,5 +23,6 @@ build-backend = "uv_build"
 
 [project.scripts]
 import = "numad_import.cli:main"
+drop-db = "numad_import.cli:drop_db"
 erd = "numad_import.cli:erd"
 drop = "numad_import.cli:drop_tables"

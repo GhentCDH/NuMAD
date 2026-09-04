@@ -88,13 +88,28 @@ MATERIALS = {
 }
 
 
-def clean_name(name:str) -> str :
+def clean_name(name: str) -> str:
     return re.sub(r"[<>!;?]", "", name.replace("-", " ").replace(",", " "))
 
-def clean_ruler_name(name:str) -> str | None :
+
+def clean_ruler_name(name: str) -> str | None:
     if name == "n/a" or name == "unidentified" or name == "type_to_rulers" or name == "<type_to_rulers>":
         return None
     return name
+
+
+def parse_ruler_names(value: str | None) -> list[str]:
+    if not value:
+        return []
+
+    names: list[str] = []
+    for part in re.split(r"\s*;\s*|\s+or\s+", value, flags=re.IGNORECASE):
+        name = clean_ruler_name(clean_name(part).strip())
+        if name and name not in names:
+            names.append(name)
+
+    return names
+
 
 def get_nomisma_ruler(name: str, start_date: int, end_date: int) -> str | None:
     if name is None or start_date is None or end_date is None:

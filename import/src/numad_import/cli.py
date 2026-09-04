@@ -2,12 +2,12 @@ import logging
 from typing import Dict, Type, TypeVar
 
 from rich.logging import RichHandler
-from sqlmodel import Session, SQLModel, select
+from sqlmodel import Session, SQLModel, select, text
 
 from .data import get_data, get_periods
 from .db import create_updated_at_trigger, engine
 from .util import get_nomisma_ruler, get_nomisma_mint, get_nomisma_denomination, get_nomisma_material, \
-    fix_online_reference, clean_name, clean_ruler_name
+    fix_online_reference, clean_name, parse_ruler_names
 from .model import (
     Authenticity,
     Coin,
@@ -50,6 +50,20 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 T = TypeVar("T", bound=SQLModel)
+LEGACY_TABLES = ("coinreeceperiod", "reeceperiod")
+
+
+def drop_db():
+    """Drop only tables managed by the NuMAD import models."""
+    logger.warning(
+        "Dropping up to %d known NuMAD tables",
+        len(SQLModel.metadata.tables) + len(LEGACY_TABLES),
+    )
+    with engine.begin() as connection:
+        for table_name in LEGACY_TABLES:
+            connection.execute(text(f'DROP TABLE IF EXISTS "{table_name}"'))
+        SQLModel.metadata.drop_all(connection, checkfirst=True)
+    logger.info("NuMAD tables dropped")
 
 
 def get_id(obj: Table | Date | None) -> int | None:
@@ -105,6 +119,43 @@ def get_or_create(
     session.flush()
     cache[clean_val] = instance
     return instance
+
+
+def get_or_create_rulers(
+        session: Session,
+        cache: Dict[str, Ruler],
+        value: str | None,
+        start_date: str | None,
+        end_date: str | None,
+) -> list[Ruler]:
+    names = parse_ruler_names(value)
+    use_dates = len(names) == 1
+    parsed_start_date = parse_int(start_date) if use_dates else None
+    parsed_end_date = parse_int(end_date) if use_dates else None
+    rulers: list[Ruler] = []
+
+    for name in names:
+        ruler = get_or_create(
+            session,
+            Ruler,
+            cache,
+            name=name,
+            start_date=parsed_start_date,
+            end_date=parsed_end_date,
+        )
+        if ruler is None:
+            continue
+
+        # A ruler may first occur in an ambiguous multi-authority row.
+        if use_dates:
+            if ruler.start_date is None:
+                ruler.start_date = parsed_start_date
+            if ruler.end_date is None:
+                ruler.end_date = parsed_end_date
+
+        rulers.append(ruler)
+
+    return rulers
 
 
 def get_or_create_date(
@@ -300,6 +351,13 @@ def main():
     with Session(engine) as session:
         for i, row in enumerate(get_data()):
             try:
+                rulers = get_or_create_rulers(
+                    session,
+                    caches["ruler"],
+                    row.get("Ruler"),
+                    row.get("Ruler_StartDate"),
+                    row.get("Ruler_EndDate"),
+                )
                 relations = {
                     "authenticity": get_or_create(
                         session,
@@ -384,14 +442,6 @@ def main():
                         caches["object_type"],
                         name=row.get("ObjectType"),
                     ),
-                    "ruler": get_or_create(
-                        session,
-                        Ruler,
-                        caches["ruler"],
-                        name=clean_ruler_name(clean_name(row.get("Ruler"))),
-                        start_date=parse_int(row.get("Ruler_StartDate")),
-                        end_date=parse_int(row.get("Ruler_EndDate")),
-                    ),
                     "state": get_or_create(
                         session,
                         State,
@@ -421,14 +471,17 @@ def main():
 
                 # Adding M-N relations later because they require knowing `coin.id`
 
-                if (ruler := relations["ruler"]) and coin.id is not None:
-                    session.add(
-                        CoinRuler(
-                            coin_id=coin.id,
-                            ruler_id=ruler.id,
-                            certainty=parse_int(row.get("Ruler_certainty_attribute")),
+                if coin.id is not None:
+                    for ruler in rulers:
+                        if ruler.id is None:
+                            continue
+                        session.add(
+                            CoinRuler(
+                                coin_id=coin.id,
+                                ruler_id=ruler.id,
+                                certainty=parse_int(row.get("Ruler_certainty_attribute")),
+                            )
                         )
-                    )
 
                 if (coin_type := relations["coin_type"]) and coin.id is not None:
                     session.add(

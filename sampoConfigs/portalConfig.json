@@ -7,7 +7,8 @@
             "coins",
             "authorities",
             "mints",
-            "finds"
+            "finds",
+            "infoPage"
         ],
         "onlyInstancePages": [
             "denominations",
@@ -54,6 +55,7 @@
         "tableFontSize": "0.8rem",
         "topBar": {
             "showSearchField": false,
+            "logoImage": "",
             "logoTextTransform": "none",
             "hideLogoTextOnMobile": true,
             "showLanguageButton": true,
@@ -62,7 +64,15 @@
             "externalAboutPage": false,
             "reducedHeight": 48,
             "defaultHeight": 64,
-            "mobileMenuBreakpoint": 1360
+            "mobileMenuBreakpoint": 1360,
+            "infoDropdown": [
+                {
+                    "id": "infoPage",
+                    "externalLink": false,
+                    "translatedText": "infoPage",
+                    "internalLink": "/info"
+                }
+            ]
         },
         "mainPage": {
             "bannerImage": "main_page/coins.webp",
@@ -99,40 +109,32 @@
             }
         },
         "footer": {
-            "reducedHeight": 44,
-            "defaultHeight": 64,
+            "reducedHeight": 85,
+            "defaultHeight": 105,
             "images": [
+                {
+                    "id": "ahrg",
+                    "href": "https://www.ancienthistory.ugent.be/en",
+                    "image": "logos/ahrg_banner.svg",
+                    "alt": "Ghent University Ancient History Research Group logo",
+                    "width": 250,
+                    "height": 60
+                },
                 {
                     "id": "ghentcdh",
                     "href": "https://www.ghentcdh.ugent.be/",
-                    "image": "logos/ghentcdh.png",
-                    "alt": "ghentcdh logo",
-                    "width": 150,
-                    "height": 40
+                    "image": "logos/ghentcdh_banner.svg",
+                    "alt": "Ghent Centre for Digital Humanities logo",
+                    "width": 250,
+                    "height": 60
                 },
                 {
-                    "id": "heldig",
-                    "href": "https://www.helsinki.fi/en/helsinki-centre-for-digital-humanities",
-                    "image": "logos/heldig-logo-transparent-black.png",
-                    "alt": "heldig logo",
-                    "width": 118,
-                    "height": 33
-                },
-                {
-                    "id": "helsinki",
-                    "href": "https://www.helsinki.fi/en",
-                    "image": "logos/university-of-helsinki-logo-transparent-black.png",
-                    "alt": "University of Helsinki logo",
-                    "width": 155,
-                    "height": 40
-                },
-                {
-                    "id": "aalto",
-                    "href":"https://www.aalto.fi/en/school-of-science",
-                    "image":"logos/Aalto_SCI_EN_13_BLACK_2_cropped.png",
-                    "alt": "Aalto University logo",
-                    "width": 143,
-                    "height": 29
+                    "id": "kbr",
+                    "href": "https://www.kbr.be/nl/",
+                    "image": "logos/kbr_banner.svg",
+                    "alt": "KBR logo",
+                    "width": 193,
+                    "height": 60
                 }
             ]
         }

@@ -1,6 +1,7 @@
 .env
 *.csv
 
+.serena
 # import
 .python-version
 __pycache__
@@ -8,3 +9,7 @@ __pycache__
 import/erd.mermaid
 
 .DS_Store
+
+msar
+
+*.xlsx
