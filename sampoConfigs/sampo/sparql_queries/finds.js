@@ -163,7 +163,7 @@ union
         )
         as ?coin__prefLabel
     )
-    bind(concat("/coins/page/", str(?coin__label)) as ?coin__dataProviderUrl)
+    bind(concat("/coins/page/", STRAFTER(str(?coin__id), "coin/")) as ?coin__dataProviderUrl)
 }
 
 `

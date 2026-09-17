@@ -140,6 +140,13 @@ nmd:hasCoinType
     rdfs:range   nmd:CoinType ;
     rdfs:label   "Has coin type"@en .
 
+nmd:hasOriginalId
+    a            owl:DatatypeProperty ;
+    rdfs:domain  nmo:Coin ;
+    rdfs:range   xsd:string ;
+    rdfs:label   "Original ID"@en ;
+    rdfs:comment "The primary ID from the source spreadsheet, used to match records back to the Excel data"@en .
+
 nmd:hasReferenceWork
     a            owl:DatatypeProperty ;
     rdfs:domain  nmo:Coin ;

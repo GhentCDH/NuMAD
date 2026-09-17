@@ -30,6 +30,12 @@
     rr:predicateObjectMap [ rr:predicate rdfs:label ;
                             rr:objectMap [ rr:column   "original_id" ;
                                            rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasOriginalId ;
+                            rr:objectMap [ rr:column   "original_id" ;
+                                           rr:datatype xsd:string ] ] ;
+    rr:predicateObjectMap [ rr:predicate nmd:hasDatabaseId ;
+                            rr:objectMap [ rr:column   "id" ;
+                                           rr:datatype xsd:int ] ] ;
     rr:predicateObjectMap [ rr:predicate nmo:hasStartDate ;
                             rr:objectMap [ rr:column   "year_start" ;
                                            rr:datatype xsd:int ] ] ;

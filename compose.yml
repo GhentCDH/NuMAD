@@ -46,7 +46,7 @@ services:
       - ./ontop/input:/opt/ontop/input
       - ./ontop/jdbc:/opt/ontop/jdbc
     ports:
-      - "8080:8080"
+      - "8890:8080"
     command: ./ontop endpoint
 
   # Sampo UI - Client

@@ -163,6 +163,10 @@
                     "label": "ID",
                     "description": "ID van de munt"
                 },
+                "databaseId": {
+                    "label": "Database-ID",
+                    "description": "Interne database-identificatie (tijdelijk)"
+                },
                 "yearStart": {
                     "label": "T.p.q.",
                     "description": "Terminus post quem, of vroegst mogelijke muntjaar."

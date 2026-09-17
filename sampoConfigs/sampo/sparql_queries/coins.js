@@ -5,10 +5,15 @@ export const coinProperties = `
     bind(?id as ?uri__id)
     bind(?id as ?uri__prefLabel)
     bind(?id as ?coinId__id)
-    bind(concat("/coins/page/", str(?coinId__prefLabel)) as ?uri__dataProviderUrl)
+    bind(concat("/coins/page/", STRAFTER(str(?id), "coin/")) as ?uri__dataProviderUrl)
     bind(?uri__dataProviderUrl as ?coinId__dataProviderUrl)
     
     bind(?uri__dataProviderUrl as ?prefLabel__dataProviderUrl)
+}
+union
+{
+    ?id nmd:hasDatabaseId ?databaseId__id .
+    bind(?databaseId__id as ?databaseId__prefLabel)
 }
 union
 {
@@ -239,7 +244,7 @@ WHERE {
     ?id nmo:hasMint <FROM_ID> ;
         nmo:hasFindContext/nmd:hasLocalAdminUnit <TO_ID> ;
         rdfs:label ?prefLabel .
-    bind(concat("/coins/page/", str(?prefLabel)) as ?dataProviderUrl)
+    bind(concat("/coins/page/", STRAFTER(str(?id), "coin/")) as ?dataProviderUrl)
 }
 `
 
